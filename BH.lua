@@ -136,7 +136,7 @@ local function detectExecutor()
     elseif getexecutorname then
         return getexecutorname()
     else
-        return "Executor Desconhecido"
+        return "Executor Desconocido"
     end
 end
 
@@ -144,17 +144,17 @@ local executorName = detectExecutor()
 
 local Paragraph = Tab1:AddParagraph({"Executor", executorName})
 
-local Section = Tab1:AddSection({"Versão Beta"})
+local Section = Tab1:AddSection({"Version Beta"})
 
-local Paragraph = Tab1:AddParagraph({"Criadores", "e0davizinTA And Herry \n Coquette_Source"})
+local Paragraph = Tab1:AddParagraph({"Creador", "Roun \n Nova"})
 
 
   
   Tab1:AddButton({
-    Name = " - Copiar @ do TikTok",
+    Name = "Copiar Tiktok",
     Callback = function()
-      setclipboard("@Davi.") -- Copia o @
-      setclipboard("https://www.tiktok.com/@daviamajesus1?_t=ZM-8yxpJgMTnW9&_r=1") -- Copia o link também, se quiser só o @, remova esta linha
+      setclipboard("@Gabriel") -- Copia o @
+      setclipboard("https://www.tiktok.com/@lxvap") -- Copia o link também, se quiser só o @, remova esta linha
       
     end
   })
@@ -179,13 +179,13 @@ local function headsitOnPlayer(targetPlayer)
     local humanoid = character:FindFirstChildOfClass("Humanoid")
 
     if not targetPlayer.Character or not targetPlayer.Character:FindFirstChild("Head") then
-        warn("Jogador alvo sem cabeça ou personagem.")
+        warn("Su personaje no tiene cabeza.")
         return false
     end
     local targetHead = targetPlayer.Character.Head
     local localRoot = character:FindFirstChild("HumanoidRootPart")
     if not localRoot then
-        warn("Seu personagem não tem HumanoidRootPart.")
+        warn("Su personaje no tiene HumanoidRootPart.")
         return false
     end
 
@@ -206,7 +206,7 @@ local function headsitOnPlayer(targetPlayer)
         humanoid.Sit = true
     end
 
-    print("Headsit ativado em " .. targetPlayer.Name)
+    print("Headsit activado en " .. targetPlayer.Name)
     return true
 end
 
@@ -225,7 +225,7 @@ local function removeHeadsit()
         humanoid.Sit = false
     end
 
-    print("Headsit desativado.")
+    print("Headsit desactivado.")
 end
 
 -- Função para encontrar jogador por nome parcial
@@ -247,8 +247,8 @@ local function notifyPlayerSelected(player)
     local content, _ = Players:GetUserThumbnailAsync(player.UserId, thumbType, thumbSize)
 
     StarterGui:SetCore("SendNotification", {
-        Title = "Player Selecionado",
-        Text = player.Name .. " foi selecionado!",
+        Title = "Player Seleccionado",
+        Text = player.Name .. " fue seleccionado!",
         Icon = content,
         Duration = 5
     })
@@ -256,22 +256,22 @@ end
 
 -- TextBox para digitar nome do player
 Tab2:AddTextBox({
-    Name = "Nome do Jogador",
-    Description = "Digite parte do nome",
-    PlaceholderText = "ex: lo → Lolyta",
+    Name = "Nombre del jugador",
+    Description = "Introduzca parte del nombre",
+    PlaceholderText = "ej: lo → Nova",
     Callback = function(Value)
         local foundPlayer = findPlayerByPartialName(Value)
         if foundPlayer then
             selectedPlayerName = foundPlayer.Name
             notifyPlayerSelected(foundPlayer)
         else
-            warn("Nenhum jogador encontrado com esse nome.")
+            warn("Ningun jugador encontrado con ese nombre.")
         end
     end
 })
 
--- Botão para ativar/desativar headsit
--- Botão para ativar/desativar headsit (versão simplificada)
+-- Botón para activar/desactivar el head-sit
+-- Botón para activar/desactivar el head-sit (Version simplificada)
 Tab2:AddButton({"", function()
     if not selectedPlayerName then
     
@@ -351,19 +351,19 @@ Tab2:AddSlider({
  Tab2:AddButton({
     Name = "Reset Speed/Gravity/Jumppower.✅",
     Callback = function()
-        -- Resetar Speed
+        -- Reset Speed
         local player = game.Players.LocalPlayer
         local character = player.Character or player.CharacterAdded:Wait()
         local humanoid = character:FindFirstChildOfClass("Humanoid")
         if humanoid then
-            humanoid.WalkSpeed = 16 -- Valor padrão do Speed
-            humanoid.JumpPower = 50 -- Valor padrão do JumpPower
+            humanoid.WalkSpeed = 16 -- Speed Value
+            humanoid.JumpPower = 50 -- JumpPower Value
         end
         
-        -- Resetar Gravity
-        game.Workspace.Gravity = 196.2 -- Valor padrão da gravidade
+        -- Reset Gravity
+        game.Workspace.Gravity = 196.2 -- Gravity Value
         
-        -- Desativar Infinite Jump
+        -- Deactivate Infinite Jump
         InfiniteJumpEnabled = false
     end
 })
@@ -387,7 +387,7 @@ local RunService = game:GetService("RunService")
 local Workspace = game:GetService("Workspace")
 local LocalPlayer = Players.LocalPlayer
 
--- Função para controle de colisões do jogador
+-- Collision Control
 local function managePlayerCollisions(character)
     if not character then return end
     
@@ -399,7 +399,7 @@ local function managePlayerCollisions(character)
     end
 end
 
--- Sistema anti-void melhorado
+-- Sistem Anti-void+
 local function voidProtection(rootPart)
     if rootPart.Position.Y < -500 then
         local safeCFrame = CFrame.new(0, 100, 0)
@@ -411,13 +411,13 @@ local function voidProtection(rootPart)
     end
 end
 
--- Controle das bolas de futebol
+-- Soccer Ball Control
 local function manageSoccerBalls()
     local soccerFolder = Workspace:FindFirstChild("Com", true)
                       and Workspace.Com:FindFirstChild("001_SoccerBalls")
     
     if soccerFolder then
-        -- Atualiza bolas existentes
+        -- Uodate Soccer Ball
         for _, ball in ipairs(soccerFolder:GetChildren()) do
             if ball.Name:match("^Soccer") then
                 pcall(function()
@@ -428,7 +428,7 @@ local function manageSoccerBalls()
             end
         end
         
-        -- Monitora novas bolas
+        -- Monitor Soccer Ball
         if not UltimateNoclip.Connections.BallAdded then
             UltimateNoclip.Connections.BallAdded = soccerFolder.ChildAdded:Connect(function(ball)
                 if ball.Name:match("^Soccer") then
@@ -443,12 +443,12 @@ local function manageSoccerBalls()
     end
 end
 
--- Loop principal do sistema
+-- System Main Loop
 local function mainLoop()
     UltimateNoclip.Connections.Heartbeat = RunService.Heartbeat:Connect(function()
         local character = LocalPlayer.Character
         
-        -- Controle do jogador
+        -- Player Control
         if character then
             managePlayerCollisions(character)
             
@@ -458,17 +458,17 @@ local function mainLoop()
             end
         end
         
-        -- Atualiza bolas a cada 2 segundos
+        -- Update Soccer Ball in 2s
         if tick() % 2 < 0.1 then
             manageSoccerBalls()
         end
     end)
 end
 
--- Configuração do toggle
+-- Toggle Configuration
 local NoclipToggle = Tab2:AddToggle({
     Name = "Ultimate Noclip",
-    Description = "Noclip + Controle de bolas integrado",
+    Description = "Noclip + Control de Balon Integrado",
     Default = false
 })
 
@@ -476,11 +476,11 @@ NoclipToggle:Callback(function(state)
     UltimateNoclip.Enabled = state
     
     if state then
-        -- Inicia sistemas
+        -- Start System
         mainLoop()
         manageSoccerBalls()
         
-        -- Configura respawn
+        -- Respawn Configuration
         UltimateNoclip.Connections.CharAdded = LocalPlayer.CharacterAdded:Connect(function()
             task.wait(0.5)
             managePlayerCollisions(LocalPlayer.Character)
@@ -514,7 +514,7 @@ local antiSitEnabled = false
 
 Tab2:AddToggle({
     Name = "Anti-Sit",
-    Description = "Impede o jogador de sentar",
+    Description = "Impide Sentarse",
     Default = false,
     Callback = function(state)
         antiSitEnabled = state
@@ -581,16 +581,16 @@ local selectedColor = "RGB Suave"
 
 -- Botão para Fly GUI
 Tab2:AddButton({
-    Name = "Ativar Fly GUI",
-    Description = "Carrega um GUI de fly universal",
+    Name = "Activar Fly GUI",
+    Description = "Fly GUI Universal",
     Callback = function()
         local success, _ = pcall(function()
-            loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Fly-gui-v3-30439"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/cxnker/p/refs/heads/main/fly"))()
         end)
 
         game.StarterGui:SetCore("SendNotification", {
-            Title = success and "Sucesso" or "Erro",
-            Text = success and "Fly GUI carregado!" or "Falha ao carregar o Fly GUI.",
+            Title = success and "Success" or "Error",
+            Text = success and "Fly GUI cargado!" or "Fallo al cargar Fly GUI.",
             Duration = 5
         })
     end
@@ -601,11 +601,11 @@ local Section = Tab2:AddSection({"ESP"})
 
 -- Dropdown de cor
 Tab2:AddDropdown({
-    Name = "Cor do ESP",
+    Name = "ESP Car",
     Default = "RGB ",
     Options = {
-        "RGB", "Branco", "Preto", "Vermelho",
-        "Verde", "Azul", "Amarelo", "Rosa", "Roxo"
+        "RGB", "Blanco", "Negro", "Rojo",
+        "Verde", "Azul", "Amarillo", "Rosado", "Morado"
     },
     Callback = function(value)
         selectedColor = value
@@ -617,21 +617,21 @@ local function getESPColor()
     if selectedColor == "RGB" then
         local h = (tick() % 5) / 5
         return Color3.fromHSV(h, 1, 1)
-    elseif selectedColor == "Preto" then
+    elseif selectedColor == "Negro" then
         return Color3.fromRGB(0, 0, 0)
-    elseif selectedColor == "Branco" then
+    elseif selectedColor == "Blanco" then
         return Color3.fromRGB(255, 255, 255)
-    elseif selectedColor == "Vermelho" then
+    elseif selectedColor == "Rojo" then
         return Color3.fromRGB(255, 0, 0)
     elseif selectedColor == "Verde" then
         return Color3.fromRGB(0, 255, 0)
     elseif selectedColor == "Azul" then
         return Color3.fromRGB(0, 170, 255)
-    elseif selectedColor == "Amarelo" then
+    elseif selectedColor == "Amarillo" then
         return Color3.fromRGB(255, 255, 0)
-    elseif selectedColor == "Rosa" then
+    elseif selectedColor == "Rosado" then
         return Color3.fromRGB(255, 105, 180)
-    elseif selectedColor == "Roxo" then
+    elseif selectedColor == "Morado" then
         return Color3.fromRGB(128, 0, 128)
     end
     return Color3.new(1, 1, 1)
@@ -684,8 +684,8 @@ end
 
 -- Toggle de ativação do ESP
 local Toggle1 = Tab2:AddToggle({
-    Name = "ESP Ativado",
-    Description = "Mostra nome e idade da conta dos jogadores.",
+    Name = "ESP Activado",
+    Description = "Muestra la entidad de los jugadores.",
     Default = false
 })
 Toggle1:Callback(function(value)
@@ -982,8 +982,8 @@ end
 -- Tab3: Opção de Avatar
 -- Dropdown para avatares
 local AvatarDropdown = Tab3:AddDropdown({
-    Name = "assesorios 3D",
-    Description = "Selecione  para equipar",
+    Name = "Accesorios 3D",
+    Description = "Seleccione para equipar",
     Default = nil,
     Options = AvatarManager:GetAvatarNames(),
     Callback = function(avatarSelecionado)
@@ -994,10 +994,10 @@ local AvatarDropdown = Tab3:AddDropdown({
 -- Botão para equipar avatar
 Tab3:AddButton({
     Name = "equipar ",
-    Description = "Equipar selecionado",
+    Description = "Equipar seleccionado",
     Callback = function()
         if not _G.SelectedAvatar or _G.SelectedAvatar == "" then
-            AvatarManager:MostrarNotificacao("Nenhum avatar selecionado!")
+            AvatarManager:MostrarNotificacao("Ningun avatar seleccionado!")
             return
         end
         AvatarManager:EquiparAvatar(_G.SelectedAvatar)
@@ -1009,7 +1009,7 @@ local Section = Tab3:AddSection({"Avatar Editor"})
 -- Botão para equipar partes do corpo
 
 Tab3:AddParagraph({
-    Title = "aviso vai resetar seu avatar",
+    Title = "Aviso, vas a resetear tu avatar",
     Content = ""
 })
 
