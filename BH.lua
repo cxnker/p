@@ -85,11 +85,11 @@ end
 
 -- Remove a GUI quando finalizar
 ScreenGui:Destroy()
-local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/Library-ui/refs/heads/main/Redzhubui"))()
+local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/cxnker/p/refs/heads/main/Redzhubui"))()
 
 local Window = redzlib:MakeWindow({
     Title = "MoonU Hub",
-    SubTitle = "by Herry",
+    SubTitle = "by Nova",
     SaveFolder = "teste"
   })
 
