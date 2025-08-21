@@ -258,7 +258,7 @@ end
 Tab2:AddTextBox({
     Name = "Nombre del jugador",
     Description = "Introduzca parte del nombre",
-    PlaceholderText = "ej: lo → Nova",
+    PlaceholderText = "ej: No → Nova",
     Callback = function(Value)
         local foundPlayer = findPlayerByPartialName(Value)
         if foundPlayer then
