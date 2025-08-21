@@ -1151,11 +1151,11 @@ Tab3:AddButton({
 ---------------------------------------------------------------------------------------------------
 
 Tab3:AddButton({
-    Name = "Headless/Korblox (BETA)",
+    Name = "Classic-Female-v2-Torso (Headless)",
     Callback = function()
         local args = {
             {
-                139607718, -- Right Leg
+                4637265517, -- Torso
                 15093053680   -- Head
             }
         }
@@ -1170,11 +1170,11 @@ Tab3:AddButton({
 ---------------------------------------------------------------------------------------------------
 
 Tab3:AddButton({
-    Name = "Classic-Female-v2-Torso (Headless)",
+    Name = "Headless/Korblox (BETA)",
     Callback = function()
         local args = {
             {
-                4637265517, -- Torso
+                139607718, -- Right Leg
                 15093053680   -- Head
             }
         }
