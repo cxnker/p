@@ -1,41 +1,41 @@
--- Roblox Lua: Loading MoonU Hub com bordas arredondadas
+-- Roblox Lua: Loading MoonU Hub
 
 local Players = game:GetService("Players")
 local lp = Players.LocalPlayer
 
--- Cria a GUI
+-- Create GUI
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "MoonULoadingGui"
 ScreenGui.ResetOnSpawn = false
 ScreenGui.Parent = lp:WaitForChild("PlayerGui")
-ScreenGui.IgnoreGuiInset = true -- garante que cobre a tela toda
+ScreenGui.IgnoreGuiInset = true -- Ignore others gui
 
--- Plano de fundo
+-- Background
 local Background = Instance.new("ImageLabel")
-Background.Size = UDim2.new(1,0,1,0) -- cobre toda a tela
+Background.Size = UDim2.new(1,0,1,0) -- Cover Screen
 Background.Position = UDim2.new(0,0,0,0)
 Background.Image = "rbxassetid://75269005632110"
 Background.ScaleType = Enum.ScaleType.Crop
 Background.BackgroundTransparency = 0
 Background.Parent = ScreenGui
 
--- Bordas arredondadas (pequena curvatura pra não cortar a tela)
+-- Rounded Borders
 local bgCorner = Instance.new("UICorner")
 bgCorner.CornerRadius = UDim.new(0.02,0)
 bgCorner.Parent = Background
 
--- Texto do topo
+-- Top Text
 local Title = Instance.new("TextLabel")
 Title.Size = UDim2.new(0, 300, 0, 50)
 Title.Position = UDim2.new(0.5, -150, 0.2, 0)
 Title.BackgroundTransparency = 1
 Title.Text = "MoonU Hub"
-Title.TextColor3 = Color3.fromRGB(30, 60, 120) -- azul escuro
+Title.TextColor3 = Color3.fromRGB(30, 60, 120) -- Color
 Title.Font = Enum.Font.GothamBold
 Title.TextScaled = true
 Title.Parent = ScreenGui
 
--- Barra de carregamento (fundo)
+-- Background Loading Bar
 local BarBackground = Instance.new("Frame")
 BarBackground.Size = UDim2.new(0, 400, 0, 30)
 BarBackground.Position = UDim2.new(0.5, -200, 0.5, 0)
@@ -44,24 +44,24 @@ BarBackground.BorderSizePixel = 0
 BarBackground.Parent = ScreenGui
 BarBackground.ClipsDescendants = true
 
--- Bordas arredondadas na barra de fundo
+-- Background Rounded Borders
 local barBgCorner = Instance.new("UICorner")
 barBgCorner.CornerRadius = UDim.new(0.5,0)
 barBgCorner.Parent = BarBackground
 
--- Barra de progresso
+-- Progress Bar
 local ProgressBar = Instance.new("Frame")
 ProgressBar.Size = UDim2.new(0,0,1,0)
 ProgressBar.BackgroundColor3 = Color3.fromRGB(255,0,0)
 ProgressBar.BorderSizePixel = 0
 ProgressBar.Parent = BarBackground
 
--- Bordas arredondadas na barra de progresso
+-- Progress Rounded Borders
 local progressCorner = Instance.new("UICorner")
 progressCorner.CornerRadius = UDim.new(0.5,0)
 progressCorner.Parent = ProgressBar
 
--- Texto %
+-- Text %
 local PercentText = Instance.new("TextLabel")
 PercentText.Size = UDim2.new(1,0,1,0)
 PercentText.Position = UDim2.new(0,0,0,0)
@@ -72,8 +72,8 @@ PercentText.TextScaled = true
 PercentText.Text = "0%"
 PercentText.Parent = BarBackground
 
--- Animação do carregamento
-local totalTime = 4 -- segundos
+-- Loading Animation
+local totalTime = 4 -- Seconds
 local steps = 100
 local delayPerStep = totalTime / steps
 
@@ -83,14 +83,14 @@ for i = 1, steps do
     wait(delayPerStep)
 end
 
--- Remove a GUI quando finalizar
+-- Delete GUI in the end
 ScreenGui:Destroy()
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/cxnker/p/refs/heads/main/Redzhubui"))()
 
 local Window = redzlib:MakeWindow({
     Title = "MoonU Hub",
     SubTitle = "by Nova",
-    SaveFolder = "teste"
+    SaveFolder = "Data_NH"
   })
 
   Window:AddMinimizeButton({
@@ -247,7 +247,7 @@ local function notifyPlayerSelected(player)
     local content, _ = Players:GetUserThumbnailAsync(player.UserId, thumbType, thumbSize)
 
     StarterGui:SetCore("SendNotification", {
-        Title = "Player Seleccionado",
+        Title = "Jugador Seleccionado",
         Text = player.Name .. " fue seleccionado!",
         Icon = content,
         Duration = 5
@@ -330,7 +330,7 @@ Tab2:AddSlider({
     Name = "Gravity",
     Increase = 1,
     MinValue = 0,
-    MaxValue = 10000,
+    MaxValue = 9000,
     Default = 196.2,
     Callback = function(Value)
         game.Workspace.Gravity = Value
@@ -569,17 +569,17 @@ Tab2:AddToggle({
     end
 })
 
--- Serviços
+-- Services
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 
--- Variáveis
+-- Variables
 local billboardGuis = {}
 local connections = {}
 local espEnabled = false
 local selectedColor = "RGB Suave"
 
--- Botão para Fly GUI
+-- Fly GUI Button
 Tab2:AddButton({
     Name = "Activar Fly GUI",
     Description = "Fly GUI Universal",
@@ -748,7 +748,7 @@ local LocalPlayer = Players.LocalPlayer
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Remotes = ReplicatedStorage:WaitForChild("Remotes")
 
-local valor_do_nome_do_joagdor
+local PlayerValue
 local Target = nil
 
 local function GetPlayerNames()
@@ -768,7 +768,7 @@ local Dropdown = Tab3:AddDropdown({
     Default = "",
     Flag = "player list",
     Callback = function(playername)
-        valor_do_nome_do_joagdor = playername
+        PlayerValue = playername
         Target = playername -- Conectar o dropdown ao Copy Avatar
     end
 })
@@ -779,7 +779,7 @@ end
 
 UptadePlayers()
 
-Tab3:AddButton({"Atualizar lista", function()
+Tab3:AddButton({"Actualizar lista", function()
     UptadePlayers()
 end})
 
@@ -901,7 +901,7 @@ Tab3:AddButton({
 })
 
 ------------------------------------------------------------------------------------------------------------------------------------
-local Section = Tab3:AddSection({"Roupas 3D"})
+local Section = Tab3:AddSection({"Ropa 3D"})
 
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -921,7 +921,7 @@ function AvatarManager:MostrarNotificacao(mensagem)
     end)
 end
 
--- Tabela de avatares
+-- Clothes 3D List
 AvatarManager.Avatares = {
     { Nome = "Gato de Manga", ID = 124948425515124 },
     { Nome = "Tung Saur", ID = 117098257036480 },
@@ -969,14 +969,14 @@ function AvatarManager:EquiparAvatar(avatarName)
                 return self.ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("Wear"):InvokeServer(unpack(args))
             end)
             if success then
-                self:MostrarNotificacao("Avatar " .. avatarName .. " equipado com sucesso!")
+                self:MostrarNotificacao("Avatar " .. avatarName .. " Equipado!")
             else
-                self:MostrarNotificacao("Falha ao equipar o avatar " .. avatarName .. "!")
+                self:MostrarNotificacao("No se pudo equipar " .. avatarName .. "!")
             end
             return
         end
     end
-    self:MostrarNotificacao("Avatar " .. avatarName .. " não encontrado!")
+    self:MostrarNotificacao("Avatar " .. avatarName .. " no encontrado!")
 end
 
 -- Tab3: Opção de Avatar
@@ -1111,19 +1111,19 @@ Tab3:AddButton({
     Callback = function()
         local args = {
             {
-                127241951574732, -- Perna Direita
-                118303475394830,  -- Perna Esquerda
-                18839824209,  -- Braço Direito
-                18839824132,  -- Braço Esquerdo
+                127241951574732, -- Right Leg
+                118303475394830,  -- Left Leg
+                18839824209,  -- Right Arm
+                18839824132,  -- Left Arm
                 114206707267907, -- Torso
-                15093053680   -- Cabeça
+                15093053680   -- Head
             }
         }
         game:GetService("ReplicatedStorage")
             :WaitForChild("Remotes")
             :WaitForChild("ChangeCharacterBody")
             :InvokeServer(unpack(args))
-        print("Todas as partes do corpo equipadas!")
+        print("Todas las partes han sido equipadas!")
     end
 })
 
@@ -1134,24 +1134,24 @@ Tab3:AddButton({
     Callback = function()
         local args = {
             {
-                139607718, -- Perna Direita
-                118303475394830,  -- Perna Esquerda
-                18839824209,  -- Braço Direito
-                18839824132,  -- Braço Esquerdo
+                139607718, -- Right Leg
+                118303475394830,  -- Left Leg
+                18839824209,  -- Right Arm
+                18839824132,  -- Left Arm
                 114206707267907, -- Torso
-                15093053680   -- Cabeça
+                15093053680   -- Head
             }
         }
         game:GetService("ReplicatedStorage")
             :WaitForChild("Remotes")
             :WaitForChild("ChangeCharacterBody")
             :InvokeServer(unpack(args))
-        print("Todas as partes do corpo equipadas!")
+        print("Todas las partes han sido equipadas!")
     end
 })
 
 Tab3:AddParagraph({
-    Title = "vai ter mais coisas aqui na proxima atualizaçao",
+    Title = "Proximamente mas cosas",
     Content = ""
 })
 
@@ -1160,14 +1160,14 @@ Tab3:AddParagraph({
 ---------------------------------------------------------------------------------------------------------------------------------
 
 Tab4:AddParagraph({
-    Title = "Funções para você usar em você",
+    Title = "Funciones para usar tu mismo",
     Content = ""
 })
 
 -- Botão para remover ban de todas as casas
 Tab4:AddButton({
-    Name = "Remover Ban de Todas as Casas",
-    Description = "Tenta remover o ban de todas as casas ",
+    Name = "Desbanear de todas las casas",
+    Description = "Remover ban de las casas",
     Callback = function()
         local successCount = 0
         local failCount = 0
@@ -1199,22 +1199,22 @@ Tab4:AddButton({
         end
         if successCount > 0 then
             game.StarterGui:SetCore("SendNotification", {
-                Title = "Sucesso",
-                Text = "Bans removidos de " .. successCount .. " casas!",
+                Title = "Success",
+                Text = "Desbaneado de " .. successCount .. " casas!",
                 Duration = 5
             })
         end
         if failCount > 0 then
             game.StarterGui:SetCore("SendNotification", {
                 Title = "Aviso",
-                Text = "Falha ao remover bans de " .. failCount .. " casas.",
+                Text = "Falta ser desbaneado de " .. failCount .. " casas.",
                 Duration = 5
             })
         end
         if successCount == 0 and failCount == 0 then
             game.StarterGui:SetCore("SendNotification", {
                 Title = "Aviso",
-                Text = "Nenhum ban encontrado para remover.",
+                Text = "Ningun ban encontrado para remover.",
                 Duration = 5
             })
         end
@@ -1222,7 +1222,7 @@ Tab4:AddButton({
 })
 
 Tab4:AddParagraph({
-    Title = "to sem ideias para colocar aqui._.",
+    Title = "Proximamente mas cosas",
     Content = ""
 })
 
@@ -1278,13 +1278,13 @@ end
 -- Função para teleportar o jogador para o assento do carro
 function TeleportCarro:TeleportToSeat(seat, car)
     if not self.LocalPlayer.Character or not self.LocalPlayer.Character:FindFirstChild("Humanoid") then
-        self:MostrarNotificacao("Personagem não encontrado!")
+        self:MostrarNotificacao("Personaje no encontrado!")
         return false
     end
     local humanoid = self.LocalPlayer.Character.Humanoid
     local rootPart = self.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
     if not rootPart then
-        self:MostrarNotificacao("Parte raiz do personagem não encontrada!")
+        self:MostrarNotificacao("No se encontro HumanoidRootPart!")
         return false
     end
 
@@ -1302,7 +1302,7 @@ end
 -- Função para teleportar o carro para o void com delay
 function TeleportCarro:TeleportToVoid(car)
     if not car then
-        self:MostrarNotificacao("Veículo inválido!")
+        self:MostrarNotificacao("Vehiculo invalido!")
         return
     end
     if not car.PrimaryPart then
@@ -1310,7 +1310,7 @@ function TeleportCarro:TeleportToVoid(car)
         if body and body:IsA("BasePart") then
             car.PrimaryPart = body
         else
-            self:MostrarNotificacao("Parte principal do veículo não encontrada!")
+            self:MostrarNotificacao("Parte principal del vehiculo no encontrado!")
             return
         end
     end
@@ -1322,7 +1322,7 @@ end
 -- Função para teleportar o carro para a posição do jogador com delay
 function TeleportCarro:TeleportToPlayer(car, playerPos)
     if not car then
-        self:MostrarNotificacao("Veículo inválido!")
+        self:MostrarNotificacao("Vehiculo invalido!")
         return
     end
     if not car.PrimaryPart then
@@ -1330,7 +1330,7 @@ function TeleportCarro:TeleportToPlayer(car, playerPos)
         if body and body:IsA("BasePart") then
             car.PrimaryPart = body
         else
-            self:MostrarNotificacao("Parte principal do veículo não encontrada!")
+            self:MostrarNotificacao("Parte principal del vehiculo no encontrado!")
             return
         end
     end
@@ -1370,14 +1370,14 @@ end
 
 -- Parágrafo
 Tab5:AddParagraph({
-    Title = "use o void protection",
+    Title = "Utiliza void protection",
     Content = ""
 })
 
 -- Toggle para matar todos os carros
 Tab5:AddToggle({
-    Name = "Matar todos os carros do server",
-    Description = "Teleporta os carros para o void",
+    Name = "Eliminar todos los autos",
+    Description = "Teletransporta autos al vacio",
     Default = false,
     Callback = function(state)
         local originalPosition
@@ -1388,7 +1388,7 @@ Tab5:AddToggle({
             if self.LocalPlayer.Character and self.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
                 originalPosition = self.LocalPlayer.Character.HumanoidRootPart.Position
             else
-                TeleportCarro:MostrarNotificacao("Personagem não encontrado!")
+                TeleportCarro:MostrarNotificacao("Personaje no encontrado!")
                 return
             end
 
@@ -1397,7 +1397,7 @@ Tab5:AddToggle({
             spawn(function()
                 local vehiclesFolder = TeleportCarro.Workspace:FindFirstChild("Vehicles")
                 if not vehiclesFolder then
-                    TeleportCarro:MostrarNotificacao("Pasta de veículos não encontrada!")
+                    TeleportCarro:MostrarNotificacao("Vehiculo no encontrado!")
                     return
                 end
 
@@ -1438,8 +1438,8 @@ local Section = Tab5:AddSection({"functions dos carro"})
 
 -- Criar o dropdown
 local Dropdown = Tab5:AddDropdown({
-    Name = "Selecionar Carro do Jogador",
-    Description = "Selecione o carro de um jogador",
+    Name = "Seleccionar vehiculo",
+    Description = "Seleccione un vehiculo de un jugador",
     Default = nil,
     Options = TeleportCarro:AtualizarListaCarros(),
     Callback = function(carroSelecionado)
@@ -1449,31 +1449,31 @@ local Dropdown = Tab5:AddDropdown({
 
 -- Toggle para ver a câmera do carro selecionado
 Tab5:AddToggle({
-    Name = "Ver Câmera do Carro Selecionado",
-    Description = "Foca a câmera no carro selecionado",
+    Name = "Ver camara del vehiculo seleccionado",
+    Description = "Ve la camara de un vehiculo",
     Default = false,
     Callback = function(state)
         if state then
             if not _G.SelectedVehicle or _G.SelectedVehicle == "" then
-                TeleportCarro:MostrarNotificacao("Nenhum carro selecionado!")
+                TeleportCarro:MostrarNotificacao("Ningun vehiculo seleccionado!")
                 return
             end
 
             local vehiclesFolder = TeleportCarro.Workspace:FindFirstChild("Vehicles")
             if not vehiclesFolder then
-                TeleportCarro:MostrarNotificacao("Pasta de veículos não encontrada!")
+                TeleportCarro:MostrarNotificacao("Vehiculo no encontrado en la carpeta!")
                 return
             end
 
             local vehicle = vehiclesFolder:FindFirstChild(_G.SelectedVehicle)
             if not vehicle then
-                TeleportCarro:MostrarNotificacao("Carro selecionado não encontrado!")
+                TeleportCarro:MostrarNotificacao("Vehiculo no encontrado!")
                 return
             end
 
             local vehicleSeat = vehicle:FindFirstChildWhichIsA("VehicleSeat", true)
             if not vehicleSeat then
-                TeleportCarro:MostrarNotificacao("Assento do carro não encontrado!")
+                TeleportCarro:MostrarNotificacao("Asiento del vehiculo no encontrado!")
                 return
             end
 
@@ -1484,13 +1484,13 @@ Tab5:AddToggle({
             -- Ajustar a câmera para o assento do carro, mesmo se ocupado
             TeleportCarro.Camera.CameraSubject = vehicleSeat
             TeleportCarro.Camera.CameraType = Enum.CameraType.Follow
-            TeleportCarro:MostrarNotificacao("Câmera ajustada para o carro " .. _G.SelectedVehicle .. "!")
+            TeleportCarro:MostrarNotificacao("Camara ajustada para el vehiculo " .. _G.SelectedVehicle .. "!")
         else
             -- Restaurar a câmera ao estado original
             if TeleportCarro.OriginalCameraSubject then
                 TeleportCarro.Camera.CameraSubject = TeleportCarro.OriginalCameraSubject
                 TeleportCarro.Camera.CameraType = TeleportCarro.OriginalCameraType or Enum.CameraType.Custom
-                TeleportCarro:MostrarNotificacao("Câmera restaurada ao normal!")
+                TeleportCarro:MostrarNotificacao("Camara restaurada!")
                 TeleportCarro.OriginalCameraSubject = nil
                 TeleportCarro.OriginalCameraType = nil
             end
@@ -1510,34 +1510,34 @@ local Section = Tab5:AddSection({"functions kill e trazer"})
 
 -- Botão para destruir carro selecionado
 Tab5:AddButton({
-    Name = "Destruir Carro Selecionado",
-    Description = "Teleporta o carro selecionado para o void",
+    Name = "Eliminar vehiculo seleccionado",
+    Description = "Teletransporta el vehiculo al vacio",
     Callback = function()
         if not _G.SelectedVehicle or _G.SelectedVehicle == "" then
-            TeleportCarro:MostrarNotificacao("Nenhum carro selecionado!")
+            TeleportCarro:MostrarNotificacao("Ningun vehiculo seleccionado!")
             return
         end
 
         local vehiclesFolder = TeleportCarro.Workspace:FindFirstChild("Vehicles")
         if not vehiclesFolder then
-            TeleportCarro:MostrarNotificacao("Pasta de veículos não encontrada!")
+            TeleportCarro:MostrarNotificacao("Vehiculo no encontrado en la carpeta!")
             return
         end
 
         local vehicle = vehiclesFolder:FindFirstChild(_G.SelectedVehicle)
         if not vehicle then
-            TeleportCarro:MostrarNotificacao("Carro selecionado não encontrado!")
+            TeleportCarro:MostrarNotificacao("Vehiculo no encontrado!")
             return
         end
 
         local vehicleSeat = vehicle:FindFirstChildWhichIsA("VehicleSeat", true)
         if not vehicleSeat then
-            TeleportCarro:MostrarNotificacao("Assento do carro não encontrado!")
+            TeleportCarro:MostrarNotificacao("Asiento del vehiculo no encontrado!")
             return
         end
 
         if vehicleSeat.Occupant then
-            TeleportCarro:MostrarNotificacao("O kill car não foi possível, há alguém sentado no assento do motorista!")
+            TeleportCarro:MostrarNotificacao("Vehiculo en uso, no fue posible eliminarlo!")
             return
         end
 
@@ -1545,7 +1545,7 @@ Tab5:AddButton({
         if TeleportCarro.LocalPlayer.Character and TeleportCarro.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
             originalPos = TeleportCarro.LocalPlayer.Character.HumanoidRootPart.Position
         else
-            TeleportCarro:MostrarNotificacao("Personagem do jogador não encontrado!")
+            TeleportCarro:MostrarNotificacao("Personaje del jugador no encontrado!")
             return
         end
 
@@ -1553,10 +1553,10 @@ Tab5:AddButton({
         local success = TeleportCarro:TeleportToSeat(vehicleSeat, vehicle)
         if success then
             TeleportCarro:TeleportToVoid(vehicle)
-            TeleportCarro:MostrarNotificacao("Carro " .. _G.SelectedVehicle .. " foi teleportado para o void!")
+            TeleportCarro:MostrarNotificacao("Vehiculo " .. _G.SelectedVehicle .. " Fue teletransportado al vacio!")
             TeleportCarro:ExitCarAndReturn(originalPos)
         else
-            TeleportCarro:MostrarNotificacao("Falha ao sentar no carro!")
+            TeleportCarro:MostrarNotificacao("Fallo al sentarte en el vehiculo!")
         end
         TeleportCarro:ToggleFallDamage(false)
     end
@@ -1564,34 +1564,34 @@ Tab5:AddButton({
 
 -- Botão para trazer carro selecionado
 Tab5:AddButton({
-    Name = "Trazer Carro Selecionado",
-    Description = "Teleporta o carro selecionado para sua posição",
+    Name = "Traer vehiculo seleccionado",
+    Description = "Teletransporta el vehiculo a tu posicion",
     Callback = function()
         if not _G.SelectedVehicle or _G.SelectedVehicle == "" then
-            TeleportCarro:MostrarNotificacao("Nenhum carro selecionado!")
+            TeleportCarro:MostrarNotificacao("Ningun vehiculo seleccionado!")
             return
         end
 
         local vehiclesFolder = TeleportCarro.Workspace:FindFirstChild("Vehicles")
         if not vehiclesFolder then
-            TeleportCarro:MostrarNotificacao("Pasta de veículos não encontrada!")
+            TeleportCarro:MostrarNotificacao("Vehiculo no encontrado en carpeta!")
             return
         end
 
         local vehicle = vehiclesFolder:FindFirstChild(_G.SelectedVehicle)
         if not vehicle then
-            TeleportCarro:MostrarNotificacao("Carro selecionado não encontrado!")
+            TeleportCarro:MostrarNotificacao("Vehiculo no encontrado!")
             return
         end
 
         local vehicleSeat = vehicle:FindFirstChildWhichIsA("VehicleSeat", true)
         if not vehicleSeat then
-            TeleportCarro:MostrarNotificacao("Assento do carro não encontrado!")
+            TeleportCarro:MostrarNotificacao("Asiento del vehiculo no encontrado!")
             return
         end
 
         if vehicleSeat.Occupant then
-            TeleportCarro:MostrarNotificacao("O teleporte do carro não foi possível, há alguém sentado no assento do motorista!")
+            TeleportCarro:MostrarNotificacao("El vehiculo esta en uso, teletransporte fallido!")
             return
         end
 
@@ -1599,7 +1599,7 @@ Tab5:AddButton({
         if TeleportCarro.LocalPlayer.Character and TeleportCarro.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
             originalPos = TeleportCarro.LocalPlayer.Character.HumanoidRootPart.Position
         else
-            TeleportCarro:MostrarNotificacao("Personagem do jogador não encontrado!")
+            TeleportCarro:MostrarNotificacao("Personaje del jugador no encontrado!")
             return
         end
 
@@ -1607,10 +1607,10 @@ Tab5:AddButton({
         local success = TeleportCarro:TeleportToSeat(vehicleSeat, vehicle)
         if success then
             TeleportCarro:TeleportToPlayer(vehicle, originalPos)
-            TeleportCarro:MostrarNotificacao("Carro " .. _G.SelectedVehicle .. " foi teleportado para você!")
+            TeleportCarro:MostrarNotificacao("Vehiculo " .. _G.SelectedVehicle .. " fue teletransportando a ti!")
             TeleportCarro:ExitCarAndReturn(originalPos)
         else
-            TeleportCarro:MostrarNotificacao("Falha ao sentar no carro!")
+            TeleportCarro:MostrarNotificacao("Fallo al sentarte en el vehiculo!")
         end
         TeleportCarro:ToggleFallDamage(false)
     end
@@ -1618,14 +1618,14 @@ Tab5:AddButton({
 
 -- Botão para trazer todos os carros
 Tab5:AddButton({
-    Name = "Trazer Todos os Carros",
-    Description = "Teleporta todos os carros do servidor para sua posição",
+    Name = "Traer todos los vehiculos",
+    Description = "Teletransporta todos los vehiculos a tu posicion",
     Callback = function()
         local originalPos
         if TeleportCarro.LocalPlayer.Character and TeleportCarro.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
             originalPos = TeleportCarro.LocalPlayer.Character.HumanoidRootPart.Position
         else
-            TeleportCarro:MostrarNotificacao("Personagem do jogador não encontrado!")
+            TeleportCarro:MostrarNotificacao("Personaje del jugador no encontrado!")
             return
         end
 
