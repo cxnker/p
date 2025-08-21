@@ -1,144 +1,100 @@
+-- Roblox Lua: Loading MoonU Hub com bordas arredondadas
+
 local Players = game:GetService("Players")
-local TweenService = game:GetService("TweenService")
-local CoreGui = game:GetService("CoreGui")
-local StarterGui = game:GetService("StarterGui")
 local lp = Players.LocalPlayer
 
--- Função que cria a tela de loading e retorna uma promise
-local function createLoadingScreen()
-    local promise = {}
-    promise.completed = false
-    promise.connection = nil
-    
-    -- Remove GUI antiga se existir
-    pcall(function()
-        if CoreGui:FindFirstChild("LoadingScreen") then
-            CoreGui.LoadingScreen:Destroy()
-        end
-    end)
+-- Cria a GUI
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "MoonULoadingGui"
+ScreenGui.ResetOnSpawn = false
+ScreenGui.Parent = lp:WaitForChild("PlayerGui")
+ScreenGui.IgnoreGuiInset = true -- garante que cobre a tela toda
 
-    -- Cria a UI de carregamento
-    local gui = Instance.new("ScreenGui")
-    gui.Name = "LoadingScreen"
-    gui.IgnoreGuiInset = true
-    gui.ResetOnSpawn = false
-    gui.Parent = CoreGui
-    pcall(function() syn.protect_gui(gui) end)
+-- Plano de fundo
+local Background = Instance.new("ImageLabel")
+Background.Size = UDim2.new(1,0,1,0) -- cobre toda a tela
+Background.Position = UDim2.new(0,0,0,0)
+Background.Image = "rbxassetid://75269005632110"
+Background.ScaleType = Enum.ScaleType.Crop
+Background.BackgroundTransparency = 0
+Background.Parent = ScreenGui
 
-    local frame = Instance.new("Frame")
-    frame.BackgroundColor3 = Color3.new(0, 0, 0)
-    frame.BackgroundTransparency = 0.3
-    frame.Size = UDim2.new(1, 0, 1, 0)
-    frame.Parent = gui
+-- Bordas arredondadas (pequena curvatura pra não cortar a tela)
+local bgCorner = Instance.new("UICorner")
+bgCorner.CornerRadius = UDim.new(0.02,0)
+bgCorner.Parent = Background
 
-    local image = Instance.new("ImageLabel")
-    image.Size = UDim2.new(0, 300, 0, 300)
-    image.Position = UDim2.new(0.5, -150, 0.35, -150)
-    image.BackgroundTransparency = 1
-    image.Image = "rbxassetid://108662620575463"
-    image.Parent = frame
+-- Texto do topo
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(0, 300, 0, 50)
+Title.Position = UDim2.new(0.5, -150, 0.2, 0)
+Title.BackgroundTransparency = 1
+Title.Text = "MoonU Hub"
+Title.TextColor3 = Color3.fromRGB(30, 60, 120) -- azul escuro
+Title.Font = Enum.Font.GothamBold
+Title.TextScaled = true
+Title.Parent = ScreenGui
 
-    local nameText = Instance.new("TextLabel")
-    nameText.Size = UDim2.new(1, 0, 0, 40)
-    nameText.Position = UDim2.new(0, 0, 0.65, 0)
-    nameText.TextColor3 = Color3.fromRGB(255, 255, 255)
-    nameText.TextStrokeTransparency = 0.3
-    nameText.BackgroundTransparency = 1
-    nameText.Font = Enum.Font.FredokaOne
-    nameText.TextScaled = true
-    nameText.Text = "Verificando usuário: "..lp.Name.." (Conta: "..tostring(lp.AccountAge).." dias)"
-    nameText.Parent = frame
+-- Barra de carregamento (fundo)
+local BarBackground = Instance.new("Frame")
+BarBackground.Size = UDim2.new(0, 400, 0, 30)
+BarBackground.Position = UDim2.new(0.5, -200, 0.5, 0)
+BarBackground.BackgroundColor3 = Color3.fromRGB(200,200,200)
+BarBackground.BorderSizePixel = 0
+BarBackground.Parent = ScreenGui
+BarBackground.ClipsDescendants = true
 
-    local barBG = Instance.new("Frame")
-    barBG.Size = UDim2.new(0.6, 0, 0.03, 0)
-    barBG.Position = UDim2.new(0.2, 0, 0.8, 0)
-    barBG.BackgroundColor3 = Color3.new(1, 1, 1)
-    barBG.BorderSizePixel = 0
-    barBG.Parent = frame
+-- Bordas arredondadas na barra de fundo
+local barBgCorner = Instance.new("UICorner")
+barBgCorner.CornerRadius = UDim.new(0.5,0)
+barBgCorner.Parent = BarBackground
 
-    local bar = Instance.new("Frame")
-    bar.Size = UDim2.new(0, 0, 1, 0)
-    bar.BackgroundColor3 = Color3.new(0.7, 0.2, 0.6)
-    bar.BorderSizePixel = 0
-    bar.Parent = barBG
+-- Barra de progresso
+local ProgressBar = Instance.new("Frame")
+ProgressBar.Size = UDim2.new(0,0,1,0)
+ProgressBar.BackgroundColor3 = Color3.fromRGB(255,0,0)
+ProgressBar.BorderSizePixel = 0
+ProgressBar.Parent = BarBackground
 
-    -- Animação da barra de carregamento
-    local tween = TweenService:Create(
-        bar,
-        TweenInfo.new(4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-        {Size = UDim2.new(1, 0, 1, 0)}
-    )
-    tween:Play()
+-- Bordas arredondadas na barra de progresso
+local progressCorner = Instance.new("UICorner")
+progressCorner.CornerRadius = UDim.new(0.5,0)
+progressCorner.Parent = ProgressBar
 
-    -- Função para limpar a UI
-    local function cleanup()
-        if gui then
-            gui:Destroy()
-        end
-        if promise.connection then
-            promise.connection:Disconnect()
-        end
-    end
+-- Texto %
+local PercentText = Instance.new("TextLabel")
+PercentText.Size = UDim2.new(1,0,1,0)
+PercentText.Position = UDim2.new(0,0,0,0)
+PercentText.BackgroundTransparency = 1
+PercentText.TextColor3 = Color3.fromRGB(0,0,0)
+PercentText.Font = Enum.Font.GothamBold
+PercentText.TextScaled = true
+PercentText.Text = "0%"
+PercentText.Parent = BarBackground
 
-    -- Após a barra carregar, faz o fade out e destrói a UI
-    promise.connection = tween.Completed:Connect(function()
-        -- Fade out suave da UI
-        TweenService:Create(frame, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 1}):Play()
-        TweenService:Create(barBG, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 1}):Play()
-        TweenService:Create(bar, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 1}):Play()
-        TweenService:Create(image, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {ImageTransparency = 1}):Play()
-        TweenService:Create(nameText, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 1}):Play()
-        
-        -- Aguarda o fade out terminar
-        task.delay(1.2, function()
-            -- Toca som de conclusão
-            local sound = Instance.new("Sound")
-            sound.SoundId = "rbxassetid://8486683243"
-            sound.Volume = 0.5
-            sound.PlayOnRemove = true
-            sound.Parent = workspace
-            sound:Destroy()
-            
-            -- Exibe a notificação de boas-vindas
-            StarterGui:SetCore("SendNotification", {
-                Title = "MoonU Hub",
-                Text = "Bem-vindo à MoonU Hub",
-                Duration = 2
-            })
-            
-            -- Marca como concluído e limpa
-            promise.completed = true
-            cleanup()
-        end)
-    end)
-    
-    return promise
+-- Animação do carregamento
+local totalTime = 4 -- segundos
+local steps = 100
+local delayPerStep = totalTime / steps
+
+for i = 1, steps do
+    ProgressBar.Size = UDim2.new(i/steps,0,1,0)
+    PercentText.Text = i .. "%"
+    wait(delayPerStep)
 end
 
--- Função para esperar até que a promise seja resolvida
-local function waitForPromise(promise)
-    while not promise.completed do
-        task.wait()
-    end
-end
-
--- Uso:
-local loadingPromise = createLoadingScreen()
-
--- Aqui você coloca o código que deve esperar até que o loading termine
-waitForPromise(loadingPromise)
-
-
+-- Remove a GUI quando finalizar
+ScreenGui:Destroy()
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/Library-ui/refs/heads/main/Redzhubui"))()
 
 local Window = redzlib:MakeWindow({
     Title = "MoonU Hub",
-    SubTitle = "By Herry And e0davizinTA",
-    SaveFolder = "MoonU Hub."
+    SubTitle = "by Herry",
+    SaveFolder = "teste"
   })
 
   Window:AddMinimizeButton({
-    Button = { Image = "rbxassetid://99977421928388", BackgroundTransparency = 0 },
+    Button = { Image = "rbxassetid://108662620575463", BackgroundTransparency = 0 },
     Corner = { CornerRadius = UDim.new(35, 1) },
 })
 
@@ -146,13 +102,18 @@ local Window = redzlib:MakeWindow({
 
 local Tab1 = Window:MakeTab({"Credits", "info"})
 local Tab2= Window:MakeTab({"Fun", "fun"})
-local Tab3 = Window:MakeTab({"Roupas", "shirt"})
+local Tab3 = Window:MakeTab({"Avatar", "shirt"})
 local Tab4 = Window:MakeTab({"House", "Home"})
 local Tab5 = Window:MakeTab({"Car", "Car"})
-local Tab6 = Window:MakeTab({"RGBS", "brush"})
-local Tab7 = Window:MakeTab({"Audio All", "radio"})    
+local Tab6 = Window:MakeTab({"RGB", "brush"})
+local Tab7 = Window:MakeTab({"Music All", "radio"})    
 local Tab8 = Window:MakeTab({"Music", "music"}) 
 local Tab9 = Window:MakeTab({"Troll", "skull"}) 
+local Tab10 = Window:MakeTab({"Lag Server", "bomb"})
+local Tab11 = Window:MakeTab({"Scripts", "scroll"})
+local Tab12 = Window:MakeTab({"Teleportes", "map-pin"})
+
+
 
 
 
@@ -181,20 +142,19 @@ end
 
 local executorName = detectExecutor()
 
-local Paragraph = Tab1:AddParagraph({"Execultor", executorName})
+local Paragraph = Tab1:AddParagraph({"Executor", executorName})
 
-local Section = Tab1:AddSection({"Versão Do Hub V1"})
+local Section = Tab1:AddSection({"Versão Beta"})
 
-local Paragraph = Tab1:AddParagraph({"Criadores", "Coquette Hub
-    \n Herry"})
+local Paragraph = Tab1:AddParagraph({"Criadores", "e0davizinTA And Herry \n Coquette_Source"})
 
 
   
   Tab1:AddButton({
-    Name = " - Copiar @ Do Sub-Dono(Programador)",
+    Name = " - Copiar @ do TikTok",
     Callback = function()
-      setclipboard("@Davi Top") -- Copia o @
-      setclipboard("https://www.tiktok.com/@daviamajesus1?_t=ZM-8yuiqbpmZ9x&_r=1") -- Copia o link também, se quiser só o @, remova esta linha
+      setclipboard("@Davi.") -- Copia o @
+      setclipboard("https://www.tiktok.com/@daviamajesus1?_t=ZM-8yxpJgMTnW9&_r=1") -- Copia o link também, se quiser só o @, remova esta linha
       
     end
   })
@@ -298,7 +258,7 @@ end
 Tab2:AddTextBox({
     Name = "Nome do Jogador",
     Description = "Digite parte do nome",
-    PlaceholderText = "ex: Da → DaviGamer",
+    PlaceholderText = "ex: lo → Lolyta",
     Callback = function(Value)
         local foundPlayer = findPlayerByPartialName(Value)
         if foundPlayer then
@@ -781,7 +741,7 @@ end)
                                                          -- Tab3:  Avatar Editor--
 ----------------------------------------------------------------------------------------------------------------------------------
 
-local Section = Tab3:AddSection({"Copiar  Avatares"})
+local Section = Tab3:AddSection({"Copy Avatar"})
 
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
@@ -1190,7 +1150,10 @@ Tab3:AddButton({
     end
 })
 
-
+Tab3:AddParagraph({
+    Title = "vai ter mais coisas aqui na proxima atualizaçao",
+    Content = ""
+})
 
 ---------------------------------------------------------------------------------------------------------------------------------
                                           -- === Tab4: House === --
@@ -1258,6 +1221,10 @@ Tab4:AddButton({
     end
 })
 
+Tab4:AddParagraph({
+    Title = "to sem ideias para colocar aqui._.",
+    Content = ""
+})
 
 
 
@@ -1818,7 +1785,7 @@ ToggleCabelo:Callback(function(Value)
                 "ChangeHairColor2",
                 getRainbowColor(rgbSpeed)
             })
-            task.wait(0.1)
+            task.wait(0.5)
         end
     end)
 end)
@@ -4695,85 +4662,16 @@ Tab9:AddButton({"Parar Tudo", function()
     showNotification("Tudo Parado", "Todas as funções foram desativadas.", nil)
 end})
 
--- Seção Bug na aba Troll
-local BugSection = Tab9:AddSection({"Bug"})
 
--- Texto explicativo
-local Paragraph = TabTroll:AddParagraph({
-  "Whitelist", 
-  "Escolha O Player Pra Whitelist"
-})
 
--- Tabela da whitelist
-local Whitelist = {}
 
--- TextBox para adicionar player na whitelist
-BugSection:AddTextBox({
-    Name = "Adicionar na Whitelist",
-    Description = "Digite o nome do player",
-    PlaceholderText = "Ex: DaviGamer",
-    Callback = function(Value)
-        if Value and Value ~= "" then
-            table.insert(Whitelist, Value)
-            print("Adicionado à Whitelist:", Value)
-        end
-    end
-})
 
--- Toggle: Bug All
-local ToggleBugAll = TabTroll:AddToggle({
-    Name = "Bug All",
-    Default = false,
-    Callback = function(v)
-        if v then
-            AtivarLagAll()
-        else
-            if lagAllConnection then
-                lagAllConnection:Disconnect()
-                lagAllConnection = nil
-            end
-        end
-    end
-})
+---------------------------------------------------------------------------------------------------------------------------------
+                                                   -- === Tab 10: lag server === --
+---------------------------------------------------------------------------------------------------------------------------------
 
--- Função pra listar players
-local function GetPlayersList()
-    local names = {}
-    for _,plr in pairs(game.Players:GetPlayers()) do
-        if plr ~= game.Players.LocalPlayer then
-            table.insert(names, plr.Name)
-        end
-    end
-    return names
-end
 
-local SelectedPlayer = nil
 
--- Dropdown com lista de Players
-local DropdownPlayers = BugSection:AddDropdown({
-    Name = "Lista de Players",
-    Description = "Selecione o Player",
-    Options = GetPlayersList(),
-    Default = nil,
-    Callback = function(Value)
-        SelectedPlayer = Value
-    end
-})
-
--- Botão atualizar lista
-BugSection:AddButton({"Atualizar Lista", function()
-    DropdownPlayers:Refresh(GetPlayersList(), true)
-end})
-
--- Botão Bugar somente Player
-BugSection:AddButton({"Bugar Somente Player", function()
-    if SelectedPlayer then
-        print("Bugando apenas: "..SelectedPlayer)
-        -- aqui entra a função para bugar apenas o player selecionado
-    else
-        warn("Nenhum player selecionado!")
-    end
-end})
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -4809,7 +4707,7 @@ Tab11:AddButton({
 local Section = Tab11:AddSection({"esse system broochk e voidProtection"})
 
 Tab11:AddButton({
-    Name = "System Bro",
+    Name = "System Broochk",
     Description = "Universal",
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/script"))()
@@ -4817,7 +4715,7 @@ Tab11:AddButton({
 })
 
 Tab11:AddButton({
-    Name = "Rochips",
+    Name = "Roships",
     Description = "Universal",
     Callback = function()
         loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-rochips-universal-18294"))()
@@ -4856,7 +4754,7 @@ Tab11:AddButton({
 
 
 
--- Tab12: Locais
+-- Tab12: Teleportes
 
 local teleportPlayer = game.Players.LocalPlayer
 local teleportLocation = "Morro" -- Valor padrão
@@ -4926,7 +4824,4 @@ Tab12:AddButton({
             end
         end
     end
-
 })
-
-
