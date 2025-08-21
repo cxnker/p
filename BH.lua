@@ -1172,6 +1172,30 @@ Tab3:AddParagraph({
     Content = ""
 })
 
+---------------------------------------------------------------------------------------------------
+
+Tab3:AddButton({
+    Name = "Classic-Female-v2-Torso (Headless)",
+    Callback = function()
+        local args = {
+            {
+                4637265517, -- Torso
+                15093053680   -- Head
+            }
+        }
+        game:GetService("ReplicatedStorage")
+            :WaitForChild("Remotes")
+            :WaitForChild("ChangeCharacterBody")
+            :InvokeServer(unpack(args))
+        print("Todas las partes han sido equipadas!")
+    end
+})
+
+Tab3:AddParagraph({
+    Title = "Proximamente mas cosas",
+    Content = ""
+})
+
 ---------------------------------------------------------------------------------------------------------------------------------
                                           -- === Tab4: House === --
 ---------------------------------------------------------------------------------------------------------------------------------
