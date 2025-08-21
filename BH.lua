@@ -599,7 +599,7 @@ local Section = Tab2:AddSection({"ESP"})
 
 -- Dropdown de cor
 Tab2:AddDropdown({
-    Name = "ESP Car",
+    Name = "ESP Color",
     Default = "RGB ",
     Options = {
         "RGB", "Blanco", "Negro", "Rojo",
@@ -1628,7 +1628,7 @@ Tab5:AddButton({
 
         local vehiclesFolder = TeleportCarro.Workspace:FindFirstChild("Vehicles")
         if not vehiclesFolder then
-            TeleportCarro:MostrarNotificacao("Pasta de veículos não encontrada!")
+            TeleportCarro:MostrarNotificacao("Vehiculo no encontrado en carpeta!")
             return
         end
 
@@ -1647,23 +1647,23 @@ Tab5:AddButton({
                 if success then
                     TeleportCarro:TeleportToPlayer(car, originalPos)
                     TeleportCarro:ExitCarAndReturn(originalPos)
-                    TeleportCarro:MostrarNotificacao("Carro " .. car.Name .. " foi teleportado para você!")
+                    TeleportCarro:MostrarNotificacao("Vehiculo " .. car.Name .. " fue teletransportado a ti!")
                     task.wait(1)
                 else
-                    TeleportCarro:MostrarNotificacao("Falha ao sentar no carro " .. car.Name .. "!")
+                    TeleportCarro:MostrarNotificacao("No puedes sentarte en el vehiculo " .. car.Name .. "!")
                 end
             else
                 if vehicleSeat then
-                    TeleportCarro:MostrarNotificacao("Carro " .. car.Name .. " ignorado: alguém está no assento do motorista!")
+                    TeleportCarro:MostrarNotificacao("Vehiculo " .. car.Name .. " Vehiculo en uso!")
                 else
-                    TeleportCarro:MostrarNotificacao("Carro " .. car.Name .. " ignorado: assento não encontrado!")
+                    TeleportCarro:MostrarNotificacao("Vehiculo " .. car.Name .. " Asiento no encontrado!")
                 end
             end
         end
 
         TeleportCarro:ToggleFallDamage(false)
         if #cars == 0 then
-            TeleportCarro:MostrarNotificacao("Nenhum carro disponível para teleportar!")
+            TeleportCarro:MostrarNotificacao("Ningun vehiculo disponible para teletransportar!")
         end
     end
 })
@@ -1719,12 +1719,12 @@ local function fireServer(eventName, args)
     end
 end
 
-local Section = Tab6:AddSection({"RGB para usar em você"})
+local Section = Tab6:AddSection({"Player RGB"})
 
 -- Nome + Bio RGB  juntos
 local nameBioRGBActive = false
 Tab6:AddToggle({
-    Name = "Nome + Bio RGB ",
+    Name = "Nombre + Bio RGB ",
     Default = false,
     Callback = function(state)
         nameBioRGBActive = state
@@ -1742,8 +1742,8 @@ Tab6:AddToggle({
 })
 
 local ToggleCorpo = Tab6:AddToggle({
-    Name = "RGB Corpo",
-    Description = "RGB  no corpo",
+    Name = "Cuerpo RGB",
+    Description = "Tono de piel RGB",
     Default = false
 })
 ToggleCorpo:Callback(function(Value)
@@ -1766,8 +1766,8 @@ end)
 
 
 local ToggleCabelo = Tab6:AddToggle({
-    Name = "RGB Cabelo",
-    Description = "RGB  no cabelo",
+    Name = "Cabello RGB",
+    Description = "Cabello RGB",
     Default = false
 })
 ToggleCabelo:Callback(function(Value)
@@ -1790,8 +1790,8 @@ local Section = Tab6:AddSection({"Vehicles and Houses"})
 
 
 local ToggleCasa = Tab6:AddToggle({
-    Name = "RGB Casa",
-    Description = "RGB  na casa",
+    Name = "Casa RGB",
+    Description = "Casa RGB",
     Default = false
 })
 ToggleCasa:Callback(function(Value)
@@ -1811,8 +1811,8 @@ end)
 -- Carro RGB 
 local carRGBActive = false
 Tab6:AddToggle({
-    Name = "Carro RGB  (Premium)",
-    Description = "Altera a cor do carro com RGB contínuo. Pode causar kick se não for premium!",
+    Name = "Vehiculo RGB (Premium)",
+    Description = "Cambia el color del auto a RGB. Necesario Premium!",
     Default = false,
     Callback = function(state)
         carRGBActive = state
@@ -1830,8 +1830,8 @@ Tab6:AddToggle({
 
 
 local ToggleBicicleta = Tab6:AddToggle({
-    Name = "RGB Bicicleta",
-    Description = "RGB na bicicleta",
+    Name = "Bicicleta RGB",
+    Description = "Bicicleta RGB",
     Default = false
 })
 ToggleBicicleta:Callback(function(Value)
@@ -1855,8 +1855,8 @@ local Section = Tab6:AddSection({"Items/Tools"})
 -- NOVO TOGGLE: Rádio RGB
 local radioRGBActive = false
 Tab6:AddToggle({
-    Name = "Rádio RGB",
-    Description = "Altera a cor do rádio com RGB contínuo",
+    Name = "Radio RGB",
+    Description = "Cambia el color del radio a RGB",
     Default = false,
     Callback = function(state)
         radioRGBActive = state
@@ -1880,8 +1880,8 @@ Tab6:AddToggle({
 })
 
 local ToggleMegafone = Tab6:AddToggle({
-    Name = "RGB Megafone",
-    Description = "RGB  no megafone",
+    Name = "Megafono RGB",
+    Description = "Megafono RGB",
     Default = false
 })
 ToggleMegafone:Callback(function(Value)
@@ -1910,8 +1910,8 @@ ToggleMegafone:Callback(function(Value)
 end)
 
 local ToggleRosquinha = Tab6:AddToggle({
-    Name = "RGB Rosquinha",
-    Description = "RGB  na rosquinha",
+    Name = "Rosquilla RGB",
+    Description = "Rosquilla RGB",
     Default = false
 })
 ToggleRosquinha:Callback(function(Value)
@@ -1950,10 +1950,10 @@ local loopAtivo = false
 local InputID = ""
 
 Tab7:AddTextBox({
-    Name = "Insira o ID Audio All",
-    Description = "Digite o ID do som que deseja tocar",
+    Name = "Reproductor de musica",
+    Description = "Pon el ID del sonido para reproducir",
     Default = "",
-    PlaceholderText = "Exemplo: 6832470734",
+    PlaceholderText = "ej: 6832470734",
     ClearTextOnFocus = true,
     Callback = function(text)
         InputID = tonumber(text)
@@ -1971,8 +1971,8 @@ local function fireServer(eventName, args)
 end
 
 Tab7:AddButton({
-    Name = "Tocar Som",
-    Description = "Clique para tocar a música inserida",
+    Name = "Reproducir Musica",
+    Description = "Reproducir Sonido",
     Callback = function()
         if InputID then
             fireServer("1Gu1nSound1s", {Workspace, InputID, 1})
@@ -1988,7 +1988,7 @@ Tab7:AddButton({
 
 Tab7:AddToggle({
     Name = "Loop",
-    Description = "Ative para colocar o som em loop",
+    Description = "Activar Bucle",
     Default = false,
     Callback = function(state)
         loopAtivo = state
@@ -2047,7 +2047,7 @@ local function createSoundDropdown(title, musicOptions, defaultOption)
 
     Tab7:AddDropdown({
         Name = title,
-        Description = "Escolha um som para tocar no servidor",
+        Description = "Escoja un sonido para reproducir en el servidor",
         Default = defaultOption,
         Multi = false,
         Options = musicNames,
@@ -2061,8 +2061,8 @@ local function createSoundDropdown(title, musicOptions, defaultOption)
     })
 
     Tab7:AddButton({
-        Name = "Tocar Som Selecionado",
-        Description = "Clique para tocar o som do dropdown",
+        Name = "Reproducir Sonido Seleccionado",
+        Description = "Reproducir Sonido seleccionado del menu",
         Callback = function()
             if selectedSoundID then
                 playSound(selectedSoundID, currentVolume, currentPitch)
@@ -2073,7 +2073,7 @@ local function createSoundDropdown(title, musicOptions, defaultOption)
     local dropdownLoopActive = false
     Tab7:AddToggle({
         Name = "Loop",
-        Description = "Ativa o loop do som selecionado",
+        Description = "Activar Bucle",
         Default = false,
         Callback = function(state)
             dropdownLoopActive = state
@@ -2109,11 +2109,11 @@ createSoundDropdown("Selecione um meme", {
         {name = "iamete cunasai", id = "108494476595033"},
         {name = "dodichan onnn...", id = "134640594695384"},
         {name = "Loly gemiD0", id = "119277017538197"},
-         {name = "ai poison", id = "115870718113313"},
-         {name = "chegachega SUS", id = "77405864184828"},
-         {name = "uwu", id = "76820720070248"},
-         {name = "ai meu cuzin", id = "130714479795369"},
-         {name = "girl audio 2", id = "84207358477461"},
+        {name = "ai poison", id = "115870718113313"},
+        {name = "chegachega SUS", id = "77405864184828"},
+        {name = "uwu", id = "76820720070248"},
+        {name = "ai meu cuzin", id = "130714479795369"},
+        {name = "girl audio 2", id = "84207358477461"},
         {name = "Hoo ze da manga", id = "106624090319571"},
         {name = "ai alexandre de moraes", id = "107261471941570"},
         {name = "haaii meme", id = "120006672159037"},
@@ -2259,10 +2259,10 @@ createSoundDropdown("Selecione um meme", {
 
 
 
-local Section = Tab7:AddSection({" tacar o terror ou efeito no server"})
+local Section = Tab7:AddSection({"Reproducir sonidos de terror o efectos"})
 
 -- Dropdown "Efeito/Terror"
-createSoundDropdown("Selecione um terror ou efeito", {
+createSoundDropdown("Seleccione un sonido de terror o efecto", {
     ["efeito/terror"] = {
         {name = "jumpscar", id = "91784486966761"},
         {name = "n se preocupe", id = "87041057113780"},
@@ -2845,7 +2845,7 @@ local function teleportToPlayer(playerName)
         local myHRP = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
         local myHumanoid = LocalPlayer.Character:FindFirstChild("Humanoid")
         if not myHRP or not myHumanoid then
-            print("Seu personagem não está totalmente carregado para teletransporte.")
+            print("Su personaje no ha cargado para teletransportar.")
             return
         end
 
@@ -2863,7 +2863,7 @@ local function teleportToPlayer(playerName)
             myHRP.CFrame = CFrame.new(targetPlayer.Character.HumanoidRootPart.Position + Vector3.new(0, 2, 0)) -- Leve elevação para evitar colisão com o chão
         end)
         if not success then
-            warn("Erro ao teletransportar: " .. tostring(errorMessage))
+            warn("Error al transportar: " .. tostring(errorMessage))
             return
         end
 
@@ -2883,9 +2883,9 @@ local function teleportToPlayer(playerName)
             end
         end
 
-        print("Teletransportado para o jogador: " .. playerName .. " com ancoragem segura.")
+        print("Teletransportado al jugador: " .. playerName .. " con anclaje seguro.")
     else
-        print("Jogador ou personagem não encontrado para teletransporte.")
+        print("Jugador o personaje no encontrado para teletransportarse.")
     end
 end
 
@@ -2899,8 +2899,8 @@ end)
 local valor_do_nome_do_joagdor
 
 local DropdownPlayerTab2 = Tab9:AddDropdown({
-    Name = "Selecionar Jogador",
-    Description = "Escolha um jogador para matar, puxar, visualizar ou aplicar fling",
+    Name = "Seleccionar Jugador",
+    Description = "Elige un jugador para matar, tirar, ver o lanzar",
     Default = "",
     Multi = false,
     Options = getPlayerNames(),
@@ -2938,7 +2938,7 @@ function UptadePlayers()
     DropdownPlayerTab2:Set(playerNames)
 end
 
-Tab9:AddButton({"Atualizar lista", function()
+Tab9:AddButton({"Actualizar lista", function()
     UptadePlayers()
 end})
 
@@ -2946,24 +2946,24 @@ UptadePlayers()
 
 
 Tab9:AddButton({
-    Title = "Teleportar para Jogador",
-    Desc = "Clique para teletransportar para o jogador selecionado",
+    Title = "Teletransportar al jugador",
+    Desc = "Teletransportarse al jugador seleccionado",
     Callback = function()
         local selectedPlayerName = valor_do_nome_do_joagdor
         if selectedPlayerName and selectedPlayerName ~= "" then
             local success, errorMessage = pcall(teleportToPlayer, selectedPlayerName)
             if not success then
-                warn("Erro ao teletransportar: " .. tostring(errorMessage))
+                warn("Error al teletransportarse: " .. tostring(errorMessage))
             end
         else
-            print("Selecione um jogador antes de teletransportar.")
+            print("Seleccione un jugador antes de teletransportarse.")
         end
     end
 })
 
 local SpectateToggleTab10 = Tab9:AddToggle({
-    Name = "Visualizar Jogador",
-    Description = "Ativa/desativa a visualização do jogador selecionado",
+    Name = "Visualizar Jugador",
+    Description = "Activar/desactivar la visualizacion del jugador seleccionado",
     Default = false,
     Callback = function(state)
         if state then
