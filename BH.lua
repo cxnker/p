@@ -1013,15 +1013,15 @@ Tab3:AddParagraph({
 
 -- Cria um botão para equipar todas as partes do corpo
 Tab3:AddButton({
-    Name = "E-Girl Body (Korblox)",
+    Name = "Mini-Plushie (Headless)",
     Callback = function()
         local args = {
             {
-                139607718, -- Right Leg
-                118303475394830,  -- Left Leg
-                18839824209,  -- Right Arm
-                18839824132,  -- Left Arm
-                114206707267907, -- Torso
+                107431241133468, -- Right Leg
+                103380121023771,  -- Left Leg
+                76079756909323,  -- Right Arm
+                82598238110471,  -- Left Arm
+                112722466960512, -- Torso
                 15093053680   -- Head
             }
         }
@@ -1036,15 +1036,15 @@ Tab3:AddButton({
 ---------------------------------------------------------------------------------------------------
 
 Tab3:AddButton({
-    Name = "E-Girl Body (Korblox)",
+    Name = "S15-Thin-Hourglass (Headless)",
     Callback = function()
         local args = {
             {
-                139607718, -- Right Leg
-                118303475394830,  -- Left Leg
-                18839824209,  -- Right Arm
-                18839824132,  -- Left Arm
-                114206707267907, -- Torso
+                128776848621889, -- Right Leg
+                81547744637409,  -- Left Leg
+                133466157082146,  -- Right Arm
+                73001997018020,  -- Left Arm
+                129543160215232, -- Torso
                 15093053680   -- Head
             }
         }
@@ -1059,15 +1059,15 @@ Tab3:AddButton({
 ---------------------------------------------------------------------------------------------------
 
 Tab3:AddButton({
-    Name = "E-Girl Body (Korblox)",
+    Name = "inf15-Thin (Headless)",
     Callback = function()
         local args = {
             {
-                139607718, -- Right Leg
-                118303475394830,  -- Left Leg
-                18839824209,  -- Right Arm
-                18839824132,  -- Left Arm
-                114206707267907, -- Torso
+                84418052877367, -- Right Leg
+                124343282827669,  -- Left Leg
+                99519402284266,  -- Right Arm
+                115905570886697,  -- Left Arm
+                92757812011061, -- Torso
                 15093053680   -- Head
             }
         }
@@ -1082,15 +1082,15 @@ Tab3:AddButton({
 ---------------------------------------------------------------------------------------------------
 
 Tab3:AddButton({
-    Name = "E-Girl Body (Korblox)",
+    Name = "Blush-Fashion-Doll (Headless)",
     Callback = function()
         local args = {
             {
-                139607718, -- Right Leg
+                127241951574732, -- Right Leg
                 118303475394830,  -- Left Leg
                 18839824209,  -- Right Arm
                 18839824132,  -- Left Arm
-                114206707267907, -- Torso
+                115745153758680, -- Torso
                 15093053680   -- Head
             }
         }
@@ -1105,7 +1105,7 @@ Tab3:AddButton({
 ---------------------------------------------------------------------------------------------------
 
 Tab3:AddButton({
-    Name = "E-Girl Body",
+    Name = "E-Girl Body (Headless)",
     Callback = function()
         local args = {
             {
@@ -1128,7 +1128,7 @@ Tab3:AddButton({
 ---------------------------------------------------------------------------------------------------
 
 Tab3:AddButton({
-    Name = "E-Girl Body (Korblox)",
+    Name = "E-Girl Body (Headless/Korblox)",
     Callback = function()
         local args = {
             {
@@ -1137,6 +1137,25 @@ Tab3:AddButton({
                 18839824209,  -- Right Arm
                 18839824132,  -- Left Arm
                 114206707267907, -- Torso
+                15093053680   -- Head
+            }
+        }
+        game:GetService("ReplicatedStorage")
+            :WaitForChild("Remotes")
+            :WaitForChild("ChangeCharacterBody")
+            :InvokeServer(unpack(args))
+        print("Todas las partes han sido equipadas!")
+    end
+})
+
+---------------------------------------------------------------------------------------------------
+
+Tab3:AddButton({
+    Name = "Headless/Korblox",
+    Callback = function()
+        local args = {
+            {
+                139607718, -- Right Leg
                 15093053680   -- Head
             }
         }
