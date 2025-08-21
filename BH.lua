@@ -106,9 +106,9 @@ local Tab3 = Window:MakeTab({"Avatar", "shirt"})
 local Tab4 = Window:MakeTab({"House", "Home"})
 local Tab5 = Window:MakeTab({"Car", "Car"})
 local Tab6 = Window:MakeTab({"RGB", "brush"})
-local Tab7 = Window:MakeTab({"Music All", "radio"})    
-local Tab8 = Window:MakeTab({"Music", "music"}) 
-local Tab9 = Window:MakeTab({"Troll", "skull"}) 
+local Tab7 = Window:MakeTab({"Music All", "radio"})
+local Tab8 = Window:MakeTab({"Music", "music"})
+local Tab9 = Window:MakeTab({"Troll", "skull"})
 local Tab10 = Window:MakeTab({"Lag Server", "bomb"})
 local Tab11 = Window:MakeTab({"Scripts", "scroll"})
 local Tab12 = Window:MakeTab({"Teleportes", "map-pin"})
@@ -144,12 +144,10 @@ local executorName = detectExecutor()
 
 local Paragraph = Tab1:AddParagraph({"Executor", executorName})
 
-local Section = Tab1:AddSection({"Version Beta"})
+local Section = Tab1:AddSection({"Version 1.1"})
 
 local Paragraph = Tab1:AddParagraph({"Creador", "Roun \n Nova"})
 
-
-  
   Tab1:AddButton({
     Name = "Copiar Tiktok",
     Callback = function()
@@ -256,8 +254,8 @@ end
 
 -- TextBox para digitar nome do player
 Tab2:AddTextBox({
-    Name = "Nombre del jugador",
-    Description = "Introduzca parte del nombre",
+    Name = "Headsit Player",
+    Description = "Introduzca parte del nombre del jugador",
     PlaceholderText = "ej: No → Nova",
     Callback = function(Value)
         local foundPlayer = findPlayerByPartialName(Value)
@@ -293,7 +291,7 @@ end})
 
 
 Tab2:AddSlider({
-    Name = "Speed Player",
+    Name = "Speed",
     Increase = 1,
     MinValue = 16,
     MaxValue = 888,
@@ -993,7 +991,7 @@ local AvatarDropdown = Tab3:AddDropdown({
 
 -- Botão para equipar avatar
 Tab3:AddButton({
-    Name = "equipar ",
+    Name = "Equipar",
     Description = "Equipar seleccionado",
     Callback = function()
         if not _G.SelectedAvatar or _G.SelectedAvatar == "" then
@@ -1009,98 +1007,98 @@ local Section = Tab3:AddSection({"Avatar Editor"})
 -- Botão para equipar partes do corpo
 
 Tab3:AddParagraph({
-    Title = "Aviso, vas a resetear tu avatar",
+    Title = "Aviso, vas a reiniciar tu avatar",
     Content = ""
 })
 
 -- Cria um botão para equipar todas as partes do corpo
 Tab3:AddButton({
-    Name = "Mini REPO",
+    Name = "E-Girl Body (Korblox)",
     Callback = function()
         local args = {
             {
-                117101023704825, -- Perna Direita
-                125767940563838,  -- Perna Esquerda
-                137301494386930,  -- Braço Direito
-                87357384184710,  -- Braço Esquerdo
-                133391239416999, -- Torso
-                111818794467824   -- Cabeça
+                139607718, -- Right Leg
+                118303475394830,  -- Left Leg
+                18839824209,  -- Right Arm
+                18839824132,  -- Left Arm
+                114206707267907, -- Torso
+                15093053680   -- Head
             }
         }
         game:GetService("ReplicatedStorage")
             :WaitForChild("Remotes")
             :WaitForChild("ChangeCharacterBody")
             :InvokeServer(unpack(args))
-        print("Todas as partes do corpo equipadas!")
+        print("Todas las partes han sido equipadas!")
     end
 })
 
 ---------------------------------------------------------------------------------------------------
 
 Tab3:AddButton({
-    Name = "mini garanhao",
+    Name = "E-Girl Body (Korblox)",
     Callback = function()
         local args = {
             {
-                124355047456535, -- Perna Direita
-                120507500641962,  -- Perna Esquerda
-                82273782655463,  -- Braço Direito
-                113625313757230,  -- Braço Esquerdo
-                109182039511426, -- Torso
-                0   -- Cabeça
+                139607718, -- Right Leg
+                118303475394830,  -- Left Leg
+                18839824209,  -- Right Arm
+                18839824132,  -- Left Arm
+                114206707267907, -- Torso
+                15093053680   -- Head
             }
         }
         game:GetService("ReplicatedStorage")
             :WaitForChild("Remotes")
             :WaitForChild("ChangeCharacterBody")
             :InvokeServer(unpack(args))
-        print("Todas as partes do corpo equipadas!")
+        print("Todas las partes han sido equipadas!")
     end
 })
 
 ---------------------------------------------------------------------------------------------------
 
 Tab3:AddButton({
-    Name = "stick",
+    Name = "E-Girl Body (Korblox)",
     Callback = function()
         local args = {
             {
-                14731384498, -- Perna Direita
-                14731377938,  -- Perna Esquerda
-                14731377894,  -- Braço Direito
-                14731377875,  -- Braço Esquerdo
-                14731377941, -- Torso
-                14731382899   -- Cabeça
+                139607718, -- Right Leg
+                118303475394830,  -- Left Leg
+                18839824209,  -- Right Arm
+                18839824132,  -- Left Arm
+                114206707267907, -- Torso
+                15093053680   -- Head
             }
         }
         game:GetService("ReplicatedStorage")
             :WaitForChild("Remotes")
             :WaitForChild("ChangeCharacterBody")
             :InvokeServer(unpack(args))
-        print("Todas as partes do corpo equipadas!")
+        print("Todas las partes han sido equipadas!")
     end
 })
 
 ---------------------------------------------------------------------------------------------------
 
 Tab3:AddButton({
-    Name = "Chunky-Bug",
+    Name = "E-Girl Body (Korblox)",
     Callback = function()
         local args = {
             {
-                15527827600, -- Perna Direita
-                15527827578,  -- Perna Esquerda
-                15527831669,  -- Braço Direito
-                15527836067,  -- Braço Esquerdo
-                15527827184, -- Torso
-                15527827599   -- Cabeça
+                139607718, -- Right Leg
+                118303475394830,  -- Left Leg
+                18839824209,  -- Right Arm
+                18839824132,  -- Left Arm
+                114206707267907, -- Torso
+                15093053680   -- Head
             }
         }
         game:GetService("ReplicatedStorage")
             :WaitForChild("Remotes")
             :WaitForChild("ChangeCharacterBody")
             :InvokeServer(unpack(args))
-        print("Todas as partes do corpo equipadas!")
+        print("Todas las partes han sido equipadas!")
     end
 })
 
@@ -1232,8 +1230,7 @@ Tab4:AddParagraph({
                                           -- === Tab 5: Car === --
 ---------------------------------------------------------------------------------------------------------------------------------
 
-local Section = Tab5:AddSection({"all car functions"})
-
+local Section = Tab5:AddSection({"All Vehicle Functions"})
 
 local Players = game:GetService("Players")
 local Workspace = game:GetService("Workspace")
@@ -1434,12 +1431,12 @@ Tab5:AddToggle({
     end
 })
 
-local Section = Tab5:AddSection({"functions dos carro"})
+local Section = Tab5:AddSection({"Vehicle Features"})
 
 -- Criar o dropdown
 local Dropdown = Tab5:AddDropdown({
     Name = "Seleccionar vehiculo",
-    Description = "Seleccione un vehiculo de un jugador",
+    Description = "Seleccione el vehiculo de un jugador",
     Default = nil,
     Options = TeleportCarro:AtualizarListaCarros(),
     Callback = function(carroSelecionado)
@@ -1506,7 +1503,7 @@ TeleportCarro.Workspace:WaitForChild("Vehicles").ChildRemoved:Connect(function()
     Dropdown:Set(TeleportCarro:AtualizarListaCarros())
 end)
 
-local Section = Tab5:AddSection({"functions kill e trazer"})
+local Section = Tab5:AddSection({"Others Functions"})
 
 -- Botão para destruir carro selecionado
 Tab5:AddButton({
@@ -1690,17 +1687,13 @@ end)
                                                    -- === Tab 6: RGB === --
 ---------------------------------------------------------------------------------------------------------------------------------
 
-local Section = Tab6:AddSection({""})
-
-
-
-
+local Section = Tab6:AddSection({"RGB Speed"})
 -- Velocidade controlada pelo slider (quanto maior, mais rápido)
 local rgbSpeed = 1
 
 Tab6:AddSlider({
-    Name = "Velocidade RGB",
-    Description = "Aumenta a velocidade do efeito RGB",
+    Name = "Velocidad RGB",
+    Description = "Ajusta la velocidad RGB",
     Min = 1,
     Max = 5,
     Increase = 1,
@@ -1792,7 +1785,7 @@ end)
 
 
 
-local Section = Tab6:AddSection({"veiculos e casa"})
+local Section = Tab6:AddSection({"Vehicles and Houses"})
 
 
 
@@ -1856,13 +1849,13 @@ end)
 
 
 
-local Section = Tab6:AddSection({"itens/tool"})
+local Section = Tab6:AddSection({"Items/Tools"})
 
 
 -- NOVO TOGGLE: Rádio RGB
 local radioRGBActive = false
 Tab6:AddToggle({
-    Name = "Rádio RGB  ",
+    Name = "Rádio RGB",
     Description = "Altera a cor do rádio com RGB contínuo",
     Default = false,
     Callback = function(state)
