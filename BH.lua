@@ -1107,7 +1107,7 @@ Tab3:AddButton({
 ---------------------------------------------------------------------------------------------------
 
 Tab3:AddButton({
-    Name = "Cuerpo E-Girl v1",
+    Name = "E-Girl Body",
     Callback = function()
         local args = {
             {
@@ -1130,14 +1130,14 @@ Tab3:AddButton({
 ---------------------------------------------------------------------------------------------------
 
 Tab3:AddButton({
-    Name = "Cuerpo E-Girl v2",
+    Name = "E-Girl Body (Korblox)",
     Callback = function()
         local args = {
             {
                 139607718, -- Perna Direita
                 118303475394830,  -- Perna Esquerda
-                76683091425509,  -- Braço Direito
-                75159926897589,  -- Braço Esquerdo
+                18839824209,  -- Braço Direito
+                18839824132,  -- Braço Esquerdo
                 114206707267907, -- Torso
                 15093053680   -- Cabeça
             }
