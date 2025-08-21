@@ -1151,7 +1151,7 @@ Tab3:AddButton({
 ---------------------------------------------------------------------------------------------------
 
 Tab3:AddButton({
-    Name = "Headless/Korblox",
+    Name = "Headless/Korblox (BETA)",
     Callback = function()
         local args = {
             {
@@ -1165,11 +1165,6 @@ Tab3:AddButton({
             :InvokeServer(unpack(args))
         print("Todas las partes han sido equipadas!")
     end
-})
-
-Tab3:AddParagraph({
-    Title = "Proximamente mas cosas",
-    Content = ""
 })
 
 ---------------------------------------------------------------------------------------------------
