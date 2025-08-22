@@ -3989,14 +3989,9 @@ local function flingWithBoat(targetPlayer)
         end
     end)
 end
-
-
-
 ------------------------------------------------------------------------------------------------------------------------------------------------
                                       --fling com caminhão--
 ------------------------------------------------------------------------------------------------------------------------------------------------
-
-
 local function flingWithTruck(targetPlayer)
     if not targetPlayer or not targetPlayer.Character or not LocalPlayer.Character then return end
     local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
@@ -4183,15 +4178,9 @@ local function flingWithTruck(targetPlayer)
         end
     end)
 end
-
-
-
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
 local function stopFling()
     running = false
     if connection then
@@ -4285,7 +4274,7 @@ flingToggle = Tab9:AddToggle({
     end
 })
 
-local Section = Tab9:AddSection({" fling ALL e desligue os RGB antes de usar"})
+local Section = Tab9:AddSection({"Apague TODO y el RGB antes de usar"})
 
 -- Variáveis globais no início do Tab2
 local Players = game:GetService("Players")
@@ -4318,7 +4307,7 @@ local function getPlayerThumbnail(userId)
     if success then
         return result
     else
-        warn("Erro ao obter thumbnail: " .. tostring(result))
+        warn("Error al obtener la miniatura: " .. tostring(result))
         return nil
     end
 end
@@ -4348,12 +4337,12 @@ end
 
 -- TextBox para excluir jogador
 Tab9:AddTextBox({
-    Name = "adicionar jogador na whaitelist",
-    Description = "Digite parte do nome do jogador",
-    PlaceholderText = "Ex.: rt para (player123)",
+    Name = "Añadir jugador a la Whitelist",
+    Description = "Ingrese parte del nombre del jugador",
+    PlaceholderText = "Ej: No - Nova",
     Callback = function(Value)
         if Value == "" then
-            showNotification("Nenhuma Ação", "Digite um nome para adicionar um jogador.", nil)
+            showNotification("Ninguna accion", "Introduzca un nombre para agregar un jugador.", nil)
             return
         end
 
@@ -4362,44 +4351,41 @@ Tab9:AddTextBox({
             -- Verifica se o jogador já está excluído
             for _, excluded in ipairs(excludedPlayers) do
                 if excluded == player then
-                    showNotification("Jogador Já esta na whaitelist", "Jogador " .. player.Name .. " já foi adicionado.", getPlayerThumbnail(player.UserId))
+                    showNotification("El jugador ya está en la lista de espera", "Jugador " .. player.Name .. " ya se ha añadido.", getPlayerThumbnail(player.UserId))
                     return
                 end
             end
             table.insert(excludedPlayers, player)
             local thumbnail = getPlayerThumbnail(player.UserId)
-            showNotification("Jogador adicionado", "Jogador " .. player.Name .. " foi removido dos flings.", thumbnail)
+            showNotification("Jugador añadido", "Jugador " .. player.Name .. " fue removido.", thumbnail)
         else
-            showNotification("Jogador Não Encontrado", "Nenhum jogador encontrado com '" .. Value .. "'.", nil)
+            showNotification("Jugador no encontrado", "No se encontraron jugadores con '" .. Value .. "'.", nil)
         end
     end
 })
 
--- Botão para verificar jogadores excluídos
-Tab9:AddButton({"Verificar Excluídos", function()
+Tab9:AddButton({"Verificar lista blanca", function()
     if #excludedPlayers == 0 then
-        showNotification("Nenhum na whaitelist", "Nenhum jogador está removido dos flings.", nil)
+        showNotification("Alerta", "Ningun jugador fue removido.", nil)
         return
     end
     for i, player in ipairs(excludedPlayers) do
         local thumbnail = getPlayerThumbnail(player.UserId)
-        showNotification("Jogador adicionado " .. i, "Jogador " .. player.Name .. " está removido dos flings.", thumbnail)
-        task.wait(0.5) -- Pequeno atraso entre notificações para evitar sobreposição
+        showNotification("Jugador añadido " .. i, "Jugador " .. player.Name .. " fue removido.", thumbnail)
+        task.wait(0.5) -- Breve retraso entre notificaciones para evitar superposiciones
     end
 end})
 
--- Botão para remover todos os jogadores excluídos
-Tab9:AddButton({"Remover Excluídos", function()
+Tab9:AddButton({"Remover lista blanca", function()
     if #excludedPlayers == 0 then
-        showNotification("Nenhum removido", "Nenhum jogador para remover da whaitelist.", nil)
+        showNotification("Alerta", "Ningun jugador de la lista blanca fue removido.", nil)
         return
     end
     excludedPlayers = {}
-    showNotification("whaitelists Removidas", "Todos os jogadores foram removidos da whaitelist.", nil)
+    showNotification("Lista blanca removida", "Todos los jugadores de la lista blanca fueron removidos.", nil)
 end})
 
--- Bola Fling Orbitando
-Tab9:AddButton({"Bola Fling Orbitando", function()
+Tab9:AddButton({"Orbiting Fling Ball", function()
     if orbitando then return end
     if not equipBola() then return end
     task.wait(0.5)
@@ -4444,8 +4430,7 @@ Tab9:AddButton({"Bola Fling Orbitando", function()
     end)
 end})
 
--- Fling Bola ALL V1
-Tab9:AddButton({"Fling Bola ALL V1", function()
+Tab9:AddButton({"Fling ALL V1", function()
     if allFling then return end
     if not equipBola() then return end
     task.wait(0.5)
@@ -4566,8 +4551,7 @@ Tab9:AddButton({"Fling Bola ALL V1", function()
     end)
 end})
 
--- Fling Bola ALL V2
-Tab9:AddButton({"Fling Bola ALL V2", function()
+Tab9:AddButton({"Fling ALL V2", function()
     if allFling2 then return end
     if not equipBola() then return end
     task.wait(0.5)
@@ -4660,7 +4644,7 @@ Tab9:AddButton({"Fling Bola ALL V2", function()
 end})
 
 -- Parar Tudo
-Tab9:AddButton({"Parar Tudo", function()
+Tab9:AddButton({"Stop All", function()
     -- Parar Orbitando
     orbitando = false
     if orbitConn then
@@ -4690,139 +4674,73 @@ Tab9:AddButton({"Parar Tudo", function()
     end
     soccerBall = nil
     originalProperties = nil
-    showNotification("Tudo Parado", "Todas as funções foram desativadas.", nil)
+    showNotification("ALERT", "Se han desactivado todas las funciones.", nil)
 end})
-
-
-
-
-
 ---------------------------------------------------------------------------------------------------------------------------------
                                                    -- === Tab 10: lag server === --
 ---------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
                                                -- === Tab 11: Scripts === --
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
 Tab11:AddButton({
-    Name = "FE Jerk Off Hub Matrix",
+    Name = "Bring Flings Players",
+    Description = "Universal",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/cxnker/p/refs/heads/main/BringFlingPlayers"))()
+    end
+})
+
+local Section = Tab11:AddSection({"Paneles"})
+
+Tab11:AddButton({
+    Name = "System Broken HUB",
+    Description = "Universal",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/cxnker/p/refs/heads/main/SystemBroken"))()
+    end
+})
+
+Tab11:AddButton({
+    Name = "FE Jerk Off AquaMatrix Hub",
     Description = "Universal",
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/ExploitFin/AquaMatrix/refs/heads/AquaMatrix/AquaMatrix"))()
     end
 })
 
-Tab11:AddButton({
-    Name = "FE HUGG",
-    Description = "Universal",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/JSFKGBASDJKHIOAFHDGHIUODSGBJKLFGDKSB/fe/refs/heads/main/FEHUGG"))()
-    end
-})
-
-
-
-Tab11:AddButton({
-    Name = "Buraco Negro",
-    Description = "Universal",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Bac0nHck/Scripts/main/BringFlingPlayers"))("More Scripts: t.me/arceusxscripts")
-    end
-})
-
-local Section = Tab11:AddSection({"esse system broochk e voidProtection"})
-
-Tab11:AddButton({
-    Name = "System Broochk",
-    Description = "Universal",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/script"))()
-    end
-})
-
-Tab11:AddButton({
-    Name = "Roships",
-    Description = "Universal",
-    Callback = function()
-        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-rochips-universal-18294"))()
-    end
-})
-
-Tab11:AddButton({
-    Name = "Sander X",
-    Description = "Somente para Brookhaven",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/kigredns/SanderXV4.2.2/refs/heads/main/New.lua"))()
-    end
-})
-
-Tab11:AddButton({
-    Name = "Reverso",
-    Description = "Universal",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/0Ben1/fe./main/L"))()
-    end
-})
-
-Tab11:AddButton({
-    Name = "RD4",
-    Description = "Somente para Brookhaven",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/M1ZZ001/BrookhavenR4D/main/Brookhaven%20R4D%20Script"))()
-    end
-})
-
-
 -----------------------------------------------------------------------------------------------------------------------------------------
                                           -- === Tab 12: Teleportes === --
 -----------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
--- Tab12: Teleportes
-
 local teleportPlayer = game.Players.LocalPlayer
-local teleportLocation = "Morro" -- Valor padrão
+local teleportLocation = "Colina" -- Valor Predeterminado
 
 local locations = {
-    ["Morro"] = Vector3.new(-348.64, 65.94, -458.08),
-    ["Praça"] = Vector3.new(-26.17, 3.48, -0.93),
-    ["Banco"] = Vector3.new(1.99, 3.32, 236.65),
-    ["Hospital"] = Vector3.new(-303.2, 3.40, 13.74),
-    ["Prefeitura"] = Vector3.new(-354.65, 7.32, -102.16),
-    ["Fazenda"] = Vector3.new(-766.41, 2.92, -61.10),
-    ["Mercado"] = Vector3.new(16.31, 3.32, -107.07),
-    ["Shopping"] = Vector3.new(151.05, 3.52, -190.64),
-    ["Aeroporto"] = Vector3.new(290.23, 4.32, 42.57),
+    ["Colina"] = Vector3.new(-348.64, 65.94, -458.08),
+    ["Inicio"] = Vector3.new(-26.17, 3.48, -0.93),
     ["Hotel"] = Vector3.new(159.10, 3.32, 164.97),
-    ["Beira-mar 1"] = Vector3.new(55.69, 2.94, -1403.60),
-    ["Beira-mar 2"] = Vector3.new(42.39, 2.94, 1336.14)
+    ["Playa 1"] = Vector3.new(55.69, 2.94, -1403.60),
+    ["Playa 2"] = Vector3.new(42.39, 2.94, 1336.14),
+    ["Granja"] = Vector3.new(-766.41, 2.92, -61.10),
+    ["CentroComercial"] = Vector3.new(151.05, 3.52, -190.64),
+    ["Aeropuerto"] = Vector3.new(290.23, 4.32, 42.57)
 }
 
 Tab12:AddDropdown({
-    Name = "Locais de Brookhaven",
-    Description = "Selecione um local para teleportar",
+    Name = "Lugares de Brookhaven",
+    Description = "Seleccione un lugar para teletransportarse",
     Default = teleportLocation,
     Multi = false,
     Options = {
-        "Morro",
-        "Praça",
-        "Banco",
-        "Hospital",
-        "Prefeitura",
-        "Fazenda",
-        "Mercado",
-        "Shopping",
-        "Aeroporto",
+        "Colina",
+        "Inicio",
         "Hotel",
-        "Beira-mar 1",
-        "Beira-mar 2"
+        "Playa 1",
+        "Playa 2",
+        "Granja",
+        "CentroComercial",
+        "Aeropuerto"
     },
     Callback = function(value)
         teleportLocation = value
@@ -4830,8 +4748,8 @@ Tab12:AddDropdown({
 })
 
 Tab12:AddButton({
-    Name = "Teleportar",
-    Description = "Teleporta para o local selecionado",
+    Name = "Teletransportar",
+    Description = "Teletransportar al lugar seleccionado",
     Callback = function()
         if teleportPlayer.Character and teleportPlayer.Character:FindFirstChild("HumanoidRootPart") then
             local humanoidRootPart = teleportPlayer.Character.HumanoidRootPart
