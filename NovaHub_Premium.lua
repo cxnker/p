@@ -112,16 +112,9 @@ local Tab9 = Window:MakeTab({"Troll", "skull"})
 local Tab10 = Window:MakeTab({"Lag Server", "bomb"})
 local Tab11 = Window:MakeTab({"Scripts", "scroll"})
 local Tab12 = Window:MakeTab({"Teleportes", "map-pin"})
-
-
-
-
-
 --------------------------------------------------------------------------------------------------------------------------------
                                                    -- === Tab 1: credits === --
 ---------------------------------------------------------------------------------------------------------------------------------
-
-  
 local function detectExecutor()
     if identifyexecutor then
         return identifyexecutor()
@@ -141,34 +134,24 @@ local function detectExecutor()
 end
 
 local executorName = detectExecutor()
-
 local Paragraph = Tab1:AddParagraph({"Executor", executorName})
-
 local Section = Tab1:AddSection({"Version 1.1"})
-
 local Paragraph = Tab1:AddParagraph({"Creador", "Roun \n Nova"})
 
-  Tab1:AddButton({
+Tab1:AddButton({
     Name = "Copiar Tiktok",
     Callback = function()
-      setclipboard("@Gabriel") -- Copia o @
-      setclipboard("https://www.tiktok.com/@lxvap") -- Copia o link também, se quiser só o @, remova esta linha
-      
+    setclipboard("@Gabriel") -- Copia o @
+    setclipboard("https://www.tiktok.com/@lxvap") -- Copia o link também, se quiser só o @, remova esta linha     
     end
-  })
-
- ---------------------------------------------------------------------------------------------------------------------------------
+})
+-----------------------------------------------------------------------------------------------------------------------------------
                                                    -- === Tab 2: Fun === --
 -----------------------------------------------------------------------------------------------------------------------------------
-
-
-
 local Section = Tab2:AddSection({"Player Character"})
-
 
 local Players = game:GetService("Players")
 local localPlayer = Players.LocalPlayer
-
 local selectedPlayerName = nil
 local headsitActive = false
 
@@ -186,9 +169,7 @@ local function headsitOnPlayer(targetPlayer)
         warn("Su personaje no tiene HumanoidRootPart.")
         return false
     end
-
     localRoot.CFrame = targetHead.CFrame * CFrame.new(0, 2.2, 0)
-
     for _, v in pairs(localRoot:GetChildren()) do
         if v:IsA("WeldConstraint") then
             v:Destroy()
@@ -207,7 +188,6 @@ local function headsitOnPlayer(targetPlayer)
     print("Headsit activado en " .. targetPlayer.Name)
     return true
 end
-
 local function removeHeadsit()
     local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
     local humanoid = character:FindFirstChildOfClass("Humanoid")
@@ -272,10 +252,8 @@ Tab2:AddTextBox({
 -- Botón para activar/desactivar el head-sit (Version simplificada)
 Tab2:AddButton({"", function()
     if not selectedPlayerName then
-    
         return
     end
-
     if not headsitActive then
         local target = Players:FindFirstChild(selectedPlayerName)
         if target and headsitOnPlayer(target) then
@@ -286,9 +264,6 @@ Tab2:AddButton({"", function()
         headsitActive = false
     end
 end})
-
-
-
 
 Tab2:AddSlider({
     Name = "Speed",
@@ -900,8 +875,6 @@ Tab3:AddButton({
 
 ------------------------------------------------------------------------------------------------------------------------------------
 local Section = Tab3:AddSection({"Ropa 3D"})
-
-
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 -- Namespace para evitar conflitos
@@ -918,34 +891,9 @@ function AvatarManager:MostrarNotificacao(mensagem)
         })
     end)
 end
-
 -- Clothes 3D List
 AvatarManager.Avatares = {
     { Nome = "Gato de Manga", ID = 124948425515124 },
-    { Nome = "Tung Saur", ID = 117098257036480 },
-    { Nome = "Tralaleiro", ID = 99459753608381 },
-    { Nome = "Monstro S.A", ID = 123609977175226 },
-    { Nome = "Trenzinho", ID = 80468697076178 },
-    { Nome = "Dino", ID = 11941741105 },
-    { Nome = "Pou idoso", ID = 15742966010  },
-    { Nome = "Coco/boxt@", ID = 77013984520332  },
-    { Nome = "Coelho", ID = 71797333686800  },
-    { Nome = "Hipopótamo", ID = 73215892129281 },
-    { Nome = "Ratatui", ID = 108557570415453 },
-    { Nome = "Galinha", ID = 71251793812515 },
-    { Nome = "Pepa pig", ID = 92979204778377 },
-    { Nome = "pinguin", ID = 94944293759578 },
-    { Nome = "Sid", ID = 87442757321244 },
-    { Nome = "puga grande", ID = 111436158728716 },
-    { Nome = "SHREK AMALDIÇOADO", ID = 120960401202173 },
-    { Nome = "mosquito grande", ID = 108052868536435 },
-    { Nome = "Noob Invertido", ID = 106596990206151 },
-    { Nome = "Pato(a)", ID = 135132836238349 },
-    { Nome = "Cachorro Chihuahua", ID = 18656467256 },
-    { Nome = "Gato sla", ID = 18994959003 },
-    { Nome = "Gato fei ", ID = 77506186615650 },
-    { Nome = "Inpostor", ID = 18234669337 },
-    { Nome = "Simon amarelo", ID = 75183593514657 },
     { Nome = "Simon azul", ID = 76155710249925 }
     
 }
@@ -1001,16 +949,13 @@ Tab3:AddButton({
         AvatarManager:EquiparAvatar(_G.SelectedAvatar)
     end
 })
-
 -------------------------------------------------------------------------------------------------------------------------
 local Section = Tab3:AddSection({"Avatar Editor"})
 -- Botão para equipar partes do corpo
-
 Tab3:AddParagraph({
     Title = "Aviso, vas a reiniciar tu avatar",
     Content = ""
 })
-
 -- Cria um botão para equipar todas as partes do corpo
 Tab3:AddButton({
     Name = "Mini-Plushie (Headless)",
@@ -1032,7 +977,6 @@ Tab3:AddButton({
         print("Todas las partes han sido equipadas!")
     end
 })
-
 ---------------------------------------------------------------------------------------------------
 
 Tab3:AddButton({
@@ -1353,7 +1297,6 @@ function TeleportCarro:TeleportToVoid(car)
     car:SetPrimaryPartCFrame(CFrame.new(voidPosition))
     task.wait(0.5)
 end
-
 -- Função para teleportar o carro para a posição do jogador com delay
 function TeleportCarro:TeleportToPlayer(car, playerPos)
     if not car then
@@ -1866,7 +1809,6 @@ Tab6:AddToggle({
     end
 })
 
-
 local ToggleBicicleta = Tab6:AddToggle({
     Name = "Bicicleta RGB",
     Description = "Bicicleta RGB",
@@ -1885,11 +1827,7 @@ ToggleBicicleta:Callback(function(Value)
     end)
 end)
 
-
-
 local Section = Tab6:AddSection({"Items/Tools"})
-
-
 -- NOVO TOGGLE: Rádio RGB
 local radioRGBActive = false
 Tab6:AddToggle({
@@ -1976,14 +1914,9 @@ ToggleRosquinha:Callback(function(Value)
         end
     end)
 end)
-
-
-
-
 ---------------------------------------------------------------------------------------------------------------------------------
                                                 -- === Tab 7: Music All === --
 ---------------------------------------------------------------------------------------------------------------------------------
-
 local loopAtivo = false
 local InputID = ""
 
@@ -2023,7 +1956,6 @@ Tab7:AddButton({
         end
     end
 })
-
 Tab7:AddToggle({
     Name = "Loop",
     Description = "Activar Bucle",
@@ -2155,21 +2087,6 @@ createSoundDropdown("Selecione um meme", {
         {name = "Hoo ze da manga", id = "106624090319571"},
         {name = "ai alexandre de moraes", id = "107261471941570"},
         {name = "haaii meme", id = "120006672159037"},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
  
     
 
@@ -2229,17 +2146,6 @@ createSoundDropdown("Selecione um meme", {
         {name = "um cavalo de tres pernas?", id = "8164241439"},
         {name = "voces sao um bado de fdp", id = "8232773326"},
         {name = "HAHA TROLLEI ATÉ VOCÊ", id = "7021794555"},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
         
         
 
@@ -2316,16 +2222,6 @@ createSoundDropdown("Seleccione un sonido de terror o efecto", {
         {name = "Alarm estourAAAA...", id = "93354528379052"},
         {name = "MegaMan Alarm", id = "1442382907"},
         {name = "Alarm bookhaven", id = "1526192493"},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
 
 
 
@@ -2483,9 +2379,7 @@ createMusicDropdown("Forró", {
         {name = "PARA NÃO ESQUECER QUEM SOMOS", id = "88937498361674"},
         {name = "Uno zero", id = "112959083808887"},
         {name = "Iate do neymar", id = "135738534706063"},
-        {name = "Batidao na aldeia", id = "79953696595578"},
-        {name = "", id = ""},
-        {name = "", id = ""}
+        {name = "Batidao na aldeia", id = "79953696595578"}
     }
 }, "Option 1")
 
@@ -2513,12 +2407,7 @@ createMusicDropdown("Músicas e Memes Aleatório", {
         {name = "MIKU MIKU HATSUNE", id = "112783541496955"},
         {name = "Five Nights at Freddy's", id = "110733765539890"},
         {name = "Rat Dance", id = "133496635668044"},
-        {name = "Escalando a Seleção Brasileira para a Copa", id = "116546457407236"},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""}
+        {name = "Escalando a Seleção Brasileira para a Copa", id = "116546457407236"}
     }
 }, "Option 1")
 
@@ -2555,19 +2444,7 @@ createMusicDropdown("Funk", {
         {name = "meta ritmo", id = "110091098283354"},
         {name = "CAPPUCCINO ASSASSINO (SPEDUP)", id = "132733033157915"},
         {name = "haha (NGI)", id = "122114766584918"},
-        {name = "DO PO", id = "114207745067816"},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""}
+        {name = "DO PO", id = "114207745067816"}
     }
 }, "Option 1")
 
@@ -2681,16 +2558,7 @@ createMusicDropdown("Phonk", {
         
         {name = "movimenta funk", id = "114994598691121"},
         {name = "CRISTAL", id = "103445348511856"},
-        {name = "Letero funkphonk", id = "99409598156364"},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""}
+        {name = "Letero funkphonk", id = "99409598156364"}
     }
 }, "Option 1")
 
@@ -2701,15 +2569,10 @@ Tab8:AddButton({
         tocarMusica("")
     end
 })
-
-
-
-
 ---------------------------------------------------------------------------------------------------------------------------------
                                                    -- === Tab 9: troll === --
 -----------------------------------------------------------------------------------------------------------------------------------
 local Players = game:GetService("Players")
-
 local Workspace = game:GetService("Workspace")
 local RunService = game:GetService("RunService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -2810,10 +2673,6 @@ local function updateDropdown(dropdown, spectateToggle)
         end
     end)
 end
-
-
-
-
 
 local function spectatePlayer(playerName)
     if characterConnection then
@@ -2982,7 +2841,6 @@ end})
 
 UptadePlayers()
 
-
 Tab9:AddButton({
     Title = "Teletransportar al jugador",
     Desc = "Teletransportarse al jugador seleccionado",
@@ -3046,8 +2904,8 @@ updateDropdown(DropdownPlayerTab2, SpectateToggleTab10)
 local Section = Tab9:AddSection({"Kill"})
 
 local DropdownKillPullMethod = Tab9:AddDropdown({
-    Name = "Selecionar Método (Matar/Puxar)",
-    Description = "Escolha o método para matar ou puxar",
+    Name = "Seleccionar Metodo (Matar/Jalar)",
+    Description = "Escoja si matar o tirar",
     Options = {"Sofá", "Ônibus"},
     Callback = function(value)
         selectedKillPullMethod = value
@@ -3057,7 +2915,6 @@ local DropdownKillPullMethod = Tab9:AddDropdown({
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
                                                    --fling com sofa--
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 local function equipSofa()
     local backpack = LocalPlayer:WaitForChild("Backpack")
     local sofa = backpack:FindFirstChild("Couch") or LocalPlayer.Character:FindFirstChild("Couch")
@@ -3092,12 +2949,9 @@ local function pullWithSofa(targetPlayer)
     isFollowingPull = true
     originalPosition = LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Position
 end
-
 ----------------------------------------------------------------------------
                                                    --fling com onibus--
 ----------------------------------------------------------------------------
-
-
 local function killWithBus(targetPlayer)
     if not targetPlayer or not targetPlayer.Character or not LocalPlayer.Character then return end
     local character = LocalPlayer.Character
@@ -3368,12 +3222,9 @@ local DropdownFlingMethod = Tab9:AddDropdown({
         selectedFlingMethod = value
     end
 })
-
-
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
                                                    --fling com sofa--
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
-
 local function flingWithSofa(targetPlayer)
     if not targetPlayer or not targetPlayer.Character or not LocalPlayer.Character then
         return
@@ -3513,12 +3364,9 @@ local function flingWithSofa(targetPlayer)
         end
     end)
 end
-
-
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
                                                    --fling com bola--
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
-
 local function equipBola()
     local backpack = LocalPlayer:WaitForChild("Backpack")
     local bola = backpack:FindFirstChild("SoccerBall") or LocalPlayer.Character:FindFirstChild("SoccerBall")
@@ -3627,12 +3475,9 @@ local function flingWithBall(targetPlayer)
         end
     end)
 end
-
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
                                                   --fling bola v2--
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
 local function flingWithBallV2(targetPlayer)
     if not targetPlayer or not targetPlayer.Character then return end
     local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
@@ -3707,15 +3552,9 @@ local function flingWithBallV2(targetPlayer)
         end
     end)
 end
-
-
-
-
 -----------------------------------------------------------------------------------------------------------------------------------------------------
                                                    --fling com ônibus--
 -----------------------------------------------------------------------------------------------------------------------------------------------------
-
-
 local function flingWithBus(targetPlayer)
     if not targetPlayer or not targetPlayer.Character or not LocalPlayer.Character then return end
     local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
@@ -3845,7 +3684,6 @@ local function flingWithBus(targetPlayer)
         end
     end)
 end
-
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
                                                    --fling com barco--
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -4642,7 +4480,6 @@ Tab9:AddButton({"Fling ALL V2", function()
         end
     end)
 end})
-
 -- Parar Tudo
 Tab9:AddButton({"Stop All", function()
     -- Parar Orbitando
