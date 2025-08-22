@@ -88,7 +88,7 @@ ScreenGui:Destroy()
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/cxnker/p/refs/heads/main/Redzhubui"))()
 
 local Window = redzlib:MakeWindow({
-    Title = "MoonU Hub",
+    Title = "Nova Hub",
     SubTitle = "by Nova",
     SaveFolder = "Data_NH"
   })
@@ -97,8 +97,6 @@ local Window = redzlib:MakeWindow({
     Button = { Image = "rbxassetid://108662620575463", BackgroundTransparency = 0 },
     Corner = { CornerRadius = UDim.new(35, 1) },
 })
-
-
 
 local Tab1 = Window:MakeTab({"Credits", "info"})
 local Tab2= Window:MakeTab({"Fun", "fun"})
@@ -269,7 +267,7 @@ Tab2:AddSlider({
     Name = "Speed",
     Increase = 1,
     MinValue = 16,
-    MaxValue = 888,
+    MaxValue = 500,
     Default = 16,
     Callback = function(Value)
         local player = game.Players.LocalPlayer
@@ -303,7 +301,7 @@ Tab2:AddSlider({
     Name = "Gravity",
     Increase = 1,
     MinValue = 0,
-    MaxValue = 9000,
+    MaxValue = 6000,
     Default = 196.2,
     Callback = function(Value)
         game.Workspace.Gravity = Value
@@ -322,7 +320,7 @@ Tab2:AddSlider({
  end)
 
  Tab2:AddButton({
-    Name = "Reset Speed/Gravity/Jumppower.✅",
+    Name = "Reset Speed, Gravity, Jumppower",
     Callback = function()
         -- Reset Speed
         local player = game.Players.LocalPlayer
