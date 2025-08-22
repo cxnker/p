@@ -1129,20 +1129,18 @@ Tab3:AddButton({
 })
 
 Tab3:AddParagraph({
-    Title = "Proximamente mas cosas",
+    Title = "NOTA: Ajusta las proporciones de tu personaje para un mejor resultado",
     Content = ""
 })
-
 ---------------------------------------------------------------------------------------------------------------------------------
                                           -- === Tab4: House === --
 ---------------------------------------------------------------------------------------------------------------------------------
-
 Tab4:AddParagraph({
     Title = "Funciones para usar tu mismo",
     Content = ""
 })
 
--- Botão para remover ban de todas as casas
+-- Botón para remover el baneo en todas las casas
 Tab4:AddButton({
     Name = "Desbanear de todas las casas",
     Description = "Remover ban de las casas",
@@ -1192,7 +1190,7 @@ Tab4:AddButton({
         if successCount == 0 and failCount == 0 then
             game.StarterGui:SetCore("SendNotification", {
                 Title = "Aviso",
-                Text = "Ningun ban encontrado para remover.",
+                Text = "Ningun baneo encontrado para remover.",
                 Duration = 5
             })
         end
@@ -1203,8 +1201,6 @@ Tab4:AddParagraph({
     Title = "Proximamente mas cosas",
     Content = ""
 })
-
-
 
 ---------------------------------------------------------------------------------------------------------------------------------
                                           -- === Tab 5: Car === --
@@ -1235,7 +1231,7 @@ function TeleportCarro:MostrarNotificacao(mensagem)
     end)
 end
 
--- Função para desativar/ativar dano de queda
+-- Funcion para activar/desactivar daño de caida
 function TeleportCarro:ToggleFallDamage(disable)
     if not self.LocalPlayer.Character or not self.LocalPlayer.Character:FindFirstChild("Humanoid") then return false end
     local humanoid = self.LocalPlayer.Character.Humanoid
@@ -1252,7 +1248,7 @@ function TeleportCarro:ToggleFallDamage(disable)
     end
 end
 
--- Função para teleportar o jogador para o assento do carro
+-- Función para teletransportar al jugador al asiento del vehiculo
 function TeleportCarro:TeleportToSeat(seat, car)
     if not self.LocalPlayer.Character or not self.LocalPlayer.Character:FindFirstChild("Humanoid") then
         self:MostrarNotificacao("Personaje no encontrado!")
@@ -1276,7 +1272,7 @@ function TeleportCarro:TeleportToSeat(seat, car)
     return humanoid.SeatPart == seat
 end
 
--- Função para teleportar o carro para o void com delay
+-- Función para teletransportar el vehiculo al vacío con retraso
 function TeleportCarro:TeleportToVoid(car)
     if not car then
         self:MostrarNotificacao("Vehiculo invalido!")
@@ -1412,7 +1408,7 @@ Tab5:AddToggle({
 
 local Section = Tab5:AddSection({"Vehicle Features"})
 
--- Criar o dropdown
+-- Crear el menú desplegable
 local Dropdown = Tab5:AddDropdown({
     Name = "Seleccionar vehiculo",
     Description = "Seleccione el vehiculo de un jugador",
@@ -4549,7 +4545,7 @@ Tab11:AddButton({
                                           -- === Tab 12: Teleportes === --
 -----------------------------------------------------------------------------------------------------------------------------------------
 local teleportPlayer = game.Players.LocalPlayer
-local teleportLocation = "Colina" -- Valor Predeterminado
+local teleportLocation = "Inicio" -- Valor Predeterminado
 
 local locations = {
     ["Colina"] = Vector3.new(-348.64, 65.94, -458.08),
@@ -4558,8 +4554,8 @@ local locations = {
     ["Playa 1"] = Vector3.new(55.69, 2.94, -1403.60),
     ["Playa 2"] = Vector3.new(42.39, 2.94, 1336.14),
     ["Granja"] = Vector3.new(-766.41, 2.92, -61.10),
-    ["CentroComercial"] = Vector3.new(151.05, 3.52, -190.64),
-    ["Aeropuerto"] = Vector3.new(290.23, 4.32, 42.57)
+    ["Aeropuerto"] = Vector3.new(290.23, 4.32, 42.57),
+    ["CentroComercial"] = Vector3.new(151.05, 3.52, -190.64)
 }
 
 Tab12:AddDropdown({
@@ -4574,8 +4570,8 @@ Tab12:AddDropdown({
         "Playa 1",
         "Playa 2",
         "Granja",
-        "CentroComercial",
-        "Aeropuerto"
+        "Aeropuerto",
+        "CentroComercial"
     },
     Callback = function(value)
         teleportLocation = value
@@ -4583,8 +4579,8 @@ Tab12:AddDropdown({
 })
 
 Tab12:AddButton({
-    Name = "Teletransportar",
-    Description = "Teletransportar al lugar seleccionado",
+    Name = "Teletransportarse",
+    Description = "Teletransportarse al lugar seleccionado",
     Callback = function()
         if teleportPlayer.Character and teleportPlayer.Character:FindFirstChild("HumanoidRootPart") then
             local humanoidRootPart = teleportPlayer.Character.HumanoidRootPart
