@@ -1,90 +1,3 @@
--- Roblox Lua: Loading MoonU Hub
-
-local Players = game:GetService("Players")
-local lp = Players.LocalPlayer
-
--- Create GUI
-local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "MoonULoadingGui"
-ScreenGui.ResetOnSpawn = false
-ScreenGui.Parent = lp:WaitForChild("PlayerGui")
-ScreenGui.IgnoreGuiInset = true -- Ignore others gui
-
--- Background
-local Background = Instance.new("ImageLabel")
-Background.Size = UDim2.new(1,0,1,0) -- Cover Screen
-Background.Position = UDim2.new(0,0,0,0)
-Background.Image = "rbxassetid://75269005632110"
-Background.ScaleType = Enum.ScaleType.Crop
-Background.BackgroundTransparency = 0
-Background.Parent = ScreenGui
-
--- Rounded Borders
-local bgCorner = Instance.new("UICorner")
-bgCorner.CornerRadius = UDim.new(0.02,0)
-bgCorner.Parent = Background
-
--- Top Text
-local Title = Instance.new("TextLabel")
-Title.Size = UDim2.new(0, 300, 0, 50)
-Title.Position = UDim2.new(0.5, -150, 0.2, 0)
-Title.BackgroundTransparency = 1
-Title.Text = "MoonU Hub"
-Title.TextColor3 = Color3.fromRGB(30, 60, 120) -- Color
-Title.Font = Enum.Font.GothamBold
-Title.TextScaled = true
-Title.Parent = ScreenGui
-
--- Background Loading Bar
-local BarBackground = Instance.new("Frame")
-BarBackground.Size = UDim2.new(0, 400, 0, 30)
-BarBackground.Position = UDim2.new(0.5, -200, 0.5, 0)
-BarBackground.BackgroundColor3 = Color3.fromRGB(200,200,200)
-BarBackground.BorderSizePixel = 0
-BarBackground.Parent = ScreenGui
-BarBackground.ClipsDescendants = true
-
--- Background Rounded Borders
-local barBgCorner = Instance.new("UICorner")
-barBgCorner.CornerRadius = UDim.new(0.5,0)
-barBgCorner.Parent = BarBackground
-
--- Progress Bar
-local ProgressBar = Instance.new("Frame")
-ProgressBar.Size = UDim2.new(0,0,1,0)
-ProgressBar.BackgroundColor3 = Color3.fromRGB(255,0,0)
-ProgressBar.BorderSizePixel = 0
-ProgressBar.Parent = BarBackground
-
--- Progress Rounded Borders
-local progressCorner = Instance.new("UICorner")
-progressCorner.CornerRadius = UDim.new(0.5,0)
-progressCorner.Parent = ProgressBar
-
--- Text %
-local PercentText = Instance.new("TextLabel")
-PercentText.Size = UDim2.new(1,0,1,0)
-PercentText.Position = UDim2.new(0,0,0,0)
-PercentText.BackgroundTransparency = 1
-PercentText.TextColor3 = Color3.fromRGB(0,0,0)
-PercentText.Font = Enum.Font.GothamBold
-PercentText.TextScaled = true
-PercentText.Text = "0%"
-PercentText.Parent = BarBackground
-
--- Loading Animation
-local totalTime = 4 -- Seconds
-local steps = 100
-local delayPerStep = totalTime / steps
-
-for i = 1, steps do
-    ProgressBar.Size = UDim2.new(i/steps,0,1,0)
-    PercentText.Text = i .. "%"
-    wait(delayPerStep)
-end
-
--- Delete GUI in the end
-ScreenGui:Destroy()
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/cxnker/p/refs/heads/main/Redzhubui"))()
 
 local Window = redzlib:MakeWindow({
@@ -99,10 +12,10 @@ local Window = redzlib:MakeWindow({
 })
 
 local Tab1 = Window:MakeTab({"Credits", "info"})
-local Tab2= Window:MakeTab({"Fun", "fun"})
+local Tab2= Window:MakeTab({"Player", "fun"})
 local Tab3 = Window:MakeTab({"Avatar", "shirt"})
-local Tab4 = Window:MakeTab({"House", "Home"})
-local Tab5 = Window:MakeTab({"Car", "Car"})
+local Tab4 = Window:MakeTab({"House", "home"})
+local Tab5 = Window:MakeTab({"Car", "car"})
 local Tab6 = Window:MakeTab({"RGB", "brush"})
 local Tab7 = Window:MakeTab({"Music All", "radio"})
 local Tab8 = Window:MakeTab({"Music", "music"})
@@ -133,14 +46,13 @@ end
 
 local executorName = detectExecutor()
 local Paragraph = Tab1:AddParagraph({"Executor", executorName})
-local Section = Tab1:AddSection({"Version 1.1"})
-local Paragraph = Tab1:AddParagraph({"Creador", "Roun \n Nova"})
+local Section = Tab1:AddSection({"Version Lite"})
+local Paragraph = Tab1:AddParagraph({"Creador", "\n Nova"})
 
 Tab1:AddButton({
     Name = "Copiar Tiktok",
     Callback = function()
-    setclipboard("@Gabriel") -- Copia o @
-    setclipboard("https://www.tiktok.com/@lxvap") -- Copia o link também, se quiser só o @, remova esta linha     
+    setclipboard("https://www.tiktok.com/@lxvap")
     end
 })
 -----------------------------------------------------------------------------------------------------------------------------------
@@ -301,7 +213,7 @@ Tab2:AddSlider({
     Name = "Gravity",
     Increase = 1,
     MinValue = 0,
-    MaxValue = 6000,
+    MaxValue = 5000,
     Default = 196.2,
     Callback = function(Value)
         game.Workspace.Gravity = Value
@@ -330,10 +242,8 @@ Tab2:AddSlider({
             humanoid.WalkSpeed = 16 -- Speed Value
             humanoid.JumpPower = 50 -- JumpPower Value
         end
-        
         -- Reset Gravity
         game.Workspace.Gravity = 196.2 -- Gravity Value
-        
         -- Deactivate Infinite Jump
         InfiniteJumpEnabled = false
     end
@@ -346,138 +256,6 @@ Tab2:AddSlider({
        InfiniteJumpEnabled = Value
     end
  })
-
- local UltimateNoclip = {
-    Enabled = false,
-    Connections = {},
-    SoccerBalls = {}
-}
-
-local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
-local Workspace = game:GetService("Workspace")
-local LocalPlayer = Players.LocalPlayer
-
--- Collision Control
-local function managePlayerCollisions(character)
-    if not character then return end
-    
-    for _, part in ipairs(character:GetDescendants()) do
-        if part:IsA("BasePart") then
-            part.CanCollide = not UltimateNoclip.Enabled
-            part.Anchored = false
-        end
-    end
-end
-
--- Sistem Anti-void+
-local function voidProtection(rootPart)
-    if rootPart.Position.Y < -500 then
-        local safeCFrame = CFrame.new(0, 100, 0)
-        local rayParams = RaycastParams.new()
-        rayParams.FilterDescendantsInstances = {LocalPlayer.Character}
-        
-        local result = Workspace:Raycast(rootPart.Position, Vector3.new(0, 500, 0), rayParams)
-        rootPart.CFrame = result and CFrame.new(result.Position + Vector3.new(0, 5, 0)) or safeCFrame
-    end
-end
-
--- Soccer Ball Control
-local function manageSoccerBalls()
-    local soccerFolder = Workspace:FindFirstChild("Com", true)
-                      and Workspace.Com:FindFirstChild("001_SoccerBalls")
-    
-    if soccerFolder then
-        -- Uodate Soccer Ball
-        for _, ball in ipairs(soccerFolder:GetChildren()) do
-            if ball.Name:match("^Soccer") then
-                pcall(function()
-                    ball.CanCollide = not UltimateNoclip.Enabled
-                    ball.Anchored = UltimateNoclip.Enabled
-                end)
-                UltimateNoclip.SoccerBalls[ball] = true
-            end
-        end
-        
-        -- Monitor Soccer Ball
-        if not UltimateNoclip.Connections.BallAdded then
-            UltimateNoclip.Connections.BallAdded = soccerFolder.ChildAdded:Connect(function(ball)
-                if ball.Name:match("^Soccer") then
-                    task.wait(0.3)
-                    pcall(function()
-                        ball.CanCollide = not UltimateNoclip.Enabled
-                        ball.Anchored = UltimateNoclip.Enabled
-                    end)
-                end
-            end)
-        end
-    end
-end
-
--- System Main Loop
-local function mainLoop()
-    UltimateNoclip.Connections.Heartbeat = RunService.Heartbeat:Connect(function()
-        local character = LocalPlayer.Character
-        
-        -- Player Control
-        if character then
-            managePlayerCollisions(character)
-            
-            local rootPart = character:FindFirstChild("HumanoidRootPart")
-            if rootPart then
-                voidProtection(rootPart)
-            end
-        end
-        
-        -- Update Soccer Ball in 2s
-        if tick() % 2 < 0.1 then
-            manageSoccerBalls()
-        end
-    end)
-end
-
--- Toggle Configuration
-local NoclipToggle = Tab2:AddToggle({
-    Name = "Ultimate Noclip",
-    Description = "Noclip + Control de Balon Integrado",
-    Default = false
-})
-
-NoclipToggle:Callback(function(state)
-    UltimateNoclip.Enabled = state
-    
-    if state then
-        -- Start System
-        mainLoop()
-        manageSoccerBalls()
-        
-        -- Respawn Configuration
-        UltimateNoclip.Connections.CharAdded = LocalPlayer.CharacterAdded:Connect(function()
-            task.wait(0.5)
-            managePlayerCollisions(LocalPlayer.Character)
-        end)
-    else
-        -- Desativa tudo
-        for _, conn in pairs(UltimateNoclip.Connections) do
-            conn:Disconnect()
-        end
-        
-        -- Restaura colisões
-        if LocalPlayer.Character then
-            managePlayerCollisions(LocalPlayer.Character)
-        end
-        
-        -- Restaura bolas
-        for ball in pairs(UltimateNoclip.SoccerBalls) do
-            if ball.Parent then
-                pcall(function()
-                    ball.CanCollide = true
-                    ball.Anchored = false
-                end)
-            end
-        end
-    end
-end)
 -------------------------------------------------------------------------------
 -- Toggle para Anti-Sit
 local antiSitConnection = nil
@@ -485,7 +263,6 @@ local antiSitEnabled = false
 
 Tab2:AddToggle({
     Name = "Anti-Sit",
-    Description = "Impide Sentarse",
     Default = false,
     Callback = function(state)
         antiSitEnabled = state
@@ -552,15 +329,14 @@ local selectedColor = "RGB Suave"
 
 -- Fly GUI Button
 Tab2:AddButton({
-    Name = "Activar Fly GUI",
-    Description = "Fly GUI Universal",
+    Name = "Fly GUI Universal",
     Callback = function()
         local success, _ = pcall(function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/cxnker/p/refs/heads/main/fly"))()
         end)
 
         game.StarterGui:SetCore("SendNotification", {
-            Title = success and "Success" or "Error",
+            Title = success and "Exito" or "Error",
             Text = success and "Fly GUI cargado!" or "Fallo al cargar Fly GUI.",
             Duration = 5
         })
@@ -573,7 +349,7 @@ local Section = Tab2:AddSection({"ESP"})
 -- Dropdown de cor
 Tab2:AddDropdown({
     Name = "ESP Color",
-    Default = "RGB ",
+    Default = "RGB",
     Options = {
         "RGB", "Blanco", "Negro", "Rojo",
         "Verde", "Azul", "Amarillo", "Rosado", "Morado"
@@ -655,7 +431,7 @@ end
 
 -- Toggle de ativação do ESP
 local Toggle1 = Tab2:AddToggle({
-    Name = "ESP Activado",
+    Name = "Activar ESP",
     Description = "Muestra la entidad de los jugadores.",
     Default = false
 })
@@ -707,7 +483,6 @@ Toggle1:Callback(function(value)
         billboardGuis = {}
     end
 end)
-
 ----------------------------------------------------------------------------------------------------------------------------------
                                                          -- Tab3:  Avatar Editor--
 ----------------------------------------------------------------------------------------------------------------------------------
@@ -771,10 +546,10 @@ Tab3:AddButton({
             local THumanoid = TPlayer.Character:FindFirstChildOfClass("Humanoid")
 
             if LHumanoid and THumanoid then
-                -- RESETAR LOCALPLAYER
+                -- RESETEAR LOCALPLAYER
                 local LDesc = LHumanoid:GetAppliedDescription()
 
-                -- Remover acessórios, roupas e face atuais
+                -- Remover accesorios, ropa y caras actuales
                 for _, acc in ipairs(LDesc:GetAccessories(true)) do
                     if acc.AssetId and tonumber(acc.AssetId) then
                         Remotes.Wear:InvokeServer(tonumber(acc.AssetId))
@@ -799,7 +574,7 @@ Tab3:AddButton({
 
                 local PDesc = THumanoid:GetAppliedDescription()
 
-                -- Enviar partes do corpo
+                -- Copiar partes del cuerpo
                 local argsBody = {
                     [1] = {
                         [1] = PDesc.Torso,
@@ -846,7 +621,7 @@ Tab3:AddButton({
                     task.wait(0.3)
                 end
 
-                -- Nome, bio e cor
+                -- Nombre, Bio y Color
                 local Bag = TPlayer:FindFirstChild("PlayersBag")
                 if Bag then
                     if Bag:FindFirstChild("RPName") and Bag.RPName.Value ~= "" then
@@ -872,7 +647,7 @@ Tab3:AddButton({
 })
 
 ------------------------------------------------------------------------------------------------------------------------------------
-local Section = Tab3:AddSection({"Ropa 3D"})
+local Section = Tab3:AddSection({"3D Clothes"})
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 -- Namespace para evitar conflitos
@@ -893,7 +668,6 @@ end
 AvatarManager.Avatares = {
     { Nome = "Gato de Manga", ID = 124948425515124 },
     { Nome = "Simon azul", ID = 76155710249925 }
-    
 }
 -- Função para obter os nomes dos avatares para o dropdown
 function AvatarManager:GetAvatarNames()
@@ -926,7 +700,7 @@ end
 -- Tab3: Opção de Avatar
 -- Dropdown para avatares
 local AvatarDropdown = Tab3:AddDropdown({
-    Name = "Accesorios 3D",
+    Name = "Ropa 3D",
     Description = "Seleccione para equipar",
     Default = nil,
     Options = AvatarManager:GetAvatarNames(),
@@ -938,7 +712,6 @@ local AvatarDropdown = Tab3:AddDropdown({
 -- Botão para equipar avatar
 Tab3:AddButton({
     Name = "Equipar",
-    Description = "Equipar seleccionado",
     Callback = function()
         if not _G.SelectedAvatar or _G.SelectedAvatar == "" then
             AvatarManager:MostrarNotificacao("Ningun avatar seleccionado!")
@@ -949,9 +722,9 @@ Tab3:AddButton({
 })
 -------------------------------------------------------------------------------------------------------------------------
 local Section = Tab3:AddSection({"Avatar Editor"})
--- Botão para equipar partes do corpo
+
 Tab3:AddParagraph({
-    Title = "Aviso, vas a reiniciar tu avatar",
+    Title = "NOTA: (Tu avatar se reiniciara) Ajusta las proporciones de tu personaje para un mejor resultado",
     Content = ""
 })
 -- Cria um botão para equipar todas as partes do corpo
@@ -1127,19 +900,9 @@ Tab3:AddButton({
         print("Todas las partes han sido equipadas!")
     end
 })
-
-Tab3:AddParagraph({
-    Title = "NOTA: Ajusta las proporciones de tu personaje para un mejor resultado",
-    Content = ""
-})
 ---------------------------------------------------------------------------------------------------------------------------------
                                           -- === Tab4: House === --
 ---------------------------------------------------------------------------------------------------------------------------------
-Tab4:AddParagraph({
-    Title = "Funciones para usar tu mismo",
-    Content = ""
-})
-
 -- Botón para remover el baneo en todas las casas
 Tab4:AddButton({
     Name = "Desbanear de todas las casas",
@@ -1201,11 +964,9 @@ Tab4:AddParagraph({
     Title = "Proximamente mas cosas",
     Content = ""
 })
-
 ---------------------------------------------------------------------------------------------------------------------------------
                                           -- === Tab 5: Car === --
 ---------------------------------------------------------------------------------------------------------------------------------
-
 local Section = Tab5:AddSection({"All Vehicle Functions"})
 
 local Players = game:GetService("Players")
