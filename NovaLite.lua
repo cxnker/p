@@ -47,7 +47,7 @@ end
 local executorName = detectExecutor()
 local Paragraph = Tab1:AddParagraph({"Executor", executorName})
 local Section = Tab1:AddSection({"Version Lite"})
-local Paragraph = Tab1:AddParagraph({"Creador", "\n Nova"})
+local Paragraph = Tab1:AddParagraph({"Creador", "Roun \n Nova"})
 
 Tab1:AddButton({
     Name = "Copiar Tiktok",
@@ -724,7 +724,7 @@ Tab3:AddButton({
 local Section = Tab3:AddSection({"Avatar Editor"})
 
 Tab3:AddParagraph({
-    Title = "NOTA: (Tu avatar se reiniciara) Ajusta las proporciones de tu personaje para un mejor resultado",
+    Title = "Tu avatar se reiniciara, Ajusta las proporciones de tu personaje para un mejor resultado",
     Content = ""
 })
 -- Cria um botão para equipar todas as partes do corpo
