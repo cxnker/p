@@ -1667,8 +1667,8 @@ end
 createSoundDropdown("Selecione um meme", {
     ["Memes"] = {
         {name = "pankapakan", id = "122547522269143"}, 
+       
         {name = "Gemido ultra rápido", id = "128863565301778"},
-        {name = "OH MY GOD", id = "73349649774476"},
         {name = "vai g0z@?", id = "116293771329297"},
         {name = "G0z33iiii", id = "93462644278510"},
         {name = "Hommmm ", id = "133135656929513"},
@@ -1689,6 +1689,10 @@ createSoundDropdown("Selecione um meme", {
         {name = "Hoo ze da manga", id = "106624090319571"},
         {name = "ai alexandre de moraes", id = "107261471941570"},
         {name = "haaii meme", id = "120006672159037"},
+ 
+    
+
+
         {name = "GoGogo gogogo", id = "103262503950995"},
         {name = "Toma jack", id = "132603645477541"},
         {name = "Toma jackV2", id = "100446887985203"},
@@ -1711,10 +1715,13 @@ createSoundDropdown("Selecione um meme", {
         {name = "vai corinthians!!....", id = "127012936767471"},
         {name = "my sigman", id = "103431815659907"},
         {name = "mama", id = "106850066985594"},
+        {name = "OH MY GOD", id = "73349649774476"},
         {name = "aahhh plankton meme", id = "95982351322190"},
         {name = "CHINABOY", id = "84403553163931"},
         {name = "PASTOR MIRIM E A LÍNGUA DOS ANJOS", id = "71153532555470"},
+        
         {name = "Sai d3sgraç@", id = "106973692977609"},
+        
         {name = "opa salve tudo bem?", id = "80870678096428"},
         {name = "OLHA O CARRO DO DANONE", id = "110493863773948"},
         {name = "Nãoooo, Nãoooo, Nãooo!!!!!", id = "95825536480898"},
@@ -1741,12 +1748,19 @@ createSoundDropdown("Selecione um meme", {
         {name = "um cavalo de tres pernas?", id = "8164241439"},
         {name = "voces sao um bado de fdp", id = "8232773326"},
         {name = "HAHA TROLLEI ATÉ VOCÊ", id = "7021794555"},
+        
+        
+
         {name = "Calaboca Kenga", id = "86494561679259"},
         {name = "alvincut", id = "88788640194373"},
         {name = "e a risada faz como?", id = "140713372459057"},
         {name = "voce deve se m@t4", id = "100227426848009"},
         {name = "receba", id = "94142662616215"},
         {name = "UUIIII", id = "73210569653520"},
+        
+
+
+
         {name = "sai", id = "121169949217007"},
         {name = "risada boa dms", id = "127589011971759"},
         {name = "vacilo perna de pau", id = "106809680656199"},
@@ -1754,6 +1768,7 @@ createSoundDropdown("Selecione um meme", {
         {name = "arroto", id = "140203378050178"},
         {name = "iraaaa", id = "136752451575091"},
         {name = "não fica se achando muito não", id = "101588606280167"},
+       
         {name = "WhatsApp notificaçaoV1", id = "107004225739474"},
         {name = "WhatsApp notificaçaoV2", id = "18850631582"},
         {name = "SamsungV1", id = "123767635061073"},
@@ -1788,13 +1803,17 @@ createSoundDropdown("Selecione um meme", {
     }
 }, "pankapakan")
 
+
+
 local Section = Tab7:AddSection({"Reproducir sonidos de terror o efectos"})
+
 -- Dropdown "Efeito/Terror"
 createSoundDropdown("Seleccione un sonido de terror o efecto", {
     ["efeito/terror"] = {
         {name = "jumpscar", id = "91784486966761"},
         {name = "n se preocupe", id = "87041057113780"},
         {name = "eles estao todos mortos", id = "70605158718179"},
+
         {name = "gritoestourado", id = "7520729342"},
         {name = "gritomedo", id = "113029085566978"},
         {name = "Nukesiren", id = "9067330158"},
@@ -1805,6 +1824,9 @@ createSoundDropdown("Seleccione un sonido de terror o efecto", {
         {name = "Alarm estourAAAA...", id = "93354528379052"},
         {name = "MegaMan Alarm", id = "1442382907"},
         {name = "Alarm bookhaven", id = "1526192493"},
+
+
+
         {name = "alet malaysia", id = "7714172940"},
         {name = "Risada", id = "79191730206814"},
         {name = "Hahahah", id = "90096947219465"},
@@ -1834,6 +1856,7 @@ createSoundDropdown("Seleccione un sonido de terror o efecto", {
         {name = "Ennard Jumpscare 2", id = "629526707"},
         {name = "a sla medo dino", id = "125506416092123"},
         {name = "Backrooms Bacteria Pitfalls ", id = "81325342128575"},
+        
         {name = "error Infinite", id = "3893790326"},
         {name = "Screaming Meme", id = "107732411055226"},
         {name = "Jumpscare - SCP CB", id = "97098997494905"},
@@ -1846,12 +1869,22 @@ createSoundDropdown("Seleccione un sonido de terror o efecto", {
         {name = "Death House I Jumpscare Sound", id = "8151488745"},
         {name = "Shinky Jumpscare", id = "123447772144411"},
         {name = "FNaTI Jumpscare Oblitus casa", id = "18338717319"},
-        {name = "fnaf jumpscare loadmode", id = "18911896588"}
+        {name = "fnaf jumpscare loadmode", id = "18911896588"},
+        {name = "", id = ""},
+        {name = "", id = ""},
+        {name = "", id = ""},
+        {name = "", id = ""},
+        {name = "", id = ""},
+        {name = "", id = ""}
     }
 }, "jumpscar")
+
+
+
 ---------------------------------------------------------------------------------------------------------------------------------
                                           -- === Tab 8: Troll Musica === --
 ---------------------------------------------------------------------------------------------------------------------------------
+
 local function tocarMusica(id)
     local ReplicatedStorage = game:GetService("ReplicatedStorage")
     
@@ -1943,6 +1976,7 @@ createMusicDropdown("Forró", {
         {name = "forró sao joao", id = "106364874935196"},
         {name = "forró engraçado paia", id = "76524290482399"},
         {name = "100% forro vaquejada", id = "92295159623916"},
+        
         {name = "PASTOR MIRIM E A LÍNGUA DOS ANJOS", id = "71153532555470"},
         {name = "PARA NÃO ESQUECER QUEM SOMOS", id = "88937498361674"},
         {name = "Uno zero", id = "112959083808887"},
@@ -2094,6 +2128,7 @@ createMusicDropdown("Phonk", {
         {name = "BRR BRR PATAPIM FUNK", id = "117170901476451"},
         {name = "MONTAGEM TERRA BELA FUNK", id = "134770548505933"},
         {name = "FUNK DO RAVE 1.0", id = "137135395010424"},
+        
         {name = " Portao Funk", id = "70900514961735"},
         {name = " Espaço Funk", id = "110519906029322"},
         {name = " FUTABA", id = "91834632690710"},
@@ -2122,6 +2157,7 @@ createMusicDropdown("Phonk", {
         {name = "DA ZONA NTJ VERSON", id = "105770593501071"},
         {name = "HIPNOTIZA", id = "132015050363205"},
         {name = "MIDZUKI speed up", id = "129151948619922"},
+        
         {name = "movimenta funk", id = "114994598691121"},
         {name = "CRISTAL", id = "103445348511856"},
         {name = "Letero funkphonk", id = "99409598156364"}
@@ -2262,6 +2298,9 @@ local function spectatePlayer(playerName)
 
         updateCamera()
 
+
+
+
         characterConnection = RunService.Heartbeat:Connect(function()
             if not isSpectating then
                 characterConnection:Disconnect()
@@ -2360,7 +2399,7 @@ local valor_do_nome_do_joagdor
 
 local DropdownPlayerTab2 = Tab9:AddDropdown({
     Name = "Seleccionar Jugador",
-    Description = "Elige un jugador para matar, atraer, ver o lanzar",
+    Description = "Elige un jugador para matar, tirar, ver o lanzar",
     Default = "",
     Multi = false,
     Options = getPlayerNames(),
@@ -2405,8 +2444,8 @@ end})
 UptadePlayers()
 
 Tab9:AddButton({
-    Title = "Teletransportarse al jugador",
-    Desc = "Te teletransporta al jugador seleccionado",
+    Title = "Teletransportar al jugador",
+    Desc = "Teletransportarse al jugador seleccionado",
     Callback = function()
         local selectedPlayerName = valor_do_nome_do_joagdor
         if selectedPlayerName and selectedPlayerName ~= "" then
@@ -2467,15 +2506,16 @@ updateDropdown(DropdownPlayerTab2, SpectateToggleTab10)
 local Section = Tab9:AddSection({"Kill"})
 
 local DropdownKillPullMethod = Tab9:AddDropdown({
-    Name = "Seleccionar Metodo (Matar/Atraer)",
-    Description = "Escoja si matar o atraer",
-    Options = {"Sofa", "Autobus"},
+    Name = "Seleccionar Metodo (Matar/Jalar)",
+    Description = "Escoja si matar o tirar",
+    Options = {"Sofá", "Ônibus"},
     Callback = function(value)
         selectedKillPullMethod = value
     end
 })
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                                                   --Lanzamiento con Sofa--
+                                                   --fling com sofa--
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 local function equipSofa()
     local backpack = LocalPlayer:WaitForChild("Backpack")
@@ -2512,7 +2552,7 @@ local function pullWithSofa(targetPlayer)
     originalPosition = LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Position
 end
 ----------------------------------------------------------------------------
-                                                   --Lanzamiento con Autobus--
+                                                   --fling com onibus--
 ----------------------------------------------------------------------------
 local function killWithBus(targetPlayer)
     if not targetPlayer or not targetPlayer.Character or not LocalPlayer.Character then return end
@@ -2711,21 +2751,21 @@ end)
 
 Tab9:AddButton({
     Name = "Matar",
-    Description = "Tira al jugador al vacio",
+    Description = "Inicia o matar com o método selecionado",
     Callback = function()
         if isFollowingKill or isFollowingPull or running then return end
         if not selectedPlayer or not selectedKillPullMethod then return end
-        if selectedKillPullMethod == "Sofa" then
+        if selectedKillPullMethod == "Sofá" then
             killWithSofa(selectedPlayer)
-        elseif selectedKillPullMethod == "Autobus" then
+        elseif selectedKillPullMethod == "Ônibus" then
             killWithBus(selectedPlayer)
         end
     end
 })
 
 Tab9:AddButton({
-    Name = "Atraer",
-    Description = "Atrae al jugador hacia tu lugar",
+    Name = "Puxar",
+    Description = "Inicia o puxar com o método selecionado",
     Callback = function()
         if isFollowingKill or isFollowingPull or running then return end
         if not selectedPlayer or not selectedKillPullMethod or selectedKillPullMethod ~= "Sofá" then return end
@@ -2734,7 +2774,7 @@ Tab9:AddButton({
 })
 
 Tab9:AddButton({
-    Name = "Parar todo (Matar o Atraer)",
+    Name = "Stop All (Matar o Tirar)",
     Callback = function()
         isFollowingKill = false
         isFollowingPull = false
@@ -2778,7 +2818,7 @@ local Section = Tab9:AddSection({"Lanzar Jugador"})
 local DropdownFlingMethod = Tab9:AddDropdown({
     Name = "Selecciona una opcion",
     Description = "Elige una opcion para lanzar a un jugador",
-    Options = {"Sofa", "Autobus", "Balon" "Balon V2", "Barco", "Camion"},
+    Options = {"Sofa", "Autobus", "Balon", "Balon V2", "Barco", "Camion"},
     Callback = function(value)
         selectedFlingMethod = value
     end
@@ -3652,8 +3692,6 @@ flingToggle = Tab9:AddToggle({
             end
             if selectedFlingMethod == "Sofa" then
                 flingWithSofa(selectedPlayer)
-            elseif selectedFlingMethod == "Autobus" then
-                flingWithBus(selectedPlayer)
             elseif selectedFlingMethod == "Balon" then
                 flingWithBall(selectedPlayer)
             elseif selectedFlingMethod == "Balon V2" then
@@ -3662,6 +3700,8 @@ flingToggle = Tab9:AddToggle({
                 flingWithBoat(selectedPlayer)
             elseif selectedFlingMethod == "Camion" then
                 flingWithTruck(selectedPlayer)
+            elseif selectedFlingMethod == "Autobus" then
+                flingWithBus(selectedPlayer)
             end
         else
             stopFling()
