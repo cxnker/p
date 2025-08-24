@@ -905,7 +905,8 @@ Tab3:AddButton({
 ---------------------------------------------------------------------------------------------------------------------------------
 -- Botón para remover el baneo en todas las casas
 Tab4:AddButton({
-    Name = "Remover baneo de todas las casas",
+    Name = "Desbanear de todas las casas",
+    Description = "Remover ban de las casas",
     Callback = function()
         local successCount = 0
         local failCount = 0
@@ -937,7 +938,7 @@ Tab4:AddButton({
         end
         if successCount > 0 then
             game.StarterGui:SetCore("SendNotification", {
-                Title = "Exito",
+                Title = "Success",
                 Text = "Desbaneado de " .. successCount .. " casas!",
                 Duration = 5
             })
@@ -1432,7 +1433,7 @@ Tab6:AddSlider({
     Min = 1,
     Max = 5,
     Increase = 1,
-    Default = 3,
+    Default = 2,
     Callback = function(Value)
         rgbSpeed = Value
     end
@@ -1475,54 +1476,7 @@ Tab6:AddToggle({
         end
     end
 })
-
-local ToggleCorpo = Tab6:AddToggle({
-    Name = "Cuerpo RGB",
-    Description = "Tono de piel RGB",
-    Default = false
-})
-ToggleCorpo:Callback(function(Value)
-    getgenv().rgbCorpo = Value
-    task.spawn(function()
-        while getgenv().rgbCorpo do
-            local remote = game:GetService("ReplicatedStorage"):FindFirstChild("Remotes")
-            if remote and remote:FindFirstChild("ChangeBodyColor") then
-                pcall(function()
-                    remote.ChangeBodyColor:FireServer({
-                        BrickColor.new(getRainbowColor(rgbSpeed))
-                    })
-                end)
-            end
-            task.wait(0.1)
-        end
-    end)
-end)
-
-
-
-local ToggleCabelo = Tab6:AddToggle({
-    Name = "Cabello RGB",
-    Description = "Cabello RGB",
-    Default = false
-})
-ToggleCabelo:Callback(function(Value)
-    getgenv().rgbCabelo = Value
-    task.spawn(function()
-        while getgenv().rgbCabelo do
-            fireServer("1Max1y", {
-                "ChangeHairColor2",
-                getRainbowColor(rgbSpeed)
-            })
-            task.wait(0.5)
-        end
-    end)
-end)
-
-
-
 local Section = Tab6:AddSection({"Vehicles and Houses"})
-
-
 
 local ToggleCasa = Tab6:AddToggle({
     Name = "Casa RGB",
