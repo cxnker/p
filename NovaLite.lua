@@ -2502,12 +2502,11 @@ end)
 -- Inicializa o dropdown
 updateDropdown(DropdownPlayerTab2, SpectateToggleTab10)
 
-
 local Section = Tab9:AddSection({"Kill"})
 
 local DropdownKillPullMethod = Tab9:AddDropdown({
-    Name = "Seleccionar Metodo (Matar/Jalar)",
-    Description = "Escoja si matar o tirar",
+    Name = "Selecciona una opcion (Matar/Atraer)",
+    Description = "Escoja si matar o atraer",
     Options = {"Sofá", "Ônibus"},
     Callback = function(value)
         selectedKillPullMethod = value
@@ -2515,7 +2514,7 @@ local DropdownKillPullMethod = Tab9:AddDropdown({
 })
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                                                   --fling com sofa--
+                                                   --Lanzar con Sofa--
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 local function equipSofa()
     local backpack = LocalPlayer:WaitForChild("Backpack")
@@ -2551,9 +2550,9 @@ local function pullWithSofa(targetPlayer)
     isFollowingPull = true
     originalPosition = LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Position
 end
-----------------------------------------------------------------------------
-                                                   --fling com onibus--
-----------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                   --Lanzar con Autobus--
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
 local function killWithBus(targetPlayer)
     if not targetPlayer or not targetPlayer.Character or not LocalPlayer.Character then return end
     local character = LocalPlayer.Character
@@ -2751,7 +2750,7 @@ end)
 
 Tab9:AddButton({
     Name = "Matar",
-    Description = "Inicia o matar com o método selecionado",
+    Description = "Teletransporta al jugador seleccionado al vacio",
     Callback = function()
         if isFollowingKill or isFollowingPull or running then return end
         if not selectedPlayer or not selectedKillPullMethod then return end
@@ -2764,8 +2763,8 @@ Tab9:AddButton({
 })
 
 Tab9:AddButton({
-    Name = "Puxar",
-    Description = "Inicia o puxar com o método selecionado",
+    Name = "Atraer",
+    Description = "Atrae al jugador seleccionado hacia ti",
     Callback = function()
         if isFollowingKill or isFollowingPull or running then return end
         if not selectedPlayer or not selectedKillPullMethod or selectedKillPullMethod ~= "Sofá" then return end
@@ -2774,7 +2773,7 @@ Tab9:AddButton({
 })
 
 Tab9:AddButton({
-    Name = "Stop All (Matar o Tirar)",
+    Name = "Parar todo (Matar o Atraer)",
     Callback = function()
         isFollowingKill = false
         isFollowingPull = false
