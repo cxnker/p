@@ -2502,17 +2502,16 @@ end)
 -- Inicializa o dropdown
 updateDropdown(DropdownPlayerTab2, SpectateToggleTab10)
 
-local Section = Tab9:AddSection({"Kill"})
+local Section = Tab9:AddSection({"Matar/Atraer Jugador"})
 
 local DropdownKillPullMethod = Tab9:AddDropdown({
     Name = "Selecciona una opcion (Matar/Atraer)",
     Description = "Escoja si matar o atraer",
-    Options = {"Sofá", "Ônibus"},
+    Options = {"Sofa", "Autobus"},
     Callback = function(value)
         selectedKillPullMethod = value
     end
 })
-
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
                                                    --Lanzar con Sofa--
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -2754,9 +2753,9 @@ Tab9:AddButton({
     Callback = function()
         if isFollowingKill or isFollowingPull or running then return end
         if not selectedPlayer or not selectedKillPullMethod then return end
-        if selectedKillPullMethod == "Sofá" then
+        if selectedKillPullMethod == "Sofa" then
             killWithSofa(selectedPlayer)
-        elseif selectedKillPullMethod == "Ônibus" then
+        elseif selectedKillPullMethod == "Autobus" then
             killWithBus(selectedPlayer)
         end
     end
@@ -2767,7 +2766,7 @@ Tab9:AddButton({
     Description = "Atrae al jugador seleccionado hacia ti",
     Callback = function()
         if isFollowingKill or isFollowingPull or running then return end
-        if not selectedPlayer or not selectedKillPullMethod or selectedKillPullMethod ~= "Sofá" then return end
+        if not selectedPlayer or not selectedKillPullMethod or selectedKillPullMethod ~= "Sofa" then return end
         pullWithSofa(selectedPlayer)
     end
 })
