@@ -905,8 +905,7 @@ Tab3:AddButton({
 ---------------------------------------------------------------------------------------------------------------------------------
 -- Botón para remover el baneo en todas las casas
 Tab4:AddButton({
-    Name = "Desbanear de todas las casas",
-    Description = "Remover ban de las casas",
+    Name = "Remover baneo de todas las casas",
     Callback = function()
         local successCount = 0
         local failCount = 0
@@ -938,7 +937,7 @@ Tab4:AddButton({
         end
         if successCount > 0 then
             game.StarterGui:SetCore("SendNotification", {
-                Title = "Success",
+                Title = "Exito",
                 Text = "Desbaneado de " .. successCount .. " casas!",
                 Duration = 5
             })
