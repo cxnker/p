@@ -3777,7 +3777,7 @@ end
 
 -- TextBox para excluir jogador
 Tab9:AddTextBox({
-    Name = "Añadir jugador a la Whitelist",
+    Name = "Añadir jugador a la lista blanca",
     Description = "Ingrese parte del nombre del jugador",
     PlaceholderText = "Ej: No - Nova",
     Callback = function(Value)
@@ -3806,7 +3806,7 @@ Tab9:AddTextBox({
 
 Tab9:AddButton({"Verificar lista blanca", function()
     if #excludedPlayers == 0 then
-        showNotification("Alerta", "Ningun jugador fue removido.", nil)
+        showNotification("Aviso", "Ningun jugador fue removido.", nil)
         return
     end
     for i, player in ipairs(excludedPlayers) do
@@ -3818,11 +3818,11 @@ end})
 
 Tab9:AddButton({"Remover lista blanca", function()
     if #excludedPlayers == 0 then
-        showNotification("Alerta", "Ningun jugador de la lista blanca fue removido.", nil)
+        showNotification("Aviso", "Ningun jugador de la lista blanca fue removido.", nil)
         return
     end
     excludedPlayers = {}
-    showNotification("Lista blanca removida", "Todos los jugadores de la lista blanca fueron removidos.", nil)
+    showNotification("Aviso", "Todos los jugadores de la lista blanca fueron removidos.", nil)
 end})
 
 Tab9:AddButton({"Orbiting Fling Ball", function()
@@ -3863,7 +3863,7 @@ Tab9:AddButton({"Orbiting Fling Ball", function()
             return
         end
         local t = tick() * 10
-        local radius = 3
+        local radius = 5
         local offset = Vector3.new(math.cos(t) * radius, -1, math.sin(t) * radius)
         soccerBall.CFrame = CFrame.new(myHRP.Position + offset)
         soccerBall.AssemblyLinearVelocity = Vector3.new(9999, 9999, 9999)
@@ -4113,7 +4113,7 @@ Tab9:AddButton({"Stop All", function()
     end
     soccerBall = nil
     originalProperties = nil
-    showNotification("ALERT", "Se han desactivado todas las funciones.", nil)
+    showNotification("Aviso", "Se han desactivado todas las funciones.", nil)
 end})
 ---------------------------------------------------------------------------------------------------------------------------------
                                                    -- === Tab 10: lag server === --
@@ -4162,7 +4162,6 @@ local locations = {
     ["Playa 1"] = Vector3.new(55.69, 2.94, -1403.60),
     ["Playa 2"] = Vector3.new(42.39, 2.94, 1336.14),
     ["Granja"] = Vector3.new(-766.41, 2.92, -61.10),
-    ["Aeropuerto"] = Vector3.new(290.23, 4.32, 42.57),
     ["CentroComercial"] = Vector3.new(151.05, 3.52, -190.64)
 }
 
@@ -4178,7 +4177,6 @@ Tab12:AddDropdown({
         "Playa 1",
         "Playa 2",
         "Granja",
-        "Aeropuerto",
         "CentroComercial"
     },
     Callback = function(value)
