@@ -1667,8 +1667,8 @@ end
 createSoundDropdown("Selecione um meme", {
     ["Memes"] = {
         {name = "pankapakan", id = "122547522269143"}, 
-       
         {name = "Gemido ultra rápido", id = "128863565301778"},
+        {name = "OH MY GOD", id = "73349649774476"},
         {name = "vai g0z@?", id = "116293771329297"},
         {name = "G0z33iiii", id = "93462644278510"},
         {name = "Hommmm ", id = "133135656929513"},
@@ -1689,10 +1689,6 @@ createSoundDropdown("Selecione um meme", {
         {name = "Hoo ze da manga", id = "106624090319571"},
         {name = "ai alexandre de moraes", id = "107261471941570"},
         {name = "haaii meme", id = "120006672159037"},
- 
-    
-
-
         {name = "GoGogo gogogo", id = "103262503950995"},
         {name = "Toma jack", id = "132603645477541"},
         {name = "Toma jackV2", id = "100446887985203"},
@@ -1715,13 +1711,10 @@ createSoundDropdown("Selecione um meme", {
         {name = "vai corinthians!!....", id = "127012936767471"},
         {name = "my sigman", id = "103431815659907"},
         {name = "mama", id = "106850066985594"},
-        {name = "OH MY GOD", id = "73349649774476"},
         {name = "aahhh plankton meme", id = "95982351322190"},
         {name = "CHINABOY", id = "84403553163931"},
         {name = "PASTOR MIRIM E A LÍNGUA DOS ANJOS", id = "71153532555470"},
-        
         {name = "Sai d3sgraç@", id = "106973692977609"},
-        
         {name = "opa salve tudo bem?", id = "80870678096428"},
         {name = "OLHA O CARRO DO DANONE", id = "110493863773948"},
         {name = "Nãoooo, Nãoooo, Nãooo!!!!!", id = "95825536480898"},
@@ -1748,19 +1741,12 @@ createSoundDropdown("Selecione um meme", {
         {name = "um cavalo de tres pernas?", id = "8164241439"},
         {name = "voces sao um bado de fdp", id = "8232773326"},
         {name = "HAHA TROLLEI ATÉ VOCÊ", id = "7021794555"},
-        
-        
-
         {name = "Calaboca Kenga", id = "86494561679259"},
         {name = "alvincut", id = "88788640194373"},
         {name = "e a risada faz como?", id = "140713372459057"},
         {name = "voce deve se m@t4", id = "100227426848009"},
         {name = "receba", id = "94142662616215"},
         {name = "UUIIII", id = "73210569653520"},
-        
-
-
-
         {name = "sai", id = "121169949217007"},
         {name = "risada boa dms", id = "127589011971759"},
         {name = "vacilo perna de pau", id = "106809680656199"},
@@ -1768,7 +1754,6 @@ createSoundDropdown("Selecione um meme", {
         {name = "arroto", id = "140203378050178"},
         {name = "iraaaa", id = "136752451575091"},
         {name = "não fica se achando muito não", id = "101588606280167"},
-       
         {name = "WhatsApp notificaçaoV1", id = "107004225739474"},
         {name = "WhatsApp notificaçaoV2", id = "18850631582"},
         {name = "SamsungV1", id = "123767635061073"},
@@ -1803,17 +1788,44 @@ createSoundDropdown("Selecione um meme", {
     }
 }, "pankapakan")
 
-
-
 local Section = Tab7:AddSection({"Reproducir sonidos de terror o efectos"})
-
 -- Dropdown "Efeito/Terror"
 createSoundDropdown("Seleccione un sonido de terror o efecto", {
     ["efeito/terror"] = {
+        {name = "sua mulher funk", id = "90844637105538"},
+        {name = "fuga na viatura", id = "131891110268352"},
+        {name = "funkphonk fumando verde", id = "112143944982807"},
+        {name = "cauma xmara", id = "95664293972405"},
+        {name = "que que sharke", id = "129546408528391"},
+        {name = "Il Cacto Hipopotamo FUNK", id = "104491656009142"},
+        {name = "Espressora Signora FUNK", id = "123394392737234"},
+        {name = "trippi troop funk", id = "73049389767013"},
+        {name = "bombini funkphonk", id = "88814770244609"},
+        {name = "pre treino", id = "136869502216760"},
+        {name = "CVRL", id = "124244582950595"},
+        {name = "batida Brega Violino (Beat Brega Funk)", id = "99399643204701"},
+        {name = "Dança do Canguru (Pke Gaz1nh)", id = "86876136192157"},
+        {name = "espere 30segundos!! Ondas sonoras", id = "127757321382838"},
+        {name = "MONTAGEM ARABIANA (Pke Gaz1nh)", id = "78076624091098"},
+        {name = "Manda o papo (NGI)", id = "132642647937688"},
+        {name = "Viver bem", id = "82805460494325"},
+        {name = "Faixa estronda", id = "121187736532042"},
+        {name = "Ritmo Pixelado", id = "93928823862203"},
+        {name = "Viagem Sonora", id = "79349174602261"},
+        {name = "Melodia Virtual", id = "139147474886402"},
+        {name = "Melodia Serena", id = "97011217688307"},
+        {name = "SENTA", id = "124085422276732"},
+        {name = "TUNG TUNG TUNG TUNG SAHUR PHONK BRASILEIRO", id = "120353876640055"},
+        {name = "crazy-lol", id = "106958630419629"},
+        {name = "V7", id = "80348640826643"},
+        {name = "UIUAH", id = "82894376737849"},
+        {name = "meta ritmo", id = "110091098283354"},
+        {name = "CAPPUCCINO ASSASSINO (SPEDUP)", id = "132733033157915"},
+        {name = "haha (NGI)", id = "122114766584918"},
+
         {name = "jumpscar", id = "91784486966761"},
         {name = "n se preocupe", id = "87041057113780"},
         {name = "eles estao todos mortos", id = "70605158718179"},
-
         {name = "gritoestourado", id = "7520729342"},
         {name = "gritomedo", id = "113029085566978"},
         {name = "Nukesiren", id = "9067330158"},
@@ -1824,9 +1836,6 @@ createSoundDropdown("Seleccione un sonido de terror o efecto", {
         {name = "Alarm estourAAAA...", id = "93354528379052"},
         {name = "MegaMan Alarm", id = "1442382907"},
         {name = "Alarm bookhaven", id = "1526192493"},
-
-
-
         {name = "alet malaysia", id = "7714172940"},
         {name = "Risada", id = "79191730206814"},
         {name = "Hahahah", id = "90096947219465"},
@@ -1856,7 +1865,6 @@ createSoundDropdown("Seleccione un sonido de terror o efecto", {
         {name = "Ennard Jumpscare 2", id = "629526707"},
         {name = "a sla medo dino", id = "125506416092123"},
         {name = "Backrooms Bacteria Pitfalls ", id = "81325342128575"},
-        
         {name = "error Infinite", id = "3893790326"},
         {name = "Screaming Meme", id = "107732411055226"},
         {name = "Jumpscare - SCP CB", id = "97098997494905"},
@@ -1869,22 +1877,12 @@ createSoundDropdown("Seleccione un sonido de terror o efecto", {
         {name = "Death House I Jumpscare Sound", id = "8151488745"},
         {name = "Shinky Jumpscare", id = "123447772144411"},
         {name = "FNaTI Jumpscare Oblitus casa", id = "18338717319"},
-        {name = "fnaf jumpscare loadmode", id = "18911896588"},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""}
+        {name = "fnaf jumpscare loadmode", id = "18911896588"}
     }
 }, "jumpscar")
-
-
-
 ---------------------------------------------------------------------------------------------------------------------------------
                                           -- === Tab 8: Troll Musica === --
 ---------------------------------------------------------------------------------------------------------------------------------
-
 local function tocarMusica(id)
     local ReplicatedStorage = game:GetService("ReplicatedStorage")
     
@@ -1976,7 +1974,6 @@ createMusicDropdown("Forró", {
         {name = "forró sao joao", id = "106364874935196"},
         {name = "forró engraçado paia", id = "76524290482399"},
         {name = "100% forro vaquejada", id = "92295159623916"},
-        
         {name = "PASTOR MIRIM E A LÍNGUA DOS ANJOS", id = "71153532555470"},
         {name = "PARA NÃO ESQUECER QUEM SOMOS", id = "88937498361674"},
         {name = "Uno zero", id = "112959083808887"},
@@ -2016,36 +2013,7 @@ createMusicDropdown("Músicas e Memes Aleatório", {
 -- Dropdown "Funk"
 createMusicDropdown("Funk", {
     ["Funk"] = {
-        {name = "sua mulher funk", id = "90844637105538"},
-        {name = "fuga na viatura", id = "131891110268352"},
-        {name = "funkphonk fumando verde", id = "112143944982807"},
-        {name = "cauma xmara", id = "95664293972405"},
-        {name = "que que sharke", id = "129546408528391"},
-        {name = "Il Cacto Hipopotamo FUNK", id = "104491656009142"},
-        {name = "Espressora Signora FUNK", id = "123394392737234"},
-        {name = "trippi troop funk", id = "73049389767013"},
-        {name = "bombini funkphonk", id = "88814770244609"},
-        {name = "pre treino", id = "136869502216760"},
-        {name = "CVRL", id = "124244582950595"},
-        {name = "batida Brega Violino (Beat Brega Funk)", id = "99399643204701"},
-        {name = "Dança do Canguru (Pke Gaz1nh)", id = "86876136192157"},
-        {name = "espere 30segundos!! Ondas sonoras", id = "127757321382838"},
-        {name = "MONTAGEM ARABIANA (Pke Gaz1nh)", id = "78076624091098"},
-        {name = "Manda o papo (NGI)", id = "132642647937688"},
-        {name = "Viver bem", id = "82805460494325"},
-        {name = "Faixa estronda", id = "121187736532042"},
-        {name = "Ritmo Pixelado", id = "93928823862203"},
-        {name = "Viagem Sonora", id = "79349174602261"},
-        {name = "Melodia Virtual", id = "139147474886402"},
-        {name = "Melodia Serena", id = "97011217688307"},
-        {name = "SENTA", id = "124085422276732"},
-        {name = "TUNG TUNG TUNG TUNG SAHUR PHONK BRASILEIRO", id = "120353876640055"},
-        {name = "crazy-lol", id = "106958630419629"},
-        {name = "V7", id = "80348640826643"},
-        {name = "UIUAH", id = "82894376737849"},
-        {name = "meta ritmo", id = "110091098283354"},
-        {name = "CAPPUCCINO ASSASSINO (SPEDUP)", id = "132733033157915"},
-        {name = "haha (NGI)", id = "122114766584918"},
+
         {name = "DO PO", id = "114207745067816"}
     }
 }, "Option 1")
@@ -2128,7 +2096,6 @@ createMusicDropdown("Phonk", {
         {name = "BRR BRR PATAPIM FUNK", id = "117170901476451"},
         {name = "MONTAGEM TERRA BELA FUNK", id = "134770548505933"},
         {name = "FUNK DO RAVE 1.0", id = "137135395010424"},
-        
         {name = " Portao Funk", id = "70900514961735"},
         {name = " Espaço Funk", id = "110519906029322"},
         {name = " FUTABA", id = "91834632690710"},
@@ -2157,7 +2124,6 @@ createMusicDropdown("Phonk", {
         {name = "DA ZONA NTJ VERSON", id = "105770593501071"},
         {name = "HIPNOTIZA", id = "132015050363205"},
         {name = "MIDZUKI speed up", id = "129151948619922"},
-        
         {name = "movimenta funk", id = "114994598691121"},
         {name = "CRISTAL", id = "103445348511856"},
         {name = "Letero funkphonk", id = "99409598156364"}
@@ -2298,9 +2264,6 @@ local function spectatePlayer(playerName)
 
         updateCamera()
 
-
-
-
         characterConnection = RunService.Heartbeat:Connect(function()
             if not isSpectating then
                 characterConnection:Disconnect()
@@ -2399,7 +2362,7 @@ local valor_do_nome_do_joagdor
 
 local DropdownPlayerTab2 = Tab9:AddDropdown({
     Name = "Seleccionar Jugador",
-    Description = "Elige un jugador para matar, tirar, ver o lanzar",
+    Description = "Elige un jugador para matar, atraer, ver o lanzar",
     Default = "",
     Multi = false,
     Options = getPlayerNames(),
@@ -2444,8 +2407,8 @@ end})
 UptadePlayers()
 
 Tab9:AddButton({
-    Title = "Teletransportar al jugador",
-    Desc = "Teletransportarse al jugador seleccionado",
+    Title = "Teletransportarse al jugador",
+    Desc = "Te teletransporta al jugador seleccionado",
     Callback = function()
         local selectedPlayerName = valor_do_nome_do_joagdor
         if selectedPlayerName and selectedPlayerName ~= "" then
@@ -2506,16 +2469,15 @@ updateDropdown(DropdownPlayerTab2, SpectateToggleTab10)
 local Section = Tab9:AddSection({"Kill"})
 
 local DropdownKillPullMethod = Tab9:AddDropdown({
-    Name = "Seleccionar Metodo (Matar/Jalar)",
-    Description = "Escoja si matar o tirar",
-    Options = {"Sofá", "Ônibus"},
+    Name = "Seleccionar Metodo (Matar/Atraer)",
+    Description = "Escoja si matar o atraer",
+    Options = {"Sofa", "Autobus"},
     Callback = function(value)
         selectedKillPullMethod = value
     end
 })
-
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                                                   --fling com sofa--
+                                                   --Lanzamiento con Sofa--
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 local function equipSofa()
     local backpack = LocalPlayer:WaitForChild("Backpack")
@@ -2552,7 +2514,7 @@ local function pullWithSofa(targetPlayer)
     originalPosition = LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Position
 end
 ----------------------------------------------------------------------------
-                                                   --fling com onibus--
+                                                   --Lanzamiento con Autobus--
 ----------------------------------------------------------------------------
 local function killWithBus(targetPlayer)
     if not targetPlayer or not targetPlayer.Character or not LocalPlayer.Character then return end
@@ -2751,21 +2713,21 @@ end)
 
 Tab9:AddButton({
     Name = "Matar",
-    Description = "Inicia o matar com o método selecionado",
+    Description = "Tira al jugador al vacio",
     Callback = function()
         if isFollowingKill or isFollowingPull or running then return end
         if not selectedPlayer or not selectedKillPullMethod then return end
-        if selectedKillPullMethod == "Sofá" then
+        if selectedKillPullMethod == "Sofa" then
             killWithSofa(selectedPlayer)
-        elseif selectedKillPullMethod == "Ônibus" then
+        elseif selectedKillPullMethod == "Autobus" then
             killWithBus(selectedPlayer)
         end
     end
 })
 
 Tab9:AddButton({
-    Name = "Puxar",
-    Description = "Inicia o puxar com o método selecionado",
+    Name = "Atraer",
+    Description = "Atrae al jugador hacia tu lugar",
     Callback = function()
         if isFollowingKill or isFollowingPull or running then return end
         if not selectedPlayer or not selectedKillPullMethod or selectedKillPullMethod ~= "Sofá" then return end
@@ -2774,7 +2736,7 @@ Tab9:AddButton({
 })
 
 Tab9:AddButton({
-    Name = "Stop All (Matar o Tirar)",
+    Name = "Parar todo (Matar o Atraer)",
     Callback = function()
         isFollowingKill = false
         isFollowingPull = false
@@ -2818,7 +2780,7 @@ local Section = Tab9:AddSection({"Lanzar Jugador"})
 local DropdownFlingMethod = Tab9:AddDropdown({
     Name = "Selecciona una opcion",
     Description = "Elige una opcion para lanzar a un jugador",
-    Options = {"Sofa", "Autobus", "Balon V2", "Barco", "Camion"},
+    Options = {"Sofa", "Autobus", "Balon" "Balon V2", "Barco", "Camion"},
     Callback = function(value)
         selectedFlingMethod = value
     end
@@ -3094,6 +3056,117 @@ local function flingWithBus(targetPlayer)
                 if humanoid then humanoid:ChangeState(Enum.HumanoidStateType.GettingUp) end
             end)
             if flingToggle then flingToggle:Set(false) end
+        end
+    end)
+end
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                   --Lanzamiento con Balon--
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+local function equipBola()
+    local backpack = LocalPlayer:WaitForChild("Backpack")
+    local bola = backpack:FindFirstChild("SoccerBall") or LocalPlayer.Character:FindFirstChild("SoccerBall")
+    if not bola then
+        local args = { [1] = "PickingTools", [2] = "SoccerBall" }
+        local success = pcall(function()
+            ReplicatedStorage:WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(args))
+        end)
+        if not success then return false end
+        repeat
+            bola = backpack:FindFirstChild("SoccerBall")
+            task.wait()
+        until bola or task.wait(5)
+        if not bola then return false end
+    end
+    if bola.Parent ~= LocalPlayer.Character then
+        bola.Parent = LocalPlayer.Character
+    end
+    return true
+end
+
+local function flingWithBall(targetPlayer)
+    if not targetPlayer or not targetPlayer.Character then return end
+    local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+    local humanoid = character:FindFirstChildOfClass("Humanoid")
+    local myHRP = character:FindFirstChild("HumanoidRootPart")
+    if not humanoid or not myHRP then return end
+    if not equipBola() then return end
+    task.wait(0.5)
+    local args = { [1] = "PlayerWantsToDeleteTool", [2] = "SoccerBall" }
+    pcall(function()
+        ReplicatedStorage:WaitForChild("RE"):WaitForChild("1Clea1rTool1s"):FireServer(unpack(args))
+    end)
+    local workspaceCom = Workspace:FindFirstChild("WorkspaceCom")
+    if not workspaceCom then return end
+    local soccerBalls = workspaceCom:FindFirstChild("001_SoccerBalls")
+    if not soccerBalls then return end
+    soccerBall = soccerBalls:FindFirstChild("Soccer" .. LocalPlayer.Name)
+    if not soccerBall then return end
+    originalProperties = {
+        Anchored = soccerBall.Anchored,
+        CanCollide = soccerBall.CanCollide,
+        CanTouch = soccerBall.CanTouch
+    }
+    soccerBall.Anchored = false
+    soccerBall.CanCollide = true
+    soccerBall.CanTouch = true
+    pcall(function() soccerBall:SetNetworkOwner(nil) end)
+    savedPosition = myHRP.Position
+    for _, part in ipairs(character:GetDescendants()) do
+        if part:IsA("BasePart") then part.CanCollide = false end
+    end
+    if humanoid then
+        humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, false)
+        humanoid.Sit = false
+    end
+    for _, seat in ipairs(Workspace:GetDescendants()) do
+        if seat:IsA("Seat") or seat:IsA("VehicleSeat") then seat.Disabled = true end
+    end
+    pcall(function()
+        ReplicatedStorage:WaitForChild("RE"):WaitForChild("1Clothe1s"):FireServer("CharacterSizeDown", 4)
+    end)
+    running = true
+    local lastFlingTime = 0
+    connection = RunService.Heartbeat:Connect(function()
+        if not running or not targetPlayer.Character then return end
+        local hrp = targetPlayer.Character:FindFirstChild("HumanoidRootPart")
+        local hum = targetPlayer.Character:FindFirstChild("Humanoid")
+        local myHRP = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+        if not hrp or not hum or not myHRP then return end
+        local moveDir = hum.MoveDirection
+        local isStill = moveDir.Magnitude < 0.1
+        local isSitting = hum.Sit
+        if isSitting then
+            local y = math.sin(tick() * 50) * 2
+            soccerBall.CFrame = CFrame.new(hrp.Position + Vector3.new(0, 0.75 + y, 0))
+        elseif isStill then
+            local z = math.sin(tick() * 50) * 3
+            soccerBall.CFrame = CFrame.new(hrp.Position + Vector3.new(0, 0.75, z))
+        else
+            local offset = moveDir.Unit * math.clamp(hrp.Velocity.Magnitude * 0.15, 5, 12)
+            soccerBall.CFrame = CFrame.new(hrp.Position + offset + Vector3.new(0, 0.75, 0))
+        end
+        myHRP.CFrame = CFrame.new(soccerBall.Position + Vector3.new(0, 1, 0))
+    end)
+    flingConnection = RunService.Heartbeat:Connect(function()
+        if not running or not targetPlayer.Character then return end
+        local hrp = targetPlayer.Character:FindFirstChild("HumanoidRootPart")
+        if not hrp then return end
+        local dist = (soccerBall.Position - hrp.Position).Magnitude
+        if dist < 4 and tick() - lastFlingTime > 0.4 then
+            lastFlingTime = tick()
+            for _, part in ipairs(targetPlayer.Character:GetDescendants()) do
+                if part:IsA("BasePart") then part.CanCollide = false end
+            end
+            local fling = Instance.new("BodyVelocity")
+            fling.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+            fling.Velocity = Vector3.new(math.random(-5, 5), 5, math.random(-5, 5)).Unit * 500000 + Vector3.new(0, 250000, 0)
+            fling.Parent = hrp
+            task.delay(0.3, function()
+                fling:Destroy()
+                for _, part in ipairs(targetPlayer.Character:GetDescendants()) do
+                    if part:IsA("BasePart") then part.CanCollide = true end
+                end
+            end)
         end
     end)
 end
@@ -3581,14 +3654,16 @@ flingToggle = Tab9:AddToggle({
             end
             if selectedFlingMethod == "Sofa" then
                 flingWithSofa(selectedPlayer)
+            elseif selectedFlingMethod == "Autobus" then
+                flingWithBus(selectedPlayer)
+            elseif selectedFlingMethod == "Balon" then
+                flingWithBall(selectedPlayer)
             elseif selectedFlingMethod == "Balon V2" then
                 flingWithBallV2(selectedPlayer)
             elseif selectedFlingMethod == "Barco" then
                 flingWithBoat(selectedPlayer)
             elseif selectedFlingMethod == "Camion" then
                 flingWithTruck(selectedPlayer)
-            elseif selectedFlingMethod == "Autobus" then
-                flingWithBus(selectedPlayer)
             end
         else
             stopFling()
