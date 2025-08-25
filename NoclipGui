@@ -6,22 +6,22 @@ pcall(function()
     game.CoreGui.NoclipGui:Destroy()
 end)
 
--- GUI Create
+-- Create GUI
 local gui = Instance.new("ScreenGui", game.CoreGui)
 gui.Name = "NoclipGui"
 gui.ResetOnSpawn = false
 
--- Frame principale
+-- Main Frame
 local frame = Instance.new("Frame", gui)
 frame.Size = UDim2.new(0, 200, 0, 100)
 frame.Position = UDim2.new(0, 20, 0, 20)
 frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 frame.BackgroundTransparency = 0.3
 frame.BorderSizePixel = 0
-frame.Active = true -- necessario per il drag
-frame.Draggable = false -- lo gestiamo manualmente per mobile
+frame.Active = true -- Toggle button
+frame.Draggable = false -- Draggable button
 
--- Etichetta "by aminos29T"
+-- Credits Title
 local title = Instance.new("TextLabel", frame)
 title.Size = UDim2.new(1, 0, 0, 30)
 title.Position = UDim2.new(0, 0, 0, 0)
@@ -31,21 +31,21 @@ title.BackgroundTransparency = 1
 title.Font = Enum.Font.SourceSansBold
 title.TextSize = 20
 
--- Etichetta "noclip"
+-- NoclipGui Title
 local label = Instance.new("TextLabel", frame)
 label.Size = UDim2.new(1, 0, 0, 20)
 label.Position = UDim2.new(0, 0, 0, 30)
-label.Text = "noclip"
+label.Text = "NoclipGui"
 label.TextColor3 = Color3.fromRGB(200, 200, 200)
 label.BackgroundTransparency = 1
 label.Font = Enum.Font.SourceSans
 label.TextSize = 18
 
--- Pulsante toggle noclip
+-- Toggle button noclip
 local button = Instance.new("TextButton", frame)
 button.Size = UDim2.new(0.8, 0, 0, 30)
 button.Position = UDim2.new(0.1, 0, 0, 60)
-button.Text = "Attiva Noclip"
+button.Text = "Activar Noclip"
 button.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 button.TextColor3 = Color3.fromRGB(255, 255, 255)
 button.Font = Enum.Font.SourceSans
@@ -57,7 +57,7 @@ local RunService = game:GetService("RunService")
 
 local function toggleNoclip()
 	noclip = not noclip
-	button.Text = noclip and "Disattiva Noclip" or "Attiva Noclip"
+	button.Text = noclip and "Desactivar Noclip" or "Activar Noclip"
 
 	if noclip then
 		connection = RunService.Stepped:Connect(function()
@@ -79,7 +79,7 @@ end
 
 button.MouseButton1Click:Connect(toggleNoclip)
 
--- 💡 Mobile/PC Drag System
+-- Mobile/PC Drag System
 local UIS = game:GetService("UserInputService")
 local dragging, dragInput, dragStart, startPos
 
