@@ -3,7 +3,7 @@ local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/cxnke
 local Window = redzlib:MakeWindow({
     Title = "Nova Hub",
     SubTitle = "by Nova",
-    SaveFolder = "Data_NH"
+    SaveFolder = "NovaData"
   })
 
   Window:AddMinimizeButton({
@@ -4106,6 +4106,14 @@ end})
 ----------------------------------------------------------------------------------------------------------------------------------------------
                                                -- === Tab 11: Scripts === --
 ----------------------------------------------------------------------------------------------------------------------------------------------
+
+Tab11:AddButton({
+    Name = "NoclipGui",
+    Description = "Universal",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/cxnker/p/refs/heads/main/NoclipGui"))()
+    end
+})
 
 Tab11:AddButton({
     Name = "Bring Flings Players",
