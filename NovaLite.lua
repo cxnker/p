@@ -678,8 +678,11 @@ function AvatarManager:MostrarNotificacao(mensagem)
 end
 -- Clothes 3D List
 AvatarManager.Avatares = {
-    { Nome = "Gato de Manga", ID = 124948425515124 },
-    { Nome = "Simon azul", ID = 76155710249925 }
+    { Nome = "Black-Arm-Bandages-1-0", ID = 11458078735 },
+    { Nome = "Black-Oversized-Warmers", ID = 10789914680 },
+    { Nome = "Black-Oversized-Off-Shoulder-Hoodie", ID = 18396592827 },
+    { Nome = "White-Oversized-Off-Shoulder-Hoodie", ID = 18396754379 },
+    { Nome = "Left-Leg-Spikes", ID = 10814325667 }
 }
 -- Função para obter os nomes dos avatares para o dropdown
 function AvatarManager:GetAvatarNames()
@@ -1098,13 +1101,6 @@ function TeleportCarro:AtualizarListaCarros()
     
     return listaCarros
 end
-
--- Parágrafo
-Tab5:AddParagraph({
-    Title = "Utiliza proteccion de vacio",
-    Content = ""
-})
-
 -- Toggle para matar todos os carros
 Tab5:AddToggle({
     Name = "Eliminar todos los autos",
