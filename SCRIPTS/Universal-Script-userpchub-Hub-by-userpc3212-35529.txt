@@ -1,0 +1,295 @@
+--[=[
+ d888b  db    db d888888b      .d888b.      db      db    db  .d8b.  
+88' Y8b 88    88   `88'        VP  `8D      88      88    88 d8' `8b 
+88      88    88    88            odD'      88      88    88 88ooo88 
+88  ooo 88    88    88          .88'        88      88    88 88~~~88 
+88. ~8~ 88b  d88   .88.        j88.         88booo. 88b  d88 88   88    @uniquadev
+ Y888P  ~Y8888P' Y888888P      888888D      Y88888P ~Y8888P' YP   YP  CONVERTER 
+]=]
+
+-- Instances: 22 | Scripts: 7 | Modules: 0 | Tags: 0
+local G2L = {};
+
+-- StarterGui.ui
+G2L["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"));
+G2L["1"]["Name"] = [[ui]];
+G2L["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
+G2L["1"]["ResetOnSpawn"] = false;
+
+
+-- StarterGui.ui.ImageLabel
+G2L["2"] = Instance.new("ImageLabel", G2L["1"]);
+G2L["2"]["BorderSizePixel"] = 0;
+G2L["2"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["2"]["Image"] = [[rbxassetid://3203186317]];
+G2L["2"]["Size"] = UDim2.new(0, 100, 0, 100);
+G2L["2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["2"]["BackgroundTransparency"] = 1;
+G2L["2"]["Position"] = UDim2.new(0.45421, 0, 0.43316, 0);
+
+
+-- StarterGui.ui.ImageLabel.LocalScript
+G2L["3"] = Instance.new("LocalScript", G2L["2"]);
+
+
+
+-- StarterGui.ui.Frame
+G2L["4"] = Instance.new("Frame", G2L["1"]);
+G2L["4"]["BorderSizePixel"] = 3;
+G2L["4"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["4"]["Size"] = UDim2.new(0, 206, 0, 338);
+G2L["4"]["Position"] = UDim2.new(0, 0, 0.34759, 0);
+G2L["4"]["BorderColor3"] = Color3.fromRGB(255, 0, 0);
+
+
+-- StarterGui.ui.Frame.textbutton
+G2L["5"] = Instance.new("TextButton", G2L["4"]);
+G2L["5"]["BorderSizePixel"] = 0;
+G2L["5"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["5"]["TextSize"] = 14;
+G2L["5"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["5"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["5"]["Size"] = UDim2.new(0, 58, 0, 50);
+G2L["5"]["Name"] = [[textbutton]];
+G2L["5"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["5"]["Text"] = [[R6]];
+G2L["5"]["Style"] = Enum.ButtonStyle.RobloxButtonDefault;
+G2L["5"]["Position"] = UDim2.new(-0.0007, 0, 0.8376, 0);
+
+
+-- StarterGui.ui.Frame.textbutton.UIStroke
+G2L["6"] = Instance.new("UIStroke", G2L["5"]);
+G2L["6"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+G2L["6"]["Color"] = Color3.fromRGB(255, 0, 0);
+
+
+-- StarterGui.ui.Frame.textbutton.LocalScript
+G2L["7"] = Instance.new("LocalScript", G2L["5"]);
+
+
+
+-- StarterGui.ui.Frame.textbutton
+G2L["8"] = Instance.new("TextButton", G2L["4"]);
+G2L["8"]["BorderSizePixel"] = 0;
+G2L["8"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["8"]["TextSize"] = 14;
+G2L["8"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["8"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["8"]["Size"] = UDim2.new(0, 200, 0, 50);
+G2L["8"]["Name"] = [[textbutton]];
+G2L["8"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["8"]["Text"] = [[john doe]];
+G2L["8"]["Style"] = Enum.ButtonStyle.RobloxButtonDefault;
+G2L["8"]["Position"] = UDim2.new(0.01386, 0, -0.00265, 0);
+
+
+-- StarterGui.ui.Frame.textbutton.UIStroke
+G2L["9"] = Instance.new("UIStroke", G2L["8"]);
+G2L["9"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+G2L["9"]["Color"] = Color3.fromRGB(255, 0, 0);
+
+
+-- StarterGui.ui.Frame.textbutton.LocalScript
+G2L["a"] = Instance.new("LocalScript", G2L["8"]);
+
+
+
+-- StarterGui.ui.Frame.textbutton
+G2L["b"] = Instance.new("TextButton", G2L["4"]);
+G2L["b"]["BorderSizePixel"] = 0;
+G2L["b"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["b"]["TextSize"] = 14;
+G2L["b"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["b"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["b"]["Size"] = UDim2.new(0, 200, 0, 50);
+G2L["b"]["Name"] = [[textbutton]];
+G2L["b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["b"]["Text"] = [[FE hat hub]];
+G2L["b"]["Style"] = Enum.ButtonStyle.RobloxButtonDefault;
+G2L["b"]["Position"] = UDim2.new(0.01386, 0, 0.14785, 0);
+
+
+-- StarterGui.ui.Frame.textbutton.UIStroke
+G2L["c"] = Instance.new("UIStroke", G2L["b"]);
+G2L["c"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+G2L["c"]["Color"] = Color3.fromRGB(255, 0, 0);
+
+
+-- StarterGui.ui.Frame.textbutton.LocalScript
+G2L["d"] = Instance.new("LocalScript", G2L["b"]);
+
+
+
+-- StarterGui.ui.Frame.textbutton
+G2L["e"] = Instance.new("TextButton", G2L["4"]);
+G2L["e"]["BorderSizePixel"] = 0;
+G2L["e"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["e"]["TextSize"] = 14;
+G2L["e"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["e"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["e"]["Size"] = UDim2.new(0, 200, 0, 50);
+G2L["e"]["Name"] = [[textbutton]];
+G2L["e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["e"]["Text"] = [[FE scp 096]];
+G2L["e"]["Style"] = Enum.ButtonStyle.RobloxButtonDefault;
+G2L["e"]["Position"] = UDim2.new(0.01386, 0, 0.29244, 0);
+
+
+-- StarterGui.ui.Frame.textbutton.UIStroke
+G2L["f"] = Instance.new("UIStroke", G2L["e"]);
+G2L["f"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+G2L["f"]["Color"] = Color3.fromRGB(255, 0, 0);
+
+
+-- StarterGui.ui.Frame.textbutton.LocalScript
+G2L["10"] = Instance.new("LocalScript", G2L["e"]);
+
+
+
+-- StarterGui.ui.Frame.textbutton
+G2L["11"] = Instance.new("TextButton", G2L["4"]);
+G2L["11"]["BorderSizePixel"] = 0;
+G2L["11"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["11"]["TextSize"] = 14;
+G2L["11"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["11"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["11"]["Size"] = UDim2.new(0, 200, 0, 50);
+G2L["11"]["Name"] = [[textbutton]];
+G2L["11"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["11"]["Text"] = [[FE sword glitcher]];
+G2L["11"]["Style"] = Enum.ButtonStyle.RobloxButtonDefault;
+G2L["11"]["Position"] = UDim2.new(0.01386, 0, 0.44294, 0);
+
+
+-- StarterGui.ui.Frame.textbutton.UIStroke
+G2L["12"] = Instance.new("UIStroke", G2L["11"]);
+G2L["12"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+G2L["12"]["Color"] = Color3.fromRGB(255, 0, 0);
+
+
+-- StarterGui.ui.Frame.textbutton.LocalScript
+G2L["13"] = Instance.new("LocalScript", G2L["11"]);
+
+
+
+-- StarterGui.ui.Frame.textbutton
+G2L["14"] = Instance.new("TextButton", G2L["4"]);
+G2L["14"]["BorderSizePixel"] = 0;
+G2L["14"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["14"]["TextSize"] = 14;
+G2L["14"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["14"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["14"]["Size"] = UDim2.new(0, 200, 0, 50);
+G2L["14"]["Name"] = [[textbutton]];
+G2L["14"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["14"]["Text"] = [[ghost hub]];
+G2L["14"]["Style"] = Enum.ButtonStyle.RobloxButtonDefault;
+G2L["14"]["Position"] = UDim2.new(0.01386, 0, 0.59048, 0);
+
+
+-- StarterGui.ui.Frame.textbutton.UIStroke
+G2L["15"] = Instance.new("UIStroke", G2L["14"]);
+G2L["15"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+G2L["15"]["Color"] = Color3.fromRGB(255, 0, 0);
+
+
+-- StarterGui.ui.Frame.textbutton.LocalScript
+G2L["16"] = Instance.new("LocalScript", G2L["14"]);
+
+
+
+-- StarterGui.ui.ImageLabel.LocalScript
+local function C_3()
+local script = G2L["3"];
+	local TweenService = game:GetService("TweenService")
+	local object = script.Parent
+	local targetPosition = UDim2.new(0.908, 0, 0.866, 0)
+	
+	local tweenInfo = TweenInfo.new(
+		10,
+		Enum.EasingStyle.Linear,
+		Enum.EasingDirection.InOut,
+		0,
+		false
+	)
+	
+	local tween = TweenService:Create(object, tweenInfo, {Position = targetPosition})
+	tween:Play()
+	
+	tween.Completed:Wait()
+	
+	local rotationSpeed = 3
+	while true do
+		object.Rotation = object.Rotation + rotationSpeed
+		wait(0.03)
+	end
+end;
+task.spawn(C_3);
+-- StarterGui.ui.Frame.textbutton.LocalScript
+local function C_7()
+local script = G2L["7"];
+	local button = script.Parent
+	
+	button.MouseButton1Click:Connect(function()
+		loadstring(game:HttpGet(('https://pastebin.com/raw/9wJepMwY'),true))()
+	end)
+	
+end;
+task.spawn(C_7);
+-- StarterGui.ui.Frame.textbutton.LocalScript
+local function C_a()
+local script = G2L["a"];
+	local button = script.Parent
+	
+	button.MouseButton1Click:Connect(function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/sinret/rbxscript.com-scripts-reuploads-/main/johndoe", true))()
+	end)
+	
+end;
+task.spawn(C_a);
+-- StarterGui.ui.Frame.textbutton.LocalScript
+local function C_d()
+local script = G2L["d"];
+	local button = script.Parent
+	
+	button.MouseButton1Click:Connect(function()
+		loadstring(game:HttpGet("https://gist.githubusercontent.com/thekaisbest/acced28086f894c68a17cee424ccb1ff/raw/46312c6bef1b5019da18ba406b9c157cee403bdf/hat%2520hub", true))()
+	end)
+	
+end;
+task.spawn(C_d);
+-- StarterGui.ui.Frame.textbutton.LocalScript
+local function C_10()
+local script = G2L["10"];
+	local button = script.Parent
+	
+	button.MouseButton1Click:Connect(function()
+		loadstring(game:HttpGet('https://pastebin.com/raw/P0q5PQRp'))()
+	end)
+	
+end;
+task.spawn(C_10);
+-- StarterGui.ui.Frame.textbutton.LocalScript
+local function C_13()
+local script = G2L["13"];
+	local button = script.Parent
+	
+	button.MouseButton1Click:Connect(function()
+		loadstring(game:HttpGet('https://raw.githubusercontent.com/SwordSimIsGood/Sword-SG/main/Swords FE Starmd'))()
+	end)
+	
+end;
+task.spawn(C_13);
+-- StarterGui.ui.Frame.textbutton.LocalScript
+local function C_16()
+local script = G2L["16"];
+	local button = script.Parent
+	
+	button.MouseButton1Click:Connect(function()
+		loadstring(game:HttpGet('https://raw.githubusercontent.com/SwordSimIsGood/Sword-SG/main/Swords FE Starmd'))()
+	end)
+	
+end;
+task.spawn(C_16);
+
+return G2L["1"], require;

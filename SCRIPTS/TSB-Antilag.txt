@@ -1,0 +1,58 @@
+--[[
+ Version: 1 (This version is already pretty optimized. Tweak it if you're bored.)
+ License: Not needed. (This isn’t some cryptic, sacred relic. It’s just clean, efficient code.)
+ Author: Open source (I gift this to mortals)
+]]
+
+local function Send(title, text, duration)
+    game.StarterGui:SetCore("SendNotification", {
+        Title = title,
+        Text = text,
+        Duration = duration
+    })
+end
+
+if game.PlaceId ~= 10449761463 or getgenv().blah then
+    Send("Warning", getgenv().blah and "Already running." or "Wrong game. Not my problem.", 1.5)
+    return
+end
+
+getgenv().blah = true
+Send("Optimized!", "Initialization complete. You're welcome.", 2)
+
+-- Look, I "could" use a dictionary for O(1) lookup, but guess what? The array is fine. Chill.
+local GarbageWhitelist = {
+    Part = {
+        "Ring", "Debris2g", "Projectile", "TornadoMain", "Spiral",
+        "MiddleSpin", "MiddleSpinEmit"
+    },
+    Model = {
+        "Flash", "Slash_Teleport", "ShurikenProj", "TParticles2", "Proj",
+        "NadoSmoke", "SmokeRing", "Adjusted", "General", "Up", "Up2",
+        "Go2", "Dotted", "Clone_Rig", "Afterimage_Clone", "Dragon",
+        "KingCrab", "Model", "preload"
+    }
+}
+
+-- The Almighty Cleaner sweeping away your lag one frame at a time
+local function eat(obj)
+    for _, child in ipairs(obj:GetChildren()) do
+        if child:IsA("Part") and not table.find(GarbageWhitelist.Part, child.Name)
+           and not (child.Name == "Part" and child.Size == Vector3.new(4, 4, 4)) then
+            child:Destroy()
+        elseif child:IsA("Model") and not table.find(GarbageWhitelist.Model, child.Name) then
+            eat(child)
+        end
+    end
+end
+
+local Thing = workspace:FindFirstChild("Thrown")
+local LastNom = 0
+-- If this lags, it's your PC's fault. Upgrade it
+game:GetService("RunService").Heartbeat:Connect(function()
+    local Now = os.clock()
+    if Now - LastNom >= 0.014285714285714 and Thing then
+        LastNom = Now
+        eat(Thing)
+    end
+end)

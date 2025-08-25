@@ -1,0 +1,234 @@
+-- LightControl Pro [Anti-Cheat Toggles]--
+
+local Players = game:GetService("Players")
+local Lighting = game:GetService("Lighting")
+local RunService = game:GetService("RunService")
+local UIS = game:GetService("UserInputService")
+local CoreGui = game:GetService("CoreGui")
+
+local LocalPlayer = Players.LocalPlayer
+local guiName = "LightControlPro" .. tostring(math.random(1000,9999))
+if CoreGui:FindFirstChild(guiName) then CoreGui[guiName]:Destroy() end
+
+-- Save original lighting settings to restore later
+local originalSettings = {
+    Brightness = Lighting.Brightness,
+    ClockTime = Lighting.ClockTime,
+    Ambient = Lighting.Ambient,
+    OutdoorAmbient = Lighting.OutdoorAmbient,
+    FogEnd = Lighting.FogEnd,
+    GlobalShadows = Lighting.GlobalShadows
+}
+
+local settings = {
+    fullBright = true,
+    lightHalo = true,
+    lightingWatcher = true
+}
+
+local LightingChangedConn
+
+local function showPopup(text)
+    local gui = Instance.new("ScreenGui", CoreGui)
+    gui.Name = guiName.."Popup"
+    gui.ResetOnSpawn = false
+
+    local frame = Instance.new("Frame", gui)
+    frame.AnchorPoint = Vector2.new(1, 0)
+    frame.Position = UDim2.new(1, -10, 0, 10)
+    frame.Size = UDim2.new(0, 220, 0, 40)
+    frame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    frame.BackgroundTransparency = 0.7
+    frame.BorderSizePixel = 0
+    frame.ZIndex = 9999
+    frame.Visible = true
+    Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 6)
+
+    local label = Instance.new("TextLabel", frame)
+    label.Size = UDim2.new(1, -10, 1, -10)
+    label.Position = UDim2.new(0, 5, 0, 5)
+    label.BackgroundTransparency = 1
+    label.TextColor3 = Color3.fromRGB(220, 220, 220)
+    label.Font = Enum.Font.GothamBold
+    label.TextSize = 18
+    label.Text = text
+    label.TextXAlignment = Enum.TextXAlignment.Left
+    label.ZIndex = 10000
+
+    task.delay(3, function()
+        if gui and gui.Parent then
+            gui:Destroy()
+        end
+    end)
+end
+
+local function enforceLighting()
+    if settings.fullBright then
+        Lighting.Brightness = 6
+        Lighting.ClockTime = 14
+        Lighting.Ambient = Color3.fromRGB(220, 220, 220)
+        Lighting.OutdoorAmbient = Color3.fromRGB(220, 220, 220)
+        Lighting.FogEnd = 1e6
+        Lighting.GlobalShadows = false
+    else
+        Lighting.Brightness = originalSettings.Brightness
+        Lighting.ClockTime = originalSettings.ClockTime
+        Lighting.Ambient = originalSettings.Ambient
+        Lighting.OutdoorAmbient = originalSettings.OutdoorAmbient
+        Lighting.FogEnd = originalSettings.FogEnd
+        Lighting.GlobalShadows = originalSettings.GlobalShadows
+    end
+end
+
+local function clearEffects()
+    for _,c in pairs(Lighting:GetChildren()) do
+        if c:IsA("PostEffect") or c:IsA("Atmosphere") or c:IsA("Sky") then c:Destroy() end
+    end
+end
+
+local function resetLighting()
+    enforceLighting()
+    clearEffects()
+end
+
+local function startLightingWatcher()
+    if LightingChangedConn then LightingChangedConn:Disconnect() end
+    if not settings.lightingWatcher then return end
+    LightingChangedConn = Lighting.ChildAdded:Connect(function(c)
+        if settings.fullBright and (c:IsA("PostEffect") or c:IsA("Atmosphere") or c:IsA("Sky")) then
+            task.defer(function()
+                if c and c.Parent then c:Destroy() end
+            end)
+        end
+    end)
+    Lighting.ChildRemoved:Connect(function()
+        if settings.fullBright then
+            task.defer(resetLighting)
+        end
+    end)
+end
+
+local function createLightHalo()
+    local char = LocalPlayer.Character
+    local root = char and char:FindFirstChild("HumanoidRootPart")
+    if not root then return end
+
+    local existingHalo = root:FindFirstChild("Halo")
+    if settings.lightHalo then
+        if not existingHalo then
+            local halo = Instance.new("Attachment", root)
+            halo.Name = "Halo"
+            local light = Instance.new("PointLight", halo)
+            light.Name = "FullBrightLight"
+            light.Range = 80
+            light.Brightness = 2.5
+            light.Color = Color3.fromRGB(255, 255, 240)
+            light.Shadows = false
+        end
+    else
+        if existingHalo then existingHalo:Destroy() end
+    end
+end
+
+local function createGUI()
+    local gui = Instance.new("ScreenGui", CoreGui)
+    gui.Name = guiName
+    gui.ResetOnSpawn = false
+
+    local frame = Instance.new("Frame", gui)
+    frame.Size = UDim2.new(0, 260, 0, 180)
+    frame.Position = UDim2.new(0.5, -130, 0.2, 0)
+    frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    frame.Active = true
+    Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 8)
+
+    local title = Instance.new("TextLabel", frame)
+    title.Size = UDim2.new(1, 0, 0, 30)
+    title.BackgroundTransparency = 1
+    title.Font = Enum.Font.GothamBold
+    title.TextSize = 18
+    title.TextColor3 = Color3.new(1, 1, 1)
+    title.Text = "LightControl Pro - Anti-Cheat Toggles"
+
+    local scroll = Instance.new("ScrollingFrame", frame)
+    scroll.Size = UDim2.new(1, -20, 1, -50)
+    scroll.Position = UDim2.new(0, 10, 0, 40)
+    scroll.BackgroundTransparency = 1
+    scroll.ScrollBarThickness = 6
+    scroll.CanvasSize = UDim2.new(0, 0, 0, 3 * 43)
+
+    local layout = Instance.new("UIListLayout", scroll)
+    layout.Padding = UDim.new(0, 8)
+    layout.SortOrder = Enum.SortOrder.LayoutOrder
+    Instance.new("UIPadding", scroll).PaddingLeft = UDim.new(0, 5)
+
+    local function addToggle(text, key)
+        local btn = Instance.new("TextButton", scroll)
+        btn.Size = UDim2.new(1, -10, 0, 35)
+        btn.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+        btn.TextColor3 = Color3.new(1, 1, 1)
+        btn.Font = Enum.Font.Gotham
+        btn.TextSize = 16
+        btn.AutoButtonColor = true
+        btn.Text = text .. ": " .. (settings[key] and "ON" or "OFF")
+        Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 6)
+        btn.MouseButton1Click:Connect(function()
+            settings[key] = not settings[key]
+            btn.Text = text .. ": " .. (settings[key] and "ON" or "OFF")
+            if key == "fullBright" then
+                enforceLighting()
+                showPopup("FullBright " .. (settings.fullBright and "Enabled" or "Disabled"))
+            elseif key == "lightHalo" then
+                createLightHalo()
+                showPopup("Light Halo " .. (settings.lightHalo and "Enabled" or "Disabled"))
+            elseif key == "lightingWatcher" then
+                startLightingWatcher()
+                showPopup("Lighting Watcher " .. (settings.lightingWatcher and "Enabled" or "Disabled"))
+            end
+        end)
+        return btn
+    end
+
+    local toggles = {
+        {"FullBright", "fullBright"},
+        {"Light Halo", "lightHalo"},
+        {"Lighting Watcher", "lightingWatcher"},
+    }
+
+    for _, v in ipairs(toggles) do addToggle(v[1], v[2]) end
+
+    scroll.CanvasSize = UDim2.new(0, 0, 0, #toggles * 43)
+
+    local dragging, dragInput, dragStart, startPos
+    frame.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+            dragStart = input.Position
+            startPos = frame.Position
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then dragging = false end
+            end)
+        end
+    end)
+    frame.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+            dragInput = input
+        end
+    end)
+    RunService.RenderStepped:Connect(function()
+        if dragging and dragInput then
+            local delta = dragInput.Position - dragStart
+            frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+        end
+    end)
+end
+
+resetLighting()
+startLightingWatcher()
+createLightHalo()
+createGUI()
+
+RunService.RenderStepped:Connect(function()
+    enforceLighting()
+    createLightHalo()
+end)

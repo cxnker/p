@@ -1,0 +1,127 @@
+--// free Key system by me
+
+--== CONFIGURATION ==--
+local ownerKey = "defyowner123" -- 🔑 Owner master key
+local linkKeyURL = "YOUR LINK HERE e.g Linkvertise.com" -- 🔗 Link key (for normal users)
+local scriptURL = "https://your-main-script-link.com/script.lua" -- 🧠 Your main script
+
+--== SERVICES ==--
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+--== GUI CREATION ==--
+local gui = Instance.new("ScreenGui", LocalPlayer:WaitForChild("PlayerGui"))
+gui.Name = "KeySystem"
+gui.ResetOnSpawn = false
+
+local frame = Instance.new("Frame", gui)
+frame.Size = UDim2.new(0, 400, 0, 260)
+frame.Position = UDim2.new(0.5, -200, 0.5, -130)
+frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+frame.AnchorPoint = Vector2.new(0.5, 0.5)
+frame.Active = true
+frame.Draggable = true
+
+Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 12)
+
+local title = Instance.new("TextLabel", frame)
+title.Size = UDim2.new(1, 0, 0, 40)
+title.Text = "🔑 Key System Access"
+title.Font = Enum.Font.GothamBold
+title.TextSize = 18
+title.TextColor3 = Color3.new(1,1,1)
+title.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+
+local close = Instance.new("TextButton", frame)
+close.Size = UDim2.new(0, 30, 0, 30)
+close.Position = UDim2.new(1, -35, 0, 5)
+close.Text = "X"
+close.Font = Enum.Font.GothamBold
+close.TextSize = 14
+close.TextColor3 = Color3.fromRGB(255, 90, 90)
+close.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+close.MouseButton1Click:Connect(function()
+	gui:Destroy()
+end)
+
+local input = Instance.new("TextBox", frame)
+input.Size = UDim2.new(0.85, 0, 0, 35)
+input.Position = UDim2.new(0.075, 0, 0.4, 0)
+input.PlaceholderText = "Enter your key here"
+input.Text = ""
+input.Font = Enum.Font.Gotham
+input.TextSize = 16
+input.TextColor3 = Color3.new(1,1,1)
+input.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+Instance.new("UICorner", input).CornerRadius = UDim.new(0, 8)
+
+local submit = Instance.new("TextButton", frame)
+submit.Size = UDim2.new(0.85, 0, 0, 35)
+submit.Position = UDim2.new(0.075, 0, 0.62, 0)
+submit.Text = "🔓 Submit Key"
+submit.Font = Enum.Font.GothamBold
+submit.TextSize = 16
+submit.TextColor3 = Color3.new(1,1,1)
+submit.BackgroundColor3 = Color3.fromRGB(50, 120, 255)
+Instance.new("UICorner", submit).CornerRadius = UDim.new(0, 8)
+
+local getKey = Instance.new("TextButton", frame)
+getKey.Size = UDim2.new(0.85, 0, 0, 30)
+getKey.Position = UDim2.new(0.075, 0, 0.8, 0)
+getKey.Text = "🔗 Get Key (Copied to Clipboard)"
+getKey.Font = Enum.Font.Gotham
+getKey.TextSize = 14
+getKey.TextColor3 = Color3.fromRGB(255, 255, 255)
+getKey.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+Instance.new("UICorner", getKey).CornerRadius = UDim.new(0, 8)
+
+local message = Instance.new("TextLabel", frame)
+message.Size = UDim2.new(1, 0, 0, 28)
+message.Position = UDim2.new(0, 0, 1, -28)
+message.Text = ""
+message.TextColor3 = Color3.fromRGB(255, 100, 100)
+message.Font = Enum.Font.Gotham
+message.TextSize = 14
+message.BackgroundTransparency = 1
+
+--== FUNCTIONALITY ==--
+
+-- Clipboard copy for Get Key
+getKey.MouseButton1Click:Connect(function()
+	if setclipboard then
+		setclipboard(linkKeyURL)
+		message.Text = "🔗 Link copied to clipboard!"
+	else
+		message.Text = "⚠️ Executor doesn't support clipboard."
+	end
+end)
+
+-- Key validation
+submit.MouseButton1Click:Connect(function()
+	local keyInput = input.Text
+
+	if keyInput == ownerKey then
+		message.Text = "✅ Owner Key Accepted!"
+		wait(0.5)
+		gui:Destroy()
+		loadstring(game:HttpGet(scriptURL))()
+	else
+		local success, result = pcall(function()
+			return game:HttpGet(linkKeyURL)
+		end)
+		
+		if success then
+			local validKey = result:match("^%s*(.-)%s*$") -- trim
+			if keyInput == validKey then
+				message.Text = "✅ Key Accepted!"
+				wait(0.5)
+				gui:Destroy()
+				loadstring(game:HttpGet(scriptURL))()
+			else
+				message.Text = "❌ Invalid Key. Try again!"
+			end
+		else
+			message.Text = "⚠️ Couldn’t fetch key. Link broken?"
+		end
+	end
+end)

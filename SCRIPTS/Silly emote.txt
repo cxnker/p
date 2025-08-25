@@ -1,0 +1,1414 @@
+--// Chatgpt Ahh Code
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local HttpService = game:GetService("HttpService")
+local player = Players.LocalPlayer
+
+
+local emotes = {}
+local currentAnimationTrack = nil
+local editingEmote = nil
+
+function refresh()
+print("placeholdey")
+end
+
+
+-- Default emotes (used only if no save file exists)
+local defaultEmotes = {
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 121067808279598, fav = false, imageId = 121067808279598, n = "PARROT PARTY DANCE"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 99031916674986, fav = false, imageId = 99031916674986, n = "Dance n' Prance"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 114899970878842, fav = false, imageId = 114899970878842, n = "R15 Death (Accurate)"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 133948663586698, fav = false, imageId = 133948663586698, n = "Wally West"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 123159156696507, fav = false, imageId = 123159156696507, n = "Take The L"},
+    {cr = "Aug 09, 2025", ugc = true, isAnimation = false, price = 50, id = 131763631172236, fav = false, imageId = 131763631172236, n = "Xaviersobased"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = true, price = 0, id = 96100759913198, fav = false, imageId = 139543542518872, n = "Belly Dancing"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 150, id = 133461102795137, fav = false, imageId = 133461102795137, n = "RAT DANCE"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 93105950995997, fav = false, imageId = 93105950995997, n = "CaramellDansen"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 100, id = 133596366979822, fav = false, imageId = 133596366979822, n = "Biblically Accurate"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 134311528115559, fav = false, imageId = 134311528115559, n = "Rambunctious"},
+    {cr = "Aug 17, 2025", ugc = true, isAnimation = false, price = 200, id = 96293409369770, fav = false, imageId = 96293409369770, n = "Ballin"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 39, id = 121001502815813, fav = false, imageId = 121001502815813, n = "Die Lit"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 73796726960568, fav = false, imageId = 73796726960568, n = "Nyan Nyan!"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 114428584463004, fav = false, imageId = 114428584463004, n = "Teto Territory"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 124828909173982, fav = false, imageId = 124828909173982, n = "Skibidi"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 92600655160976, fav = false, imageId = 92600655160976, n = "Chronoshift"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 111426928948833, fav = false, imageId = 111426928948833, n = "Floating on Clouds"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 150, id = 134149640725489, fav = false, imageId = 134149640725489, n = "Jersey Joe"},
+    {cr = "Aug 09, 2025", ugc = true, isAnimation = false, price = 59, id = 83261816934732, fav = false, imageId = 83261816934732, n = "Virtual Insanity"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 107091254142209, fav = false, imageId = 107091254142209, n = "Doodle Dance"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 100, id = 83732367439808, fav = false, imageId = 83732367439808, n = "Subject 3"},
+    {cr = "Aug 09, 2025", ugc = true, isAnimation = false, price = 50, id = 98099211500155, fav = false, imageId = 98099211500155, n = "Club Penguin"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 100, id = 97629500912487, fav = false, imageId = 97629500912487, n = "Kazotsky"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 117734400993750, fav = false, imageId = 117734400993750, n = "Miku Dance"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 103139492736941, fav = false, imageId = 103139492736941, n = "Deltarune - Tenna Swing"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 80270168146449, fav = false, imageId = 80270168146449, n = "Hakari Dance"},
+    {cr = "Aug 09, 2025", ugc = true, isAnimation = false, price = 50, id = 134442882516163, fav = false, imageId = 134442882516163, n = "Addendum Dance [R6]"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 77205409178702, fav = false, imageId = 77205409178702, n = "Gangnam Style"},
+    {cr = "Aug 09, 2025", ugc = true, isAnimation = false, price = 50, id = 117922227854118, fav = false, imageId = 117922227854118, n = "Push-Up"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 98522218962476, fav = false, imageId = 98522218962476, n = "Split"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 81390693780805, fav = false, imageId = 81390693780805, n = "PROXIMA"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 110, id = 87447252507832, fav = false, imageId = 87447252507832, n = "HeadBanging"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 110, id = 127507691649322, fav = false, imageId = 127507691649322, n = "Assumptions"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 99563839802389, fav = false, imageId = 99563839802389, n = "Jumpstyle"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 133142324349281, fav = false, imageId = 133142324349281, n = "Flopping Fish"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 75, id = 78758922757947, fav = false, imageId = 78758922757947, n = "Kicking Feet Sit"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 124512151372711, fav = false, imageId = 124512151372711, n = "Fancy Feets"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = true, price = 69, id = 81636895937131, fav = false, imageId = 74236972843575, n = "Omniman Pose"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 97258018304125, fav = false, imageId = 97258018304125, n = "Absolute Cinema"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 112758073578333, fav = false, imageId = 112758073578333, n = "Bubbly Sit"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 131544122623505, fav = false, imageId = 131544122623505, n = "Become A Car"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 124935873390035, fav = false, imageId = 124935873390035, n = "Hiding Human Box"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 135489824748823, fav = false, imageId = 135489824748823, n = "Magical Pose"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 150, id = 116065653184749, fav = false, imageId = 116065653184749, n = "Griddy"},
+    {cr = "Aug 10, 2025", ugc = true, isAnimation = false, price = 50, id = 139639173024927, fav = false, imageId = 139639173024927, n = "Gon Rage"},
+    {cr = "Aug 10, 2025", ugc = true, isAnimation = false, price = 50, id = 93335594132613, fav = false, imageId = 93335594132613, n = "Become Couch"},
+    {cr = "Aug 10, 2025", ugc = true, isAnimation = false, price = 50, id = 126749574427431, fav = false, imageId = 126749574427431, n = "Spare Change"},
+    {cr = "Aug 10, 2025", ugc = true, isAnimation = false, price = 50, id = 123407922818447, fav = false, imageId = 123407922818447, n = "Paranoid"},
+    {cr = "Aug 18, 2025", ugc = true, isAnimation = false, price = 1, id = 77152953688098, fav = false, imageId = 77152953688098, n = "Kawaii Groove"},
+    {cr = "Aug 18, 2025", ugc = true, isAnimation = false, price = 50, id = 136593170936320, fav = false, imageId = 136593170936320, n = "Ai Cat dance"},
+    {cr = "Aug 18, 2025", ugc = true, isAnimation = false, price = 70, id = 131683926643291, fav = false, imageId = 131683926643291, n = "Smeeze"},
+    {cr = "Aug 18, 2025", ugc = true, isAnimation = false, price = 50, id = 113890289455724, fav = false, imageId = 113890289455724, n = "Onion"},
+    {cr = "Aug 18, 2025", ugc = true, isAnimation = false, price = 50, id = 124584711308900, fav = false, imageId = 124584711308900, n = "Thinking"},
+    {cr = "Aug 10, 2025", ugc = true, isAnimation = false, price = 75, id = 134584040095037, fav = false, imageId = 134584040095037, n = "Little Obbyist"},
+    {cr = "Aug 10, 2025", ugc = true, isAnimation = false, price = 50, id = 78755795767408, fav = false, imageId = 78755795767408, n = "Aura Fly"},
+    {cr = "Aug 10, 2025", ugc = true, isAnimation = false, price = 50, id = 109899950448992, fav = false, imageId = 109899950448992, n = "Invisible"},
+    {cr = "Aug 10, 2025", ugc = true, isAnimation = false, price = 50, id = 81926508907412, fav = false, imageId = 81926508907412, n = "Slenderman"},
+    {cr = "Aug 10, 2025", ugc = true, isAnimation = false, price = 50, id = 77058107325712, fav = false, imageId = 77058107325712, n = "Chill pose"},
+    {cr = "Aug 10, 2025", ugc = true, isAnimation = false, price = 50, id = 93552301087938, fav = false, imageId = 93552301087938, n = "house"},
+    {cr = "Aug 10, 2025", ugc = true, isAnimation = false, price = 50, id = 82824758023484, fav = false, imageId = 82824758023484, n = "baby"},
+    {cr = "Aug 10, 2025", ugc = true, isAnimation = false, price = 50, id = 92750276568993, fav = false, imageId = 92750276568993, n = "zenitsu"},
+    {cr = "Aug 10, 2025", ugc = true, isAnimation = false, price = 50, id = 73562814360939, fav = false, imageId = 73562814360939, n = "gun"},
+    {cr = "Aug 10, 2025", ugc = true, isAnimation = false, price = 95, id = 137720205462499, fav = false, imageId = 137720205462499, n = "Spy Laugh tf2"},
+    {cr = "Aug 09, 2025", ugc = true, isAnimation = false, price = 50, id = 82224981519682, fav = false, imageId = 82224981519682, n = "Head Juggling"},
+    {cr = "Aug 09, 2025", ugc = true, isAnimation = false, price = 85, id = 70560694892323, fav = false, imageId = 70560694892323, n = "Omniman Think"},
+    {cr = "Aug 09, 2025", ugc = true, isAnimation = false, price = 50, id = 138386881919239, fav = false, imageId = 138386881919239, n = "Ishowspeed Shake Dancing"},
+    {cr = "Aug 09, 2025", ugc = true, isAnimation = false, price = 50, id = 106569806588657, fav = false, imageId = 106569806588657, n = "Wait"},
+    {cr = "Aug 09, 2025", ugc = true, isAnimation = false, price = 100, id = 97629500912487, fav = false, imageId = 97629500912487, n = "Shinji Pose"},
+    {cr = "Aug 09, 2025", ugc = true, isAnimation = false, price = 39, id = 107758370940834, fav = false, imageId = 107758370940834, n = "Come At Me [ R6 ]"},
+    {cr = "Aug 09, 2025", ugc = true, isAnimation = false, price = 50, id = 71493999860590, fav = false, imageId = 71493999860590, n = "Oscillating Fan"},
+    {cr = "Aug 10, 2025", ugc = true, isAnimation = false, price = 50, id = 110145155419199, fav = false, imageId = 110145155419199, n = "Locked In"},
+    {cr = "Aug 10, 2025", ugc = true, isAnimation = false, price = 100, id = 105730788757021, fav = false, imageId = 105730788757021, n = "BirdBrain"},
+    {cr = "Aug 09, 2025", ugc = true, isAnimation = false, price = 50, id = 71056659089869, fav = false, imageId = 71056659089869, n = "Hakari (FULL)"},
+    {cr = "Aug 10, 2025", ugc = true, isAnimation = false, price = 50, id = 108714986908463, fav = false, imageId = 108714986908463, n = "How A Creeper Walk"},
+    {cr = "Aug 10, 2025", ugc = true, isAnimation = false, price = 39, id = 127103118569243, fav = false, imageId = 127103118569243, n = "Hakari (R6)"},
+    {cr = "Aug 09, 2025", ugc = true, isAnimation = false, price = 50, id = 80146495484274, fav = false, imageId = 80146495484274, n = "Strongest Stance"},
+    {cr = "Aug 09, 2025", ugc = true, isAnimation = true, price = 75, id = 130059214239749, fav = false, imageId = 109251560, n = "Doggy Things"},
+    {cr = "Aug 09, 2025", ugc = true, isAnimation = false, price = 50, id = 72247161810866, fav = false, imageId = 72247161810866, n = "Wally West Edit"},
+    {cr = "Aug 09, 2025", ugc = true, isAnimation = false, price = 75, id = 122972776209997, fav = false, imageId = 122972776209997, n = "24 Hour Cinderella"},
+    {cr = "Aug 15, 2025", ugc = true, isAnimation = false, price = 50, id = 92707348383277, fav = false, imageId = 92707348383277, n = "Mesmerizer"},
+    {cr = "Aug 15, 2025", ugc = true, isAnimation = false, price = 75, id = 88425531063616, fav = false, imageId = 88425531063616, n = "Stylish Float"},
+    {cr = "Aug 15, 2025", ugc = true, isAnimation = false, price = 50, id = 107899954696611, fav = false, imageId = 107899954696611, n = "SpongeBob Shuffle"},
+    {cr = "Aug 13, 2025", ugc = true, isAnimation = false, price = 50, id = 96426537876059, fav = false, imageId = 96426537876059, n = "Electro Shuffle"},
+    {cr = "Aug 13, 2025", ugc = true, isAnimation = false, price = 50, id = 101507732056031, fav = false, imageId = 101507732056031, n = "Foreign Shuffle"},
+    {cr = "Aug 15, 2025", ugc = true, isAnimation = false, price = 50, id = 100165303717371, fav = false, imageId = 100165303717371, n = "Caipirinha"},
+    {cr = "Aug 15, 2025", ugc = true, isAnimation = false, price = 50, id = 109244554368414, fav = false, imageId = 109244554368414, n = "Squidward Yell"},
+    {cr = "Aug 15, 2025", ugc = true, isAnimation = false, price = 50, id = 73271793399763, fav = false, imageId = 73271793399763, n = "Best Mates"},
+    {cr = "Aug 15, 2025", ugc = true, isAnimation = false, price = 50, id = 93031502567721, fav = false, imageId = 93031502567721, n = "Teto Dance"},
+    {cr = "Aug 15, 2025", ugc = true, isAnimation = false, price = 50, id = 88229016850146, fav = false, imageId = 88229016850146, n = "Michael Myers"},
+    {cr = "Aug 15, 2025", ugc = true, isAnimation = false, price = 50, id = 105055412595333, fav = false, imageId = 105055412595333, n = "Gun Shoot"},
+    {cr = "Aug 16, 2025", ugc = true, isAnimation = false, price = 50, id = 116099356619436, fav = false, imageId = 116099356619436, n = "Torture Dance"},
+    {cr = "Aug 16, 2025", ugc = true, isAnimation = false, price = 50, id = 119870339321091, fav = false, imageId = 119870339321091, n = "Yapping Yap Yap Gesture"},
+    {cr = "Aug 16, 2025", ugc = true, isAnimation = false, price = 65, id = 132151459316300, fav = false, imageId = 132151459316300, n = "Luxurious / Springtrap"},
+    {cr = "Aug 16, 2025", ugc = true, isAnimation = false, price = 50, id = 103882178542598, fav = false, imageId = 103882178542598, n = "Hand Drill"},
+    {cr = "Aug 16, 2025", ugc = true, isAnimation = false, price = 50, id = 82714556886471, fav = false, imageId = 82714556886471, n = "exclamation"},
+    {cr = "Aug 16, 2025", ugc = true, isAnimation = false, price = 50, id = 135493514352956, fav = false, imageId = 135493514352956, n = "Mewing / Mogging"},
+    {cr = "Aug 16, 2025", ugc = true, isAnimation = false, price = 50, id = 79874689836683, fav = false, imageId = 79874689836683, n = "lemon melon cookie - Miku"},
+    {cr = "Aug 16, 2025", ugc = true, isAnimation = false, price = 50, id = 80556794144838, fav = false, imageId = 80556794144838, n = "Cute Jump"},
+    {cr = "Aug 15, 2025", ugc = true, isAnimation = false, price = 50, id = 126516908191316, fav = false, imageId = 126516908191316, n = "Billy Bounce"},
+    {cr = "Aug 15, 2025", ugc = true, isAnimation = false, price = 50, id = 133751526608969, fav = false, imageId = 133751526608969, n = "What U Want / Prince Egypt"},
+    {cr = "Aug 15, 2025", ugc = true, isAnimation = false, price = 50, id = 133481721436918, fav = false, imageId = 133481721436918, n = "Rabbit Hole - Miku"},
+    {cr = "Aug 09, 2025", ugc = true, isAnimation = false, price = 50, id = 86200585395371, fav = false, imageId = 86200585395371, n = "Garou"},
+    {cr = "Aug 09, 2025", ugc = true, isAnimation = false, price = 50, id = 76736978166708, fav = false, imageId = 76736978166708, n = "Dio Pose"},
+    {cr = "Aug 09, 2025", ugc = true, isAnimation = false, price = 50, id = 122463450997235, fav = false, imageId = 122463450997235, n = "Golden Freddy"},
+    {cr = "Aug 09, 2025", ugc = true, isAnimation = false, price = 50, id = 137006085779408, fav = false, imageId = 137006085779408, n = "Noclip, Speed"},
+    {cr = "Aug 09, 2025", ugc = true, isAnimation = false, price = 100, id = 84534006084837, fav = false, imageId = 84534006084837, n = "Static [Hatsune Miku]"},
+    {cr = "Aug 09, 2025", ugc = true, isAnimation = false, price = 50, id = 78830825254717, fav = false, imageId = 78830825254717, n = "GOALL"},
+    {cr = "Aug 09, 2025", ugc = true, isAnimation = false, price = 50, id = 77108921633993, fav = false, imageId = 77108921633993, n = "Lethal Dance"},
+    {cr = "Aug 09, 2025", ugc = true, isAnimation = false, price = 50, id = 100359724990859, fav = false, imageId = 100359724990859, n = "Plug Walk"},
+    {cr = "Aug 09, 2025", ugc = true, isAnimation = false, price = 85, id = 76993139936388, fav = false, imageId = 76993139936388, n = "At Ease"},
+    {cr = "Aug 09, 2025", ugc = true, isAnimation = false, price = 115, id = 97547955535086, fav = false, imageId = 97547955535086, n = "Conga"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 84511772437190, fav = false, imageId = 84511772437190, n = "Barrel"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 84555218084038, fav = false, imageId = 84555218084038, n = "Helicopter"},
+    {cr = "Aug 09, 2025", ugc = true, isAnimation = false, price = 50, id = 88042995626011, fav = false, imageId = 88042995626011, n = "Aura Farm Boat"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 134063402217274, fav = false, imageId = 134063402217274, n = "Prince Of Egypt"},
+    {cr = "Aug 09, 2025", ugc = true, isAnimation = false, price = 39, id = 115782117564871, fav = false, imageId = 115782117564871, n = "Jersey Joe2"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 73715378215546, fav = false, imageId = 73715378215546, n = "Deltarune - Tenna Dance"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 132074413582912, fav = false, imageId = 132074413582912, n = "California Girl"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 80877772569772, fav = false, imageId = 80877772569772, n = "Default Dance"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 129501229484294, fav = false, imageId = 129501229484294, n = "Shocked meme"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 78459263478161, fav = false, imageId = 78459263478161, n = "Family Guy"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 96887377943085, fav = false, imageId = 96887377943085, n = "Car Transformation"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 129843344424281, fav = false, imageId = 129843344424281, n = "Insanity"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 121643381580730, fav = false, imageId = 121643381580730, n = "Honored One"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 91839607010745, fav = false, imageId = 91839607010745, n = "Sukuna"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 130358790702800, fav = false, imageId = 130358790702800, n = "Dropper"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 80, id = 70635223083942, fav = false, imageId = 70635223083942, n = "Be Not Afraid"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 91274761264433, fav = false, imageId = 91274761264433, n = "Macarena"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 75, id = 119431985170060, fav = false, imageId = 119431985170060, n = "Helicopter2"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 75, id = 97547486465713, fav = false, imageId = 97547486465713, n = "RONALDO"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 126647057611522, fav = false, imageId = 126647057611522, n = "Nya Anime Dance"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 50, id = 113772829398170, fav = false, imageId = 113772829398170, n = "Do that thang"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 39, id = 95441477641149, fav = false, imageId = 95441477641149, n = "Squat?"},
+    {cr = "Aug 08, 2025", ugc = true, isAnimation = false, price = 100, id = 103789826265487, fav = false, imageId = 103789826265487, n = "Slickback"},
+    {cr = "Aug 18, 2025", isAnimation = false, fav = false, price = 50, id = 91404098460527, ugc = true, imageId = 91404098460527, n = "Static Miku sway"},
+    {n = "Fuck You", fav = true, ugc = true, id = 115755052140627, price = 0, isAnimation = true, imageId = 112688646936245, cr = "Aug 21, 2025"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 1000, id = 3576747102, fav = false, imageId = 3576747102, n = "Around Town"},
+    {cr = "Jul 10, 2025", ugc = false, isAnimation = false, price = 100, id = 85623000473425, fav = false, imageId = 85623000473425, n = "TWICE TAKEDOWN DANCE 2"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 750, id = 3576745472, fav = false, imageId = 3576745472, n = "Fashionable"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 750, id = 3821527813, fav = false, imageId = 3821527813, n = "Swish"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 750, id = 3570535774, fav = false, imageId = 3570535774, n = "Top Rock"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 500, id = 3934988903, fav = false, imageId = 3934988903, n = "Fancy Feet"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 500, id = 4102317848, fav = false, imageId = 4102317848, n = "Idol"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 500, id = 3576754235, fav = false, imageId = 3576754235, n = "Sneaky"},
+    {cr = "Nov 14, 2022", ugc = false, isAnimation = false, price = 500, id = 11453096488, fav = false, imageId = 11453096488, n = "Elton John - Piano Jump"},
+    {cr = "Aug 05, 2022", ugc = false, isAnimation = false, price = 450, id = 10370929905, fav = false, imageId = 10370929905, n = "Cartwheel - George Ezra"},
+    {cr = "Aug 05, 2022", ugc = false, isAnimation = false, price = 450, id = 10478368365, fav = false, imageId = 10478368365, n = "Super Charge"},
+    {cr = "Apr 14, 2023", ugc = false, isAnimation = false, price = 400, id = 13071993910, fav = false, imageId = 13071993910, n = "Rise Above - The Chainsmokers"},
+    {cr = "Nov 03, 2022", ugc = false, isAnimation = false, price = 400, id = 11394056822, fav = false, imageId = 11394056822, n = "Elton John - Elevate"},
+    {cr = "Jun 05, 2024", ugc = false, isAnimation = false, price = 300, id = 17746270218, fav = false, imageId = 17746270218, n = "Sturdy Dance - Ice Spice"},
+    {cr = "Aug 11, 2023", ugc = false, isAnimation = false, price = 300, id = 14022978026, fav = false, imageId = 14022978026, n = "YUNGBLUD – HIGH KICK"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 250, id = 3576721660, fav = false, imageId = 3576721660, n = "Robot"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 250, id = 3576751796, fav = false, imageId = 3576751796, n = "Louder"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 250, id = 3716633898, fav = false, imageId = 3716633898, n = "Twirl"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 200, id = 3994130516, fav = false, imageId = 3994130516, n = "Bodybuilder"},
+    {cr = "Feb 12, 2025", ugc = false, isAnimation = false, price = 200, id = 117511481049460, fav = false, imageId = 117511481049460, n = "NBA Monster Dunk"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 200, id = 3570649048, fav = false, imageId = 3570649048, n = "Jacks"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 200, id = 4391208058, fav = false, imageId = 4391208058, n = "Shuffle"},
+    {cr = "Nov 06, 2022", ugc = false, isAnimation = false, price = 200, id = 11435177473, fav = false, imageId = 11435177473, n = "Elton John - Still Standing"},
+    {cr = "Nov 04, 2022", ugc = false, isAnimation = false, price = 200, id = 11435175895, fav = false, imageId = 11435175895, n = "Elton John - Cat Man"},
+    {cr = "Jul 16, 2024", ugc = false, isAnimation = false, price = 200, id = 18524331128, fav = false, imageId = 18524331128, n = "Shrek Roar"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 200, id = 4212499637, fav = false, imageId = 4212499637, n = "Dorky Dance"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 190, id = 5938396308, fav = false, imageId = 5938396308, n = "HOLIDAY Dance - Lil Nas X (LNX)"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 190, id = 5938394742, fav = false, imageId = 5938394742, n = "Old Town Road Dance - Lil Nas X (LNX)"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 190, id = 5915781665, fav = false, imageId = 5915781665, n = "Panini Dance - Lil Nas X (LNX)"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 190, id = 5938397555, fav = false, imageId = 5938397555, n = "Rodeo Dance - Lil Nas X (LNX)"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 190, id = 6531538868, fav = false, imageId = 6531538868, n = "Drum Master - Royal Blood"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 190, id = 6797948622, fav = false, imageId = 6797948622, n = "It Ain't My Fault - Zara Larsson"},
+    {cr = "Jan 16, 2024", ugc = false, isAnimation = false, price = 175, id = 15506506103, fav = false, imageId = 15506506103, n = "Flex Walk"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 175, id = 3934986896, fav = false, imageId = 3934986896, n = "Dizzy"},
+    {cr = "Aug 11, 2022", ugc = false, isAnimation = false, price = 170, id = 10275057230, fav = false, imageId = 10275057230, n = "Uprise - Tommy Hilfiger"},
+    {cr = "Jun 29, 2023", ugc = false, isAnimation = false, price = 170, id = 13823339506, fav = false, imageId = 13823339506, n = "Tommy - Archer"},
+    {cr = "Aug 11, 2022", ugc = false, isAnimation = false, price = 170, id = 10214415687, fav = false, imageId = 10214415687, n = "Mean Mug - Tommy Hilfiger"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 170, id = 6533100850, fav = false, imageId = 6533100850, n = "Rock Star - Royal Blood"},
+    {cr = "Jul 19, 2022", ugc = false, isAnimation = false, price = 170, id = 10214411646, fav = false, imageId = 10214411646, n = "Floor Rock Freeze - Tommy Hilfiger"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 170, id = 7422833723, fav = false, imageId = 7422833723, n = "Saturday Dance - Twenty One Pilots"},
+    {cr = "Aug 11, 2022", ugc = false, isAnimation = false, price = 170, id = 10214418283, fav = false, imageId = 10214418283, n = "V Pose - Tommy Hilfiger"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 170, id = 7202896732, fav = false, imageId = 7202896732, n = "Boxing Punch - KSI"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 170, id = 6532844183, fav = false, imageId = 6532844183, n = "Drum Solo - Royal Blood"},
+    {cr = "Jul 19, 2022", ugc = false, isAnimation = false, price = 170, id = 10214406616, fav = false, imageId = 10214406616, n = "Frosty Flair - Tommy Hilfiger"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 170, id = 6797919579, fav = false, imageId = 6797919579, n = "Hips Poppin' - Zara Larsson"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 160, id = 7422838770, fav = false, imageId = 7422838770, n = "Drummer Moves - Twenty One Pilots"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 160, id = 7422841700, fav = false, imageId = 7422841700, n = "On The Outside - Twenty One Pilots"},
+    {cr = "Jun 18, 2025", ugc = false, isAnimation = false, price = 150, id = 82217023310738, fav = false, imageId = 82217023310738, n = "Thanos Happy Jump - Squid Game"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 150, id = 6865011755, fav = false, imageId = 6865011755, n = "Block Partier"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 150, id = 7422843994, fav = false, imageId = 7422843994, n = "Up and Down - Twenty One Pilots"},
+    {cr = "Mar 23, 2023", ugc = false, isAnimation = false, price = 150, id = 12804173616, fav = false, imageId = 12804173616, n = "Ay-Yo Dance Move - NCT 127"},
+    {cr = "Jun 18, 2025", ugc = false, isAnimation = false, price = 150, id = 134615135651900, fav = false, imageId = 134615135651900, n = "Young-hee Head Spin - Squid Game"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 150, id = 3576719440, fav = false, imageId = 3576719440, n = "T"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 150, id = 4646302011, fav = false, imageId = 4646302011, n = "Air Dance"},
+    {cr = "Jul 26, 2024", ugc = false, isAnimation = false, price = 150, id = 18665886405, fav = false, imageId = 18665886405, n = "TMNT Dance"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 150, id = 6797938823, fav = false, imageId = 6797938823, n = "Take Me Under - Zara Larsson"},
+    {cr = "Jan 29, 2023", ugc = false, isAnimation = false, price = 150, id = 12259885838, fav = false, imageId = 12259885838, n = "Sticker Dance Move - NCT 127"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 150, id = 4049646104, fav = false, imageId = 4049646104, n = "Line Dance"},
+    {cr = "Jul 19, 2024", ugc = false, isAnimation = false, price = 150, id = 18526373545, fav = false, imageId = 18526373545, n = "NBA WNBA Fadeaway"},
+    {cr = "Jul 12, 2024", ugc = false, isAnimation = false, price = 150, id = 18443268949, fav = false, imageId = 18443268949, n = "SpongeBob Imaginaaation 🌈"},
+    {cr = "Aug 05, 2022", ugc = false, isAnimation = false, price = 150, id = 10370918044, fav = false, imageId = 10370918044, n = "Chill Vibes - George Ezra"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 150, id = 7202900159, fav = false, imageId = 7202900159, n = "Wake Up Call - KSI"},
+    {cr = "Jan 27, 2023", ugc = false, isAnimation = false, price = 150, id = 12259888240, fav = false, imageId = 12259888240, n = "Kick It Dance Move - NCT 127"},
+    {cr = "May 15, 2025", ugc = false, isAnimation = false, price = 150, id = 130245358716273, fav = false, imageId = 130245358716273, n = "The Weeknd Starboy Strut"},
+    {cr = "Jan 27, 2023", ugc = false, isAnimation = false, price = 150, id = 12259890638, fav = false, imageId = 12259890638, n = "2 Baddies Dance Move - NCT 127"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 150, id = 6532155086, fav = false, imageId = 6532155086, n = "Rock Guitar - Royal Blood"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 140, id = 7202898984, fav = false, imageId = 7202898984, n = "Show Dem Wrists - KSI"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 140, id = 7405123844, fav = false, imageId = 7405123844, n = "Dancin' Shoes - Twenty One Pilots"},
+    {cr = "Aug 03, 2023", ugc = false, isAnimation = false, price = 140, id = 9710992846, fav = false, imageId = 9710992846, n = "Arm Twist"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 140, id = 7942960760, fav = false, imageId = 7942960760, n = "AOK - Tai Verdes"},
+    {cr = "Apr 14, 2025", ugc = false, isAnimation = false, price = 140, id = 127271798262177, fav = false, imageId = 127271798262177, n = "M3GAN's Dance"},
+    {cr = "Aug 03, 2023", ugc = false, isAnimation = false, price = 140, id = 9710994651, fav = false, imageId = 9710994651, n = "High Hands"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 130, id = 7942964447, fav = false, imageId = 7942964447, n = "Cobra Arms - Tai Verdes"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 130, id = 7942972744, fav = false, imageId = 7942972744, n = "Lasso Turn - Tai Verdes"},
+    {cr = "Mar 01, 2024", ugc = false, isAnimation = false, price = 125, id = 16303091119, fav = false, imageId = 16303091119, n = "Beauty Touchdown"},
+    {cr = "Aug 05, 2022", ugc = false, isAnimation = false, price = 125, id = 10370922566, fav = false, imageId = 10370922566, n = "Sidekicks - George Ezra"},
+    {cr = "Aug 05, 2022", ugc = false, isAnimation = false, price = 125, id = 10370934040, fav = false, imageId = 10370934040, n = "Boom Boom Clap - George Ezra"},
+    {cr = "May 22, 2025", ugc = false, isAnimation = false, price = 125, id = 133765015173412, fav = false, imageId = 133765015173412, n = "DearALICE - Ariana"},
+    {cr = "Oct 05, 2024", ugc = false, isAnimation = false, price = 125, id = 79312439851071, fav = false, imageId = 79312439851071, n = "Chappell Roan HOT TO GO!"},
+    {cr = "Nov 01, 2023", ugc = false, isAnimation = false, price = 125, id = 15123050663, fav = false, imageId = 15123050663, n = "Bone Chillin' Bop"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 120, id = 4849497510, fav = false, imageId = 4849497510, n = "Power Blast"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 110, id = 7466047578, fav = false, imageId = 7466047578, n = "Flowing Breeze"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 110, id = 7466048475, fav = false, imageId = 7466048475, n = "Swan Dance"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 110, id = 7466046574, fav = false, imageId = 7466046574, n = "Quiet Waves"},
+    {cr = "Jun 21, 2024", ugc = false, isAnimation = false, price = 100, id = 18148839527, fav = false, imageId = 18148839527, n = "Rolling Stones Guitar Strum"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 100, id = 5915773992, fav = false, imageId = 5915773992, n = "Break Dance"},
+    {cr = "Nov 25, 2023", ugc = false, isAnimation = false, price = 100, id = 139021427684680, fav = false, imageId = 139021427684680, n = "KATSEYE - Touch"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 100, id = 4212496830, fav = false, imageId = 4212496830, n = "Zombie"},
+    {cr = "Dec 06, 2023", ugc = false, isAnimation = false, price = 100, id = 15554010118, fav = false, imageId = 15554010118, n = "Olivia Rodrigo Head Bop"},
+    {cr = "Jun 15, 2025", ugc = false, isAnimation = false, price = 100, id = 133477296392756, fav = false, imageId = 133477296392756, n = "Rasputin – Boney M."},
+    {cr = "Aug 09, 2023", ugc = false, isAnimation = false, price = 100, id = 14024722653, fav = false, imageId = 14024722653, n = "Tommy K-Pop Mic Drop"},
+    {cr = "Sep 27, 2023", ugc = false, isAnimation = false, price = 100, id = 14900153406, fav = false, imageId = 14900153406, n = "TWICE Feel Special"},
+    {cr = "Dec 07, 2023", ugc = false, isAnimation = false, price = 100, id = 15554013003, fav = false, imageId = 15554013003, n = "Olivia Rodrigo good 4 u"},
+    {cr = "Jan 10, 2024", ugc = false, isAnimation = false, price = 100, id = 15554016057, fav = false, imageId = 15554016057, n = "Olivia Rodrigo Fall Back to Float"},
+    {cr = "Jan 16, 2024", ugc = false, isAnimation = false, price = 100, id = 15506499986, fav = false, imageId = 15506499986, n = "Air Guitar"},
+    {cr = "Aug 30, 2024", ugc = false, isAnimation = false, price = 100, id = 126683684984862, fav = false, imageId = 126683684984862, n = "Fashion Klossette - Runway my way"},
+    {cr = "Nov 03, 2022", ugc = false, isAnimation = false, price = 100, id = 11309263077, fav = false, imageId = 11309263077, n = "Elton John - Heart Skip"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 100, id = 4272484885, fav = false, imageId = 4272484885, n = "Baby Dance"},
+    {cr = "Jul 07, 2021", ugc = false, isAnimation = false, price = 100, id = 6865013133, fav = false, imageId = 6865013133, n = "Cha Cha"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 100, id = 5938365243, fav = false, imageId = 5938365243, n = "Dolphin Dance"},
+    {cr = "Dec 06, 2022", ugc = false, isAnimation = false, price = 100, id = 11753545334, fav = false, imageId = 11753545334, n = "Elton John - Rock Out"},
+    {cr = "Sep 20, 2024", ugc = false, isAnimation = false, price = 100, id = 92859581691366, fav = false, imageId = 92859581691366, n = "ALTÉGO - Couldn’t Care Less"},
+    {cr = "Sep 30, 2024", ugc = false, isAnimation = false, price = 100, id = 73683655527605, fav = false, imageId = 73683655527605, n = "Fashion Roadkill"},
+    {cr = "Jan 27, 2024", ugc = false, isAnimation = false, price = 100, id = 16126526506, fav = false, imageId = 16126526506, n = "Paris Hilton Sanasa"},
+    {cr = "Feb 20, 2024", ugc = false, isAnimation = false, price = 100, id = 16215060261, fav = false, imageId = 16215060261, n = "TWICE I GOT YOU part 1"},
+    {cr = "Aug 30, 2024", ugc = false, isAnimation = false, price = 100, id = 71389516735424, fav = false, imageId = 71389516735424, n = "The Zabb"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 100, id = 4391211308, fav = false, imageId = 4391211308, n = "Y"},
+    {cr = "Mar 06, 2024", ugc = false, isAnimation = false, price = 100, id = 16646438742, fav = false, imageId = 16646438742, n = "Wanna play?"},
+    {cr = "Feb 20, 2024", ugc = false, isAnimation = false, price = 100, id = 16256253954, fav = false, imageId = 16256253954, n = "TWICE I GOT YOU part 2"},
+    {cr = "Jan 09, 2024", ugc = false, isAnimation = false, price = 100, id = 15571540519, fav = false, imageId = 15571540519, n = "Nicki Minaj Starships"},
+    {cr = "Jan 14, 2024", ugc = false, isAnimation = false, price = 100, id = 15963348695, fav = false, imageId = 15963348695, n = "Mean Girls Dance Break"},
+    {cr = "Jun 20, 2025", ugc = false, isAnimation = false, price = 100, id = 94796833553521, fav = false, imageId = 94796833553521, n = "TWICE Takedown"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 100, id = 6869813008, fav = false, imageId = 6869813008, n = "Samba"},
+    {cr = "Jun 25, 2024", ugc = false, isAnimation = false, price = 100, id = 18225077553, fav = false, imageId = 18225077553, n = "Rock Out - Bebe Rexha"},
+    {cr = "Sep 27, 2023", ugc = false, isAnimation = false, price = 100, id = 14900151704, fav = false, imageId = 14900151704, n = "TWICE LIKEY"},
+    {cr = "Feb 07, 2024", ugc = false, isAnimation = false, price = 100, id = 16276506814, fav = false, imageId = 16276506814, n = "Sol de Janeiro - Samba"},
+    {cr = "May 15, 2025", ugc = false, isAnimation = false, price = 100, id = 105098895743105, fav = false, imageId = 105098895743105, n = "The Weeknd Opening Night"},
+    {cr = "Nov 19, 2023", ugc = false, isAnimation = false, price = 100, id = 15392927897, fav = false, imageId = 15392927897, n = "Paris Hilton - Sliving For The Groove"},
+    {cr = "Nov 19, 2023", ugc = false, isAnimation = false, price = 100, id = 15392937495, fav = false, imageId = 15392937495, n = "Paris Hilton - Checking My Angles"},
+    {cr = "Jan 09, 2024", ugc = false, isAnimation = false, price = 100, id = 15571538346, fav = false, imageId = 15571538346, n = "Nicki Minaj Boom Boom Boom"},
+    {cr = "Jan 31, 2025", ugc = false, isAnimation = false, price = 100, id = 100773414188482, fav = false, imageId = 100773414188482, n = "Stray Kids Walkin On Water"},
+    {cr = "Jul 22, 2024", ugc = false, isAnimation = false, price = 100, id = 18526338976, fav = false, imageId = 18526338976, n = "Team USA Breaking Emote"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 100, id = 3762641826, fav = false, imageId = 3762641826, n = "Side to Side"},
+    {cr = "Oct 03, 2024", ugc = false, isAnimation = false, price = 100, id = 103102322875221, fav = false, imageId = 103102322875221, n = "Skibidi Toilet - Titan Speakerman Laser Spin"},
+    {cr = "Nov 19, 2023", ugc = false, isAnimation = false, price = 100, id = 15392932768, fav = false, imageId = 15392932768, n = "Paris Hilton - Iconic IT-Grrrl"},
+    {cr = "Feb 07, 2024", ugc = false, isAnimation = false, price = 95, id = 16276501655, fav = false, imageId = 16276501655, n = "Dave's Spin Move - Glass Animals"},
+    {cr = "Jul 16, 2024", ugc = false, isAnimation = false, price = 95, id = 17360720445, fav = false, imageId = 17360720445, n = "HUGO Let's Drive!"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 80, id = 4272351660, fav = false, imageId = 4272351660, n = "Fast Hands"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 80, id = 4049634387, fav = false, imageId = 4049634387, n = "Tree"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 80, id = 3823158750, fav = false, imageId = 3823158750, n = "Godlike"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 80, id = 4646306072, fav = false, imageId = 4646306072, n = "Keeping Time"},
+    {cr = "Jul 06, 2024", ugc = false, isAnimation = false, price = 80, id = 17748346932, fav = false, imageId = 17748346932, n = "Elton John - Heart Shuffle"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 80, id = 5104374556, fav = false, imageId = 5104374556, n = "Tantrum"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 80, id = 5915782672, fav = false, imageId = 5915782672, n = "Rock On"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 80, id = 5104377791, fav = false, imageId = 5104377791, n = "Hero Landing"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 80, id = 3994129128, fav = false, imageId = 3994129128, n = "Fishing"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 80, id = 5917570207, fav = false, imageId = 5917570207, n = "Floss Dance"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 80, id = 3934984583, fav = false, imageId = 3934984583, n = "Get Out"},
+    {cr = "Jan 16, 2024", ugc = false, isAnimation = false, price = 75, id = 15506503658, fav = false, imageId = 15506503658, n = "Victory Dance"},
+    {cr = "Dec 22, 2023", ugc = false, isAnimation = false, price = 50, id = 15694504637, fav = false, imageId = 15694504637, n = "d4vd - Backflip"},
+    {cr = "Dec 22, 2023", ugc = false, isAnimation = false, price = 50, id = 15689315657, fav = false, imageId = 15689315657, n = "GloRilla - \"Tomorrow\" Dance"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 50, id = 3716636630, fav = false, imageId = 3716636630, n = "Monkey"},
+    {cr = "Dec 22, 2023", ugc = false, isAnimation = false, price = 50, id = 15689314578, fav = false, imageId = 15689314578, n = "Imagine Dragons - “Bones” Dance"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 50, id = 3762654854, fav = false, imageId = 3762654854, n = "Greatest"},
+    {cr = "Feb 24, 2024", ugc = false, isAnimation = false, price = 50, id = 16392120020, fav = false, imageId = 16392120020, n = "Jawny - Stomp"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 50, id = 4940602656, fav = false, imageId = 4940602656, n = "Jumping Wave"},
+    {cr = "Mar 01, 2024", ugc = false, isAnimation = false, price = 50, id = 16572756230, fav = false, imageId = 16572756230, n = "HIPMOTION - Amaarae"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 50, id = 4102315500, fav = false, imageId = 4102315500, n = "Haha"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 50, id = 4849487550, fav = false, imageId = 4849487550, n = "Agree"},
+    {cr = "Apr 18, 2024", ugc = false, isAnimation = false, price = 50, id = 16553249658, fav = false, imageId = 16553249658, n = "Mae Stephens - Piano Hands"},
+    {cr = "Apr 03, 2024", ugc = false, isAnimation = false, price = 50, id = 17000058939, fav = false, imageId = 17000058939, n = "Mini Kong"},
+    {cr = "Apr 18, 2024", ugc = false, isAnimation = false, price = 50, id = 16584496781, fav = false, imageId = 16584496781, n = "Mae Stephens – Arm Wave"},
+    {cr = "Dec 19, 2023", ugc = false, isAnimation = false, price = 50, id = 15679955281, fav = false, imageId = 15679955281, n = "Festive Dance"},
+    {cr = "Nov 10, 2020", ugc = false, isAnimation = false, price = 50, id = 5895009708, fav = false, imageId = 5895009708, n = "Jumping Cheer"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 50, id = 4689362868, fav = false, imageId = 4689362868, n = "Sleep"},
+    {cr = "Dec 22, 2023", ugc = false, isAnimation = false, price = 50, id = 15698510244, fav = false, imageId = 15698510244, n = "ericdoa - dance"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 50, id = 4849495710, fav = false, imageId = 4849495710, n = "Disagree"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 50, id = 4849499887, fav = false, imageId = 4849499887, n = "Happy"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 50, id = 5230661597, fav = false, imageId = 5230661597, n = "Bored"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 50, id = 5915776835, fav = false, imageId = 5915776835, n = "High Wave"},
+    {cr = "Mar 02, 2023", ugc = false, isAnimation = false, price = 50, id = 12507106431, fav = false, imageId = 12507106431, n = "Alo Yoga Pose - Warrior II"},
+    {cr = "Jun 05, 2020", ugc = false, isAnimation = false, price = 50, id = 4940597758, fav = false, imageId = 4940597758, n = "Cower"},
+    {cr = "May 03, 2024", ugc = false, isAnimation = false, price = 50, id = 17370797454, fav = false, imageId = 17370797454, n = "Wisp - air guitar"},
+    {cr = "Mar 02, 2023", ugc = false, isAnimation = false, price = 50, id = 12507120275, fav = false, imageId = 12507120275, n = "Alo Yoga Pose - Triangle"},
+    {cr = "Feb 24, 2024", ugc = false, isAnimation = false, price = 50, id = 15698511500, fav = false, imageId = 15698511500, n = "Cuco - Levitate"},
+    {cr = "Jan 16, 2024", ugc = false, isAnimation = false, price = 50, id = 15506496093, fav = false, imageId = 15506496093, n = "Rock n Roll"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 50, id = 3576717965, fav = false, imageId = 3576717965, n = "Shy"},
+    {cr = "Mar 02, 2023", ugc = false, isAnimation = false, price = 50, id = 12507097350, fav = false, imageId = 12507097350, n = "Alo Yoga Pose - Lotus Position"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 50, id = 4646306583, fav = false, imageId = 4646306583, n = "Curtsy"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 50, id = 3994127840, fav = false, imageId = 3994127840, n = "Celebrate"},
+    {cr = "Dec 11, 2023", ugc = false, isAnimation = false, price = 50, id = 15610015346, fav = false, imageId = 15610015346, n = "Yungblud Happier Jump"},
+    {cr = "Aug 18, 2023", ugc = false, isAnimation = false, price = 50, id = 14353421343, fav = false, imageId = 14353421343, n = "Baby Queen - Face Frame"},
+    {cr = "May 29, 2020", ugc = false, isAnimation = false, price = 50, id = 4940592718, fav = false, imageId = 4940592718, n = "Confused"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 50, id = 5230615437, fav = false, imageId = 5230615437, n = "Beckon"},
+    {cr = "Dec 04, 2023", ugc = false, isAnimation = false, price = 50, id = 120642514156293, fav = false, imageId = 120642514156293, n = "Secret Handshake Dance"},
+    {cr = "Aug 18, 2023", ugc = false, isAnimation = false, price = 50, id = 14353417553, fav = false, imageId = 14353417553, n = "Baby Queen - Air Guitar & Knee Slide"},
+    {cr = "Aug 18, 2023", ugc = false, isAnimation = false, price = 50, id = 14353423348, fav = false, imageId = 14353423348, n = "Baby Queen - Bouncy Twirl"},
+    {cr = "Aug 18, 2023", ugc = false, isAnimation = false, price = 50, id = 14353425085, fav = false, imageId = 14353425085, n = "Baby Queen - Strut"},
+    {cr = "Aug 18, 2023", ugc = false, isAnimation = false, price = 50, id = 14353419229, fav = false, imageId = 14353419229, n = "Baby Queen - Dramatic Bow"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 50, id = 4849502101, fav = false, imageId = 4849502101, n = "Sad"},
+    {cr = "Feb 06, 2025", ugc = false, isAnimation = false, price = 1, id = 90569436057900, fav = false, imageId = 90569436057900, n = "Robot M3GAN"},
+    {cr = "Dec 08, 2023", ugc = false, isAnimation = false, price = 0, id = 15571539403, fav = false, imageId = 15571539403, n = "Nicki Minaj Anaconda"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 0, id = 3696764866, fav = false, imageId = 3696764866, n = "Cha-Cha"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 0, id = 10147919199, fav = false, imageId = 10147919199, n = "BURBERRY LOLA ATTITUDE - BLOOM"},
+    {cr = "Feb 13, 2024", ugc = false, isAnimation = false, price = 0, id = 16371235025, fav = false, imageId = 16371235025, n = "Skadoosh Emote - Kung Fu Panda 4"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 0, id = 4849493309, fav = false, imageId = 4849493309, n = "Chicken Dance"},
+    {cr = "Aug 08, 2024", ugc = false, isAnimation = false, price = 0, id = 18855609889, fav = false, imageId = 18855609889, n = "BLACKPINK Don't know what to do"},
+    {cr = "Jun 29, 2023", ugc = false, isAnimation = false, price = 0, id = 13694139364, fav = false, imageId = 13694139364, n = "Man City Scorpion Kick"},
+    {cr = "May 03, 2022", ugc = false, isAnimation = false, price = 0, id = 9528294735, fav = false, imageId = 9528294735, n = "Gashina - SUNMI"},
+    {cr = "Nov 26, 2023", ugc = false, isAnimation = false, price = 0, id = 130046968468383, fav = false, imageId = 130046968468383, n = "Fashion Spin"},
+    {cr = "Nov 16, 2020", ugc = false, isAnimation = false, price = 0, id = 5915780563, fav = false, imageId = 5915780563, n = "Country Line Dance - Lil Nas X (LNX)"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 0, id = 4390121879, fav = false, imageId = 4390121879, n = "Sandwich Dance"},
+    {cr = "Dec 19, 2023", ugc = false, isAnimation = false, price = 0, id = 15679957363, fav = false, imageId = 15679957363, n = "BLACKPINK LISA Money"},
+    {cr = "Dec 08, 2023", ugc = false, isAnimation = false, price = 0, id = 15571536896, fav = false, imageId = 15571536896, n = "Nicki Minaj That's That Super Bass Emote"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 0, id = 3360689775, fav = false, imageId = 3360689775, n = "Salute"},
+    {cr = "Jul 26, 2024", ugc = false, isAnimation = false, price = 0, id = 18666650035, fav = false, imageId = 18666650035, n = "Olympic Dismount"},
+    {cr = "Nov 14, 2022", ugc = false, isAnimation = false, price = 0, id = 11309309359, fav = false, imageId = 11309309359, n = "MANIAC - Stray Kids"},
+    {cr = "Nov 28, 2023", ugc = false, isAnimation = false, price = 0, id = 15439454888, fav = false, imageId = 15439454888, n = "BLACKPINK JISOO Flower"},
+    {cr = "May 18, 2023", ugc = false, isAnimation = false, price = 0, id = 13422286833, fav = false, imageId = 13422286833, n = "Man City Bicycle Kick"},
+    {cr = "Jun 29, 2023", ugc = false, isAnimation = false, price = 0, id = 13694140956, fav = false, imageId = 13694140956, n = "Man City Backflip"},
+    {cr = "Nov 25, 2023", ugc = false, isAnimation = false, price = 0, id = 14548711723, fav = false, imageId = 14548711723, n = "BLACKPINK Pink Venom - Straight to Ya Dome"},
+    {cr = "Nov 25, 2023", ugc = false, isAnimation = false, price = 0, id = 14548710952, fav = false, imageId = 14548710952, n = "BLACKPINK Pink Venom - I Bring the Pain Like…"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 0, id = 3360686498, fav = false, imageId = 3360686498, n = "Stadium"},
+    {cr = "Dec 19, 2023", ugc = false, isAnimation = false, price = 0, id = 15679958535, fav = false, imageId = 15679958535, n = "BLACKPINK ROSÉ On The Ground"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 0, id = 4646296016, fav = false, imageId = 4646296016, n = "Bunny Hop"},
+    {cr = "Nov 25, 2023", ugc = false, isAnimation = false, price = 0, id = 14901369589, fav = false, imageId = 14901369589, n = "BLACKPINK Shut Down - Part 1"},
+    {cr = "Jan 31, 2024", ugc = false, isAnimation = false, price = 0, id = 16181843366, fav = false, imageId = 16181843366, n = "BLACKPINK Kill This Love"},
+    {cr = "Jul 11, 2024", ugc = false, isAnimation = false, price = 0, id = 18443271885, fav = false, imageId = 18443271885, n = "SpongeBob Dance"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 0, id = 3236848555, fav = false, imageId = 3236848555, n = "Borock's Rage"},
+    {cr = "Jul 27, 2022", ugc = false, isAnimation = false, price = 0, id = 10370926562, fav = false, imageId = 10370926562, n = "The Conductor - George Ezra"},
+    {cr = "Aug 05, 2022", ugc = false, isAnimation = false, price = 0, id = 10478377385, fav = false, imageId = 10478377385, n = "Swag Walk"},
+    {cr = "Nov 25, 2023", ugc = false, isAnimation = false, price = 0, id = 14901371589, fav = false, imageId = 14901371589, n = "BLACKPINK Shut Down - Part 2"},
+    {cr = "Jan 31, 2024", ugc = false, isAnimation = false, price = 0, id = 16181840356, fav = false, imageId = 16181840356, n = "BLACKPINK Ice Cream"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 0, id = 3696759798, fav = false, imageId = 3696759798, n = "Superhero Reveal"},
+    {cr = "Nov 25, 2023", ugc = false, isAnimation = false, price = 0, id = 14548709888, fav = false, imageId = 14548709888, n = "BLACKPINK Pink Venom - Get em Get em Get em"},
+    {cr = "Feb 12, 2025", ugc = false, isAnimation = false, price = 0, id = 82163305721376, fav = false, imageId = 82163305721376, n = "NBA Monster Dunk"},
+    {cr = "Aug 13, 2024", ugc = false, isAnimation = false, price = 0, id = 18933761755, fav = false, imageId = 18933761755, n = "TWICE ABCD by Nayeon"},
+    {cr = "Jul 14, 2022", ugc = false, isAnimation = false, price = 0, id = 10147924028, fav = false, imageId = 10147924028, n = "BURBERRY LOLA ATTITUDE - NIMBUS"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 0, id = 3307604888, fav = false, imageId = 3307604888, n = "Ud'zal's Summoning"},
+    {cr = "Jun 23, 2023", ugc = false, isAnimation = false, price = 0, id = 13768975574, fav = false, imageId = 13768975574, n = "TWICE Pop by Nayeon"},
+    {cr = "Mar 10, 2023", ugc = false, isAnimation = false, price = 0, id = 12715395038, fav = false, imageId = 12715395038, n = "TWICE Set Me Free - Dance 1"},
+    {cr = "Mar 10, 2023", ugc = false, isAnimation = false, price = 0, id = 12715397488, fav = false, imageId = 12715397488, n = "TWICE Set Me Free - Dance 2"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 0, id = 9408642191, fav = false, imageId = 9408642191, n = "Hyperfast 5G Dance Move"},
+    {cr = "Jul 13, 2022", ugc = false, isAnimation = false, price = 0, id = 9983549160, fav = false, imageId = 9983549160, n = "You can't sit with us - Sunmi"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 0, id = 3696757129, fav = false, imageId = 3696757129, n = "Hype Dance"},
+    {cr = "Mar 25, 2024", ugc = false, isAnimation = false, price = 0, id = 16874596971, fav = false, imageId = 16874596971, n = "BLACKPINK - How You Like That"},
+    {cr = "Mar 25, 2024", ugc = false, isAnimation = false, price = 0, id = 16874600526, fav = false, imageId = 16874600526, n = "BLACKPINK - Lovesick Girls"},
+    {cr = "Jul 20, 2023", ugc = false, isAnimation = false, price = 0, id = 14124050904, fav = false, imageId = 14124050904, n = "TWICE Like Ooh-Ahh"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 0, id = 3696763549, fav = false, imageId = 3696763549, n = "Heisman Pose"},
+    {cr = "Aug 08, 2024", ugc = false, isAnimation = false, price = 0, id = 18855603653, fav = false, imageId = 18855603653, n = "BLACKPINK As If It's Your Last"},
+    {cr = "Mar 10, 2023", ugc = false, isAnimation = false, price = 0, id = 12715393154, fav = false, imageId = 12715393154, n = "TWICE Moonlight Sunrise "},
+    {cr = "May 26, 2023", ugc = false, isAnimation = false, price = 0, id = 13520623514, fav = false, imageId = 13520623514, n = "TWICE Fancy"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 0, id = 3576823880, fav = false, imageId = 3576823880, n = "Point2"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 0, id = 10147916560, fav = false, imageId = 10147916560, n = "BURBERRY LOLA ATTITUDE - GEM"},
+    {cr = "Jul 25, 2024", ugc = false, isAnimation = false, price = 0, id = 18526410572, fav = false, imageId = 18526410572, n = "Vroom Vroom"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 0, id = 9528291779, fav = false, imageId = 9528291779, n = "Hwaiting (화이팅)"},
+    {cr = "Nov 28, 2023", ugc = false, isAnimation = false, price = 0, id = 15439457146, fav = false, imageId = 15439457146, n = "BLACKPINK JENNIE You and Me"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 0, id = 3360692915, fav = false, imageId = 3360692915, n = "Tilt"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 0, id = 5915779043, fav = false, imageId = 5915779043, n = "Applaud"},
+    {cr = "Feb 28, 2024", ugc = false, isAnimation = false, price = 0, id = 16553262614, fav = false, imageId = 16553262614, n = "BLACKPINK DDU-DU DDU-DU"},
+    {cr = "Jul 14, 2022", ugc = false, isAnimation = false, price = 0, id = 10147926081, fav = false, imageId = 10147926081, n = "BURBERRY LOLA ATTITUDE - HYDRO"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 0, id = 10147921916, fav = false, imageId = 10147921916, n = "BURBERRY LOLA ATTITUDE - REFLEX"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 0, id = 3696761354, fav = false, imageId = 3696761354, n = "Air Guitar"},
+    {cr = "May 03, 2022", ugc = false, isAnimation = false, price = 0, id = 9528286240, fav = false, imageId = 9528286240, n = "Annyeong (안녕)"},
+    {cr = "Feb 28, 2024", ugc = false, isAnimation = false, price = 0, id = 16553259683, fav = false, imageId = 16553259683, n = "BLACKPINK Boombayah Emote"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 0, id = 9178397781, fav = false, imageId = 9178397781, n = "Victory - 24kGoldn"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 0, id = 3576686446, fav = false, imageId = 3576686446, n = "Hello"},
+    {cr = "Jun 30, 2024", ugc = false, isAnimation = false, price = 0, id = 18305539673, fav = false, imageId = 18305539673, n = "Vans Ollie"},
+    {cr = "Dec 18, 2024", ugc = false, isAnimation = false, price = 0, id = 106862678450011, fav = false, imageId = 106862678450011, n = "TWICE Strategy"},
+    {cr = "Mar 24, 2023", ugc = false, isAnimation = false, price = 0, id = 12874468267, fav = false, imageId = 12874468267, n = "TWICE The Feels"},
+    {cr = "May 13, 2023", ugc = false, isAnimation = false, price = 0, id = 13344121112, fav = false, imageId = 13344121112, n = "TWICE What Is Love"},
+    {cr = "Sep 15, 2022", ugc = false, isAnimation = false, price = 0, id = 3576968026, fav = false, imageId = 3576968026, n = "Shrug"},
+    {n = "Schadenfreude (Scout)", ugc = true, isAnimation = true, id = 101497146225422, price = 0, fav = false, imageId = 8683686271, cr = "Aug 21, 2025"},
+    {cr = "Aug 21, 2025", fav = false, ugc = true, price = 0, id = 82965632072615, isAnimation = true, imageId = 11398100652, n = "Schadenfreude (Demoman)"},
+    {cr = "Aug 21, 2025", fav = false, ugc = true, price = 0, id = 102438198624407, isAnimation = true, imageId = 7072386228, n = "Schadenfreude (Heavy)"},
+    {cr = "Aug 21, 2025", fav = false, ugc = true, price = 0, id = 119713273987479, isAnimation = true, imageId = 10383043357, n = "Ishowspeed Bark"},
+}
+
+
+local EMOTES_FILE = "emotes.json"
+
+
+local function saveEmotes()
+    local success, json = pcall(function()
+        return HttpService:JSONEncode(emotes)
+    end)
+    
+    if success then
+        writefile(EMOTES_FILE, json)
+        return true
+    end
+    return false
+end
+
+
+local function loadEmotes()
+    if isfile(EMOTES_FILE) then
+        local success, data = pcall(function()
+            return HttpService:JSONDecode(readfile(EMOTES_FILE))
+        end)
+        
+        if success and type(data) == "table" then
+            return data
+        end
+    end
+    return nil
+end
+
+
+local function initEmotes()
+    local loaded = loadEmotes()
+    if loaded then
+        emotes = loaded
+    else
+        
+        emotes = defaultEmotes
+        saveEmotes()
+    end
+end
+
+
+initEmotes()
+
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "EmoteGui"
+gui.ResetOnSpawn = false
+gui.Parent = game:GetService("CoreGui")
+
+
+local main = Instance.new("Frame")
+main.Size = UDim2.new(0, 400, 0, 400)
+main.Position = UDim2.new(0, 20, 0.5, -200)
+main.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+main.Active = true
+main.Draggable = true
+main.Selectable = true
+main.Parent = gui
+
+
+local topBar = Instance.new("Frame")
+topBar.Size = UDim2.new(1, 0, 0, 30)
+topBar.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+topBar.Name = "TopBar"
+topBar.Parent = main
+
+
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(0, 80, 1, 0)
+title.BackgroundTransparency = 1
+title.Text = " Emotes"
+title.TextColor3 = Color3.new(1, 1, 1)
+title.Font = Enum.Font.SourceSansBold
+title.TextSize = 18
+title.TextScaled = true
+title.TextXAlignment = Enum.TextXAlignment.Left
+title.Position = UDim2.new(0, 5, 0, 0)
+title.Parent = topBar
+
+
+local searchBox = Instance.new("TextBox")
+searchBox.Size = UDim2.new(0, 200, 0, 24)
+searchBox.Position = UDim2.new(0, 90, 0.5, -12)
+searchBox.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+searchBox.TextColor3 = Color3.new(1, 1, 1)
+searchBox.PlaceholderText = "Search emotes..."
+searchBox.PlaceholderColor3 = Color3.new(0.7, 0.7, 0.7)
+searchBox.Font = Enum.Font.SourceSans
+searchBox.TextSize = 14
+searchBox.Text = ""
+searchBox.ClearTextOnFocus = false
+searchBox.Parent = topBar
+
+
+local searchIcon = Instance.new("ImageLabel")
+searchIcon.Size = UDim2.new(0, 16, 0, 16)
+searchIcon.Position = UDim2.new(1, -20, 0.5, -8)
+searchIcon.BackgroundTransparency = 1
+searchIcon.Image = "rbxassetid://12731592401"
+searchIcon.Parent = searchBox
+
+
+local minButton = Instance.new("TextButton")
+minButton.Size = UDim2.new(0, 30, 0, 30)
+minButton.Position = UDim2.new(1, -60, 0, 0)
+minButton.BackgroundTransparency = 1
+minButton.TextColor3 = Color3.new(1, 1, 1)
+minButton.Text = "-"
+minButton.Font = Enum.Font.SourceSansBold
+minButton.TextSize = 24
+minButton.TextScaled = true
+minButton.Parent = topBar
+
+
+local closeButton = Instance.new("TextButton")
+closeButton.Size = UDim2.new(0, 30, 0, 30)
+closeButton.Position = UDim2.new(1, -30, 0, 0)
+closeButton.BackgroundTransparency = 1
+closeButton.TextColor3 = Color3.new(1, 1, 1)
+closeButton.Text = "X"
+closeButton.Font = Enum.Font.SourceSansBold
+closeButton.TextSize = 18
+closeButton.TextScaled = true
+closeButton.Parent = topBar
+
+
+local scroll = Instance.new("ScrollingFrame")
+scroll.Size = UDim2.new(1, -10, 1, -40)
+scroll.Position = UDim2.new(0, 5, 0, 35)
+scroll.CanvasSize = UDim2.new(0, 0, 0, 0)
+scroll.ScrollBarThickness = 6
+scroll.BackgroundTransparency = 1
+scroll.Parent = main
+
+local layout = Instance.new("UIGridLayout")
+layout.CellSize = UDim2.new(0, 90, 0, 130)
+layout.CellPadding = UDim2.new(0, 6, 0, 12)
+layout.FillDirectionMaxCells = 4
+layout.Parent = scroll
+
+
+local filterFrame = Instance.new("Frame")
+filterFrame.Size = UDim2.new(0, 120, 0, 280)
+filterFrame.Position = UDim2.new(1, 10, 0, 35)
+filterFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+filterFrame.Parent = main
+
+
+local function makeBtn(txt, y, callback)
+    local b = Instance.new("TextButton")
+    b.Size = UDim2.new(1, -10, 0, 30)
+    b.Position = UDim2.new(0, 5, 0, y)
+    b.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+    b.TextColor3 = Color3.new(1, 1, 1)
+    b.Font = Enum.Font.SourceSansBold
+    b.TextSize = 14
+    b.TextScaled = true
+    b.Text = txt
+    b.Parent = filterFrame
+    b.MouseButton1Click:Connect(function()
+        callback(b)
+    end)
+    return b
+end
+
+
+local sortModes = {"New", "Old", "Expensive", "Cheap", "A-Z", "Z-A"}
+local sortIndex = 1
+local ugcOnly = nil
+local searchText = ""
+
+
+local minimized = false
+local originalSize = main.Size
+local minimizedSize = UDim2.new(0, 400, 0, 30)
+
+minButton.MouseButton1Click:Connect(function()
+    minimized = not minimized
+    if minimized then
+        main.Size = minimizedSize
+        scroll.Visible = false
+        filterFrame.Visible = false
+        minButton.Text = "+"
+    else
+        main.Size = originalSize
+        scroll.Visible = true
+        filterFrame.Visible = true
+        minButton.Text = "-"
+    end
+end)
+
+
+
+--unused
+local closeAttempts = 0
+local closeMessages = {
+    "ARE YOU SURE YOU WANT TO CLOSE THIS COOL EMOTE GUI?",
+    "ARE YOU REALLY SURE?",
+    "FINAL WARNING - ARE YOU ABSOLUTELY POSITIVE?"
+}
+local closeBegs = {
+    "PLEASE DON'T CLOSE ME!",
+    "I'LL BE SO SAD IF YOU LEAVE!",
+    "I'M BEGGING YOU - DON'T DO IT!"
+}
+local confirmationFrame
+
+-- Function to stop any playing animation
+local function stopCurrentAnimation()
+    if currentAnimationTrack then
+        currentAnimationTrack:Stop(0.1)
+        currentAnimationTrack = nil
+    end
+end
+
+-- Function to create confirmation UI
+local function createConfirmation(title, message, beg, callback)
+    if confirmationFrame then
+        confirmationFrame:Destroy()
+    end
+    
+    -- Overlay
+    local confirmationFrame = Instance.new("Frame")
+confirmationFrame.Size = UDim2.new(2, 0, 2, 0)  -- 2x parent width & height (200%)
+confirmationFrame.Position = UDim2.new(-0.5, 0, -0.5, 0)  -- Moves left & up by 50% of parent size
+    confirmationFrame.BackgroundColor3 = Color3.new(0, 0, 0)
+    confirmationFrame.BackgroundTransparency = 0.4
+    confirmationFrame.ZIndex = 100
+    confirmationFrame.Parent = gui
+    
+    -- Dialog box
+    local dialog = Instance.new("Frame")
+    dialog.Size = UDim2.new(0, 300, 0, 150)
+    dialog.Position = UDim2.new(0.5, -150, 0.5, -75)
+    dialog.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    dialog.ZIndex = 101
+    dialog.Parent = confirmationFrame
+    
+    local titleLbl = Instance.new("TextLabel")
+    titleLbl.Size = UDim2.new(1, 0, 0, 30)
+    titleLbl.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+    titleLbl.Text = title
+    titleLbl.TextColor3 = Color3.new(1, 1, 1)
+    titleLbl.Font = Enum.Font.SourceSansBold
+    titleLbl.TextSize = 16
+    titleLbl.TextScaled = true
+    titleLbl.ZIndex = 102
+    titleLbl.Parent = dialog
+    
+    local messageLbl = Instance.new("TextLabel")
+    messageLbl.Size = UDim2.new(1, -20, 0, 40)
+    messageLbl.Position = UDim2.new(0, 10, 0, 35)
+    messageLbl.BackgroundTransparency = 1
+    messageLbl.Text = message
+    messageLbl.TextColor3 = Color3.new(1, 1, 1)
+    messageLbl.TextWrapped = true
+    messageLbl.Font = Enum.Font.SourceSansBold
+    messageLbl.TextSize = 14
+    messageLbl.TextScaled = true
+    messageLbl.ZIndex = 102
+    messageLbl.Parent = dialog
+    
+    local begLbl = Instance.new("TextLabel")
+    begLbl.Size = UDim2.new(1, -20, 0, 30)
+    begLbl.Position = UDim2.new(0, 10, 0, 75)
+    begLbl.BackgroundTransparency = 1
+    begLbl.Text = beg
+    begLbl.TextColor3 = Color3.new(1, 0.3, 0.3)
+    begLbl.TextWrapped = true
+    begLbl.Font = Enum.Font.GothamBlack
+    begLbl.TextSize = 14
+    begLbl.TextScaled = true
+    begLbl.ZIndex = 102
+    begLbl.Parent = dialog
+    
+    local noButton = Instance.new("TextButton")
+    noButton.Size = UDim2.new(0.4, 0, 0, 30)
+    noButton.Position = UDim2.new(0.05, 0, 1, -40)
+    noButton.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+    noButton.TextColor3 = Color3.new(1, 1, 1)
+    noButton.Text = "NO"
+    noButton.Font = Enum.Font.SourceSansBold
+    noButton.TextSize = 16
+    noButton.TextScaled = true
+    noButton.ZIndex = 102
+    noButton.Parent = dialog
+    
+    local yesButton = Instance.new("TextButton")
+    yesButton.Size = UDim2.new(0.4, 0, 0, 30)
+    yesButton.Position = UDim2.new(0.55, 0, 1, -40)
+    yesButton.BackgroundColor3 = Color3.fromRGB(180, 60, 60)
+    yesButton.TextColor3 = Color3.new(1, 1, 1)
+    yesButton.Text = "YES"
+    yesButton.Font = Enum.Font.SourceSansBold
+    yesButton.TextSize = 16
+    yesButton.TextScaled = true
+    yesButton.ZIndex = 102
+    yesButton.Parent = dialog
+    
+    -- Button functionality
+    noButton.MouseButton1Click:Connect(function()
+        confirmationFrame:Destroy()
+    end)
+    
+    yesButton.MouseButton1Click:Connect(function()
+        confirmationFrame:Destroy()
+        callback()
+    end)
+end
+
+-- Close functionality
+closeButton.MouseButton1Click:Connect(function()
+    createConfirmation(
+        "CLOSE GUI", 
+        "ARE YOU SURE YOU WANT TO CLOSE THIS COOL EMOTE GUI?",
+        "PLEASE DON'T CLOSE ME!",
+        function()
+            gui:Destroy()
+        end
+    )
+end)
+
+-- Function to open edit UI
+local function openEditUI(emote)
+    editingEmote = emote
+    
+    -- Create edit UI overlay
+    local editFrame = Instance.new("Frame")
+    editFrame.Size = UDim2.new(0, 500, 0, 450)
+    editFrame.Position = UDim2.new(0.5, -250, 0.5, -225)
+    editFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+    editFrame.Parent = gui
+    editFrame.Draggable = true
+    editFrame.Active = true
+    
+    -- Title bar
+    local titleBar = Instance.new("Frame")
+    titleBar.Size = UDim2.new(1, 0, 0, 30)
+    titleBar.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+    titleBar.Name = "TitleBar"
+    titleBar.Parent = editFrame
+    
+    -- Title text
+    local titleLabel = Instance.new("TextLabel")
+    titleLabel.Size = UDim2.new(0, 200, 1, 0)
+    titleLabel.BackgroundTransparency = 1
+    titleLabel.Text = "Edit Emote: "..emote.n
+    titleLabel.TextColor3 = Color3.new(1, 1, 1)
+    titleLabel.Font = Enum.Font.SourceSansBold
+    titleLabel.TextSize = 18
+    titleLabel.TextScaled = true
+    titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+    titleLabel.Position = UDim2.new(0, 10, 0, 0)
+    titleLabel.Parent = titleBar
+    
+    -- Minimize button for edit GUI
+    local editMinButton = Instance.new("TextButton")
+    editMinButton.Size = UDim2.new(0, 30, 0, 30)
+    editMinButton.Position = UDim2.new(1, -60, 0, 0)
+    editMinButton.BackgroundTransparency = 1
+    editMinButton.TextColor3 = Color3.new(1, 1, 1)
+    editMinButton.Text = "-"
+    editMinButton.Font = Enum.Font.SourceSansBold
+    editMinButton.TextSize = 24
+    editMinButton.TextScaled = true
+    editMinButton.Parent = titleBar
+    
+    -- Close button for edit GUI
+    local editCloseButton = Instance.new("TextButton")
+    editCloseButton.Size = UDim2.new(0, 30, 0, 30)
+    editCloseButton.Position = UDim2.new(1, -30, 0, 0)
+    editCloseButton.BackgroundTransparency = 1
+    editCloseButton.TextColor3 = Color3.new(1, 1, 1)
+    editCloseButton.Text = "X"
+    editCloseButton.Font = Enum.Font.SourceSansBold
+    editCloseButton.TextSize = 18
+    editCloseButton.TextScaled = true
+    editCloseButton.Parent = titleBar
+    
+    -- Content area below title bar
+    local content = Instance.new("Frame")
+    content.Size = UDim2.new(1, 0, 1, -30)
+    content.Position = UDim2.new(0, 0, 0, 30)
+    content.BackgroundTransparency = 1
+    content.Name = "Content"
+    content.Parent = editFrame
+    
+    -- Preview section (left side)
+    local previewFrame = Instance.new("Frame")
+    previewFrame.Size = UDim2.new(0.45, 0, 1, 0)
+    previewFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+    previewFrame.Parent = content
+    
+    -- Container for the preview image to maintain aspect ratio
+    local imageContainer = Instance.new("Frame")
+    imageContainer.Size = UDim2.new(1, -20, 0.8, -10)
+    imageContainer.Position = UDim2.new(0, 10, 0, 10)
+    imageContainer.BackgroundTransparency = 1
+    imageContainer.ClipsDescendants = true
+    imageContainer.Parent = previewFrame
+    
+    local previewImage = Instance.new("ImageLabel")
+    previewImage.Size = UDim2.new(1, 0, 1, 0)
+    previewImage.AnchorPoint = Vector2.new(0.5, 0.5)
+    previewImage.Position = UDim2.new(0.5, 0, 0.5, 0)
+    previewImage.BackgroundTransparency = 1
+    previewImage.ScaleType = Enum.ScaleType.Fit  
+    
+    if emote.imageId and emote.imageId > 0 or emote.imageId ~= emote.id then
+        previewImage.Image = "rbxassetid://" .. emote.imageId
+    else
+        previewImage.Image = "rbxthumb://type=Asset&id=".. emote.id .."&w=420&h=420"
+    end
+    
+    
+    previewImage.Parent = imageContainer
+    
+    local previewLabel = Instance.new("TextLabel")
+    previewLabel.Size = UDim2.new(1, -20, 0, 30)
+    previewLabel.Position = UDim2.new(0, 10, 0.8, 10)
+    previewLabel.BackgroundTransparency = 1
+    previewLabel.Text = emote.n
+    previewLabel.TextColor3 = Color3.new(1, 1, 1)
+    previewLabel.Font = Enum.Font.SourceSansBold
+    previewLabel.TextSize = 18
+    previewLabel.TextScaled = true
+    previewLabel.Parent = previewFrame
+    
+    -- Settings section (right side)
+    local settingsFrame = Instance.new("Frame")
+    settingsFrame.Size = UDim2.new(0.55, -10, 1, 0)
+    settingsFrame.Position = UDim2.new(0.45, 10, 0, 0)
+    settingsFrame.BackgroundTransparency = 1
+    settingsFrame.Parent = content
+    
+    local yPos = 10
+    
+    local function addField(label, value, isNumeric)
+        local frame = Instance.new("Frame")
+        frame.Size = UDim2.new(1, 0, 0, 30)
+        frame.Position = UDim2.new(0, 0, 0, yPos)
+        frame.BackgroundTransparency = 1
+        frame.Parent = settingsFrame
+        
+        local lbl = Instance.new("TextLabel")
+        lbl.Size = UDim2.new(0.4, 0, 1, 0)
+        lbl.BackgroundTransparency = 1
+        lbl.Text = label
+        lbl.TextColor3 = Color3.new(1, 1, 1)
+        lbl.Font = Enum.Font.SourceSans
+        lbl.TextSize = 14
+        lbl.TextScaled = true
+        lbl.TextXAlignment = Enum.TextXAlignment.Left
+        lbl.Parent = frame
+        
+        local box = Instance.new("TextBox")
+        box.Size = UDim2.new(0.6, 0, 1, 0)
+        box.Position = UDim2.new(0.4, 0, 0, 0)
+        box.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+        box.TextColor3 = Color3.new(1, 1, 1)
+        box.Text = tostring(value)
+        box.Font = Enum.Font.SourceSans
+        box.TextSize = 14
+        box.TextScaled = true
+        box.Parent = frame
+        
+        if isNumeric then
+            box:GetPropertyChangedSignal("Text"):Connect(function()
+                if not tonumber(box.Text) then
+                    box.Text = box.Text:gsub("%D", "")
+                end
+            end)
+        end
+        
+        yPos += 35
+        return box
+    end
+    
+    -- Add fields to settings
+    local nameBox = addField("Name:", emote.n)
+    local idBox = addField("ID:", emote.id)
+    local priceBox = addField("Price:", emote.price, true)
+    local imageBox = addField("Image ID:", emote.imageId or emote.id)
+    local dateBox = addField("Date:", emote.cr) -- Date field
+    
+    -- Update preview when image ID changes
+    imageBox.FocusLost:Connect(function()
+        local newId = tonumber(imageBox.Text)
+        if newId then
+            previewImage.Image = "rbxthumb://type=Asset&id="..newId.."&w=420&h=420"
+            previewLabel.Text = nameBox.Text
+        end
+    end)
+    
+    -- Update preview name when name changes
+    nameBox:GetPropertyChangedSignal("Text"):Connect(function()
+        previewLabel.Text = nameBox.Text
+    end)
+    
+    -- Animation type toggle
+    local animFrame = Instance.new("Frame")
+    animFrame.Size = UDim2.new(1, 0, 0, 30)
+    animFrame.Position = UDim2.new(0, 0, 0, yPos)
+    animFrame.BackgroundTransparency = 1
+    animFrame.Parent = settingsFrame
+    
+    local animLbl = Instance.new("TextLabel")
+    animLbl.Size = UDim2.new(0.4, 0, 1, 0)
+    animLbl.BackgroundTransparency = 1
+    animLbl.Text = "Animation:"
+    animLbl.TextColor3 = Color3.new(1, 1, 1)
+    animLbl.Font = Enum.Font.SourceSans
+    animLbl.TextSize = 14
+    animLbl.TextScaled = true
+    animLbl.TextXAlignment = Enum.TextXAlignment.Left
+    animLbl.Parent = animFrame
+    
+    local animToggle = Instance.new("TextButton")
+    animToggle.Size = UDim2.new(0.2, 0, 0.8, 0)
+    animToggle.Position = UDim2.new(0.4, 0, 0.1, 0)
+    animToggle.BackgroundColor3 = emote.isAnimation and Color3.new(0, 0.5, 0) or Color3.new(0.5, 0, 0)
+    animToggle.Text = emote.isAnimation and "YES" or "NO"
+    animToggle.TextColor3 = Color3.new(1, 1, 1)
+    animToggle.Font = Enum.Font.SourceSansBold
+    animToggle.TextSize = 14
+    animToggle.TextScaled = true
+    animToggle.Parent = animFrame
+    
+    animToggle.MouseButton1Click:Connect(function()
+        emote.isAnimation = not emote.isAnimation
+        animToggle.Text = emote.isAnimation and "YES" or "NO"
+        animToggle.BackgroundColor3 = emote.isAnimation and Color3.new(0, 0.5, 0) or Color3.new(0.5, 0, 0)
+    end)
+    
+    yPos += 35
+    
+    -- UGC type toggle
+    local ugcFrame = Instance.new("Frame")
+    ugcFrame.Size = UDim2.new(1, 0, 0, 30)
+    ugcFrame.Position = UDim2.new(0, 0, 0, yPos)
+    ugcFrame.BackgroundTransparency = 1
+    ugcFrame.Parent = settingsFrame
+    
+    local ugcLbl = Instance.new("TextLabel")
+    ugcLbl.Size = UDim2.new(0.4, 0, 1, 0)
+    ugcLbl.BackgroundTransparency = 1
+    ugcLbl.Text = "UGC:"
+    ugcLbl.TextColor3 = Color3.new(1, 1, 1)
+    ugcLbl.Font = Enum.Font.SourceSans
+    ugcLbl.TextSize = 14
+    ugcLbl.TextScaled = true
+    ugcLbl.TextXAlignment = Enum.TextXAlignment.Left
+    ugcLbl.Parent = ugcFrame
+    
+    local ugcToggle = Instance.new("TextButton")
+    ugcToggle.Size = UDim2.new(0.2, 0, 0.8, 0)
+    ugcToggle.Position = UDim2.new(0.4, 0, 0.1, 0)
+    ugcToggle.BackgroundColor3 = emote.ugc and Color3.new(0, 0.5, 0) or Color3.new(0.5, 0, 0)
+    ugcToggle.Text = emote.ugc and "YES" or "NO"
+    ugcToggle.TextColor3 = Color3.new(1, 1, 1)
+    ugcToggle.Font = Enum.Font.SourceSansBold
+    ugcToggle.TextSize = 14
+    ugcToggle.TextScaled = true
+    ugcToggle.Parent = ugcFrame
+    
+    ugcToggle.MouseButton1Click:Connect(function()
+        emote.ugc = not emote.ugc
+        ugcToggle.Text = emote.ugc and "YES" or "NO"
+        ugcToggle.BackgroundColor3 = emote.ugc and Color3.new(0, 0.5, 0) or Color3.new(0.5, 0, 0)
+    end)
+    
+    yPos += 40
+    
+    -- Save button
+    local saveBtn = Instance.new("TextButton")
+    saveBtn.Size = UDim2.new(0.45, -5, 0, 40)
+    saveBtn.Position = UDim2.new(0, 0, 0, yPos)
+    saveBtn.BackgroundColor3 = Color3.new(0, 0.5, 0)
+    saveBtn.Text = "SAVE CHANGES"
+    saveBtn.TextColor3 = Color3.new(1, 1, 1)
+    saveBtn.Font = Enum.Font.SourceSansBold
+    saveBtn.TextSize = 16
+    saveBtn.TextScaled = true
+    saveBtn.Parent = settingsFrame
+    
+    saveBtn.MouseButton1Click:Connect(function()
+        -- Update emote with new values
+        emote.n = nameBox.Text
+        emote.id = tonumber(idBox.Text) or emote.id
+        emote.price = tonumber(priceBox.Text) or emote.price
+        emote.imageId = tonumber(imageBox.Text) or emote.imageId or emote.id
+        emote.cr = dateBox.Text -- Save date
+        
+        -- Save changes
+        saveEmotes()
+        
+        -- Refresh UI
+        editFrame:Destroy()
+        refresh()
+    end)
+    
+    -- Delete button
+    local deleteBtn = Instance.new("TextButton")
+    deleteBtn.Size = UDim2.new(0.45, -5, 0, 40)
+    deleteBtn.Position = UDim2.new(0.55, 0, 0, yPos)
+    deleteBtn.BackgroundColor3 = Color3.new(0.5, 0, 0)
+    deleteBtn.Text = "DELETE EMOTE"
+    deleteBtn.TextColor3 = Color3.new(1, 1, 1)
+    deleteBtn.Font = Enum.Font.SourceSansBold
+    deleteBtn.TextSize = 16
+    deleteBtn.TextScaled = true
+    deleteBtn.Parent = settingsFrame
+    
+    
+    
+    
+    deleteBtn.MouseButton1Click:Connect(function()
+        createConfirmation(
+            "DELETE EMOTE",
+            "ARE YOU SURE YOU WANT TO PERMANENTLY DELETE THIS EMOTE?",
+            "THIS CANNOT BE UNDONE!",
+            function()
+                -- Find and remove the emote
+                for i, e in ipairs(emotes) do
+                    if e == emote then
+                        table.remove(emotes, i)
+                        break
+                    end
+                end
+                
+                -- Save changes
+                saveEmotes()
+                
+                -- Close and refresh
+                editFrame:Destroy()
+                refresh()
+            end
+        )
+    end)
+    
+    
+    local editMinimized = false
+    local originalEditSize = editFrame.Size
+    local minimizedEditSize = UDim2.new(0, 300, 0, 30)
+    
+    editMinButton.MouseButton1Click:Connect(function()
+        editMinimized = not editMinimized
+        if editMinimized then
+            editFrame.Size = minimizedEditSize
+            content.Visible = false
+            editMinButton.Text = "+"
+        else
+            editFrame.Size = originalEditSize
+            content.Visible = true
+            editMinButton.Text = "-"
+        end
+    end)
+    
+    
+    editCloseButton.MouseButton1Click:Connect(function()
+        editFrame:Destroy()
+    end)
+end
+
+
+local function playAnimation(emote)
+    stopCurrentAnimation()
+    
+    local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
+    if not humanoid then return end
+    
+    if emote.isAnimation then
+        -- Create and play animation
+        local animation = Instance.new("Animation")
+        animation.AnimationId = "rbxassetid://"..emote.id
+        currentAnimationTrack = humanoid:LoadAnimation(animation)
+        currentAnimationTrack:Play(0.1)
+        currentAnimationTrack:AdjustWeight(100, 0) 
+    else
+        -- Play emote
+        humanoid:PlayEmoteAndGetAnimTrackById(emote.id)
+    end
+end
+
+
+RunService.Heartbeat:Connect(function()
+    if currentAnimationTrack and player.Character then
+        local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
+        if humanoid then
+            if humanoid.MoveDirection.Magnitude > 0 or humanoid:GetState() == Enum.HumanoidStateType.Jumping then
+                stopCurrentAnimation()
+            end
+        end
+    end
+end)
+
+
+
+
+
+local function createPlaceholderEmote()
+    local newEmote = {
+        n = "New Emote",
+        id = 0,  -- 0 indicates placeholder
+        price = 0,
+        cr = os.date("%b %d, %Y"),  -- current date
+        ugc = true,
+        fav = false,
+        isAnimation = false,
+        imageId = 0  -- placeholder image
+    }
+    table.insert(emotes, newEmote)
+    saveEmotes()
+    openEditUI(newEmote)  -- Open edit UI immediately
+    refresh()
+end
+
+
+local addBtn = makeBtn("Add New", 5, function()
+    createPlaceholderEmote()
+end)
+
+local sortBtn = makeBtn("Sort: "..sortModes[sortIndex], 40, function(btn)
+    sortIndex = sortIndex % #sortModes + 1
+    refresh()
+end)
+
+
+local addBtn = makeBtn("Add New", 5, function()
+    createPlaceholderEmote()
+end)
+
+local sortBtn = makeBtn("Sort: "..sortModes[sortIndex], 40, function(btn)
+    sortIndex = sortIndex % #sortModes + 1
+    refresh()
+end)
+
+local ugcBtn = makeBtn("All", 75, function(btn)
+    if ugcOnly == nil then
+        ugcOnly = true
+    elseif ugcOnly == true then
+        ugcOnly = false
+    else
+        ugcOnly = nil
+    end
+    refresh()
+end)
+
+
+ function refresh()
+    
+    sortBtn.Text = "Sort: "..sortModes[sortIndex]
+    
+    if ugcOnly == nil then
+        ugcBtn.Text = "All"
+    elseif ugcOnly == true then
+        ugcBtn.Text = "UGC"
+    else
+        ugcBtn.Text = "Roblox"
+    end
+
+
+    for _, child in ipairs(scroll:GetChildren()) do
+        if not child:IsA("UIGridLayout") then
+            child:Destroy()
+        end
+    end
+
+    
+    local sorted = {}
+    for i, emote in ipairs(emotes) do
+        table.insert(sorted, emote)
+    end
+    
+    local mode = sortModes[sortIndex]
+
+   
+    -- Replace your current table.sort function with this improved version:
+
+table.sort(sorted, function(a, b)
+    -- First, prioritize favorites
+    if a.fav and not b.fav then
+        return true
+    elseif not a.fav and b.fav then
+        return false
+    end
+    
+    -- Then handle placeholders
+    if a.id == 0 and b.id ~= 0 then
+        return true
+    elseif a.id ~= 0 and b.id == 0 then
+        return false
+    end
+    
+    -- Then handle both placeholders
+    if a.id == 0 and b.id == 0 then
+        return a.n < b.n
+    end
+    
+    -- Then apply the selected sort mode
+    local mode = sortModes[sortIndex]
+    
+    if mode == "A-Z" then
+        return a.n < b.n
+    elseif mode == "Z-A" then
+        return a.n > b.n
+    elseif mode == "Expensive" then
+        return a.price > b.price
+    elseif mode == "Cheap" then
+        return a.price < b.price
+    elseif mode == "New" then
+        -- Assuming em.cr is a date string like "Aug 08, 2025"
+        -- Convert to timestamps for comparison
+        local function parseDate(dateStr)
+            local months = {
+                Jan = 1, Feb = 2, Mar = 3, Apr = 4, May = 5, Jun = 6,
+                Jul = 7, Aug = 8, Sep = 9, Oct = 10, Nov = 11, Dec = 12
+            }
+            local month, day, year = dateStr:match("(%a+) (%d+), (%d+)")
+            return os.time({year = tonumber(year), month = months[month], day = tonumber(day)})
+        end
+        
+        local timeA = a.cr and parseDate(a.cr) or 0
+        local timeB = b.cr and parseDate(b.cr) or 0
+        return timeA > timeB
+    elseif mode == "Old" then
+        local function parseDate(dateStr)
+            local months = {
+                Jan = 1, Feb = 2, Mar = 3, Apr = 4, May = 5, Jun = 6,
+                Jul = 7, Aug = 8, Sep = 9, Oct = 10, Nov = 11, Dec = 12
+            }
+            local month, day, year = dateStr:match("(%a+) (%d+), (%d+)")
+            return os.time({year = tonumber(year), month = months[month], day = tonumber(day)})
+        end
+        
+        local timeA = a.cr and parseDate(a.cr) or 0
+        local timeB = b.cr and parseDate(b.cr) or 0
+        return timeA < timeB
+    end
+    
+    return false
+end)
+
+    
+    local searchLower = string.lower(searchText)
+    
+    for _, em in ipairs(sorted) do
+        if ugcOnly == true and not em.ugc then continue end
+        if ugcOnly == false and em.ugc then continue end
+        if searchLower ~= "" and not string.find(string.lower(em.n), searchLower, 1, true) then continue end
+
+        
+        local container = Instance.new("TextButton")
+        container.Size = UDim2.new(0, 90, 0, 130)
+        container.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+        container.AutoButtonColor = false
+        container.Text = ""
+        container.Parent = scroll
+
+        
+        local favButton = Instance.new("TextButton")
+        favButton.Size = UDim2.new(0, 20, 0, 20)
+        favButton.Position = UDim2.new(0, 2, 0, 2)
+        favButton.BackgroundTransparency = 1
+        favButton.Text = em.fav and "★" or "☆"
+        favButton.TextColor3 = em.fav and Color3.fromRGB(255, 215, 0) or Color3.new(1, 1, 1)
+        favButton.Font = Enum.Font.SourceSansBold
+        favButton.TextSize = 16
+        favButton.TextScaled = true
+        favButton.Parent = container
+        
+        favButton.MouseButton1Click:Connect(function()
+    em.fav = not em.fav
+    favButton.Text = em.fav and "★" or "☆"
+    favButton.TextColor3 = em.fav and Color3.fromRGB(255, 215, 0) or Color3.new(1, 1, 1)
+    saveEmotes()  -- Add this line to save when favorite status changes
+    refresh()
+end)
+
+        
+        local playButton = Instance.new("TextButton")
+        playButton.Size = UDim2.new(0, 20, 0, 20)
+        playButton.Position = UDim2.new(1, -22, 0, 2)
+        playButton.BackgroundTransparency = 1
+        playButton.Text = "play"
+        playButton.TextColor3 = Color3.new(0, 1, 0)
+        playButton.Font = Enum.Font.SourceSansBold
+        playButton.TextSize = 14
+        playButton.TextScaled = true
+        playButton.Parent = container
+        
+        playButton.MouseButton1Click:Connect(function()
+            playAnimation(em)
+        end)
+
+        -- Edit button
+        local editButton = Instance.new("TextButton")
+        editButton.Size = UDim2.new(0, 20, 0, 20)
+        editButton.Position = UDim2.new(0, 2, 0, 24) -- Below favorite button
+        editButton.BackgroundTransparency = 1
+        editButton.Text = "edit"
+        editButton.TextColor3 = Color3.new(0.8, 0.8, 1)
+        editButton.Font = Enum.Font.SourceSansBold
+        editButton.TextSize = 14
+        editButton.TextScaled = true
+        editButton.Parent = container
+        
+        editButton.MouseButton1Click:Connect(function()
+            openEditUI(em)
+        end)
+
+        
+        local imgContainer = Instance.new("Frame")
+        imgContainer.Size = UDim2.new(1, -10, 0, 80)
+        imgContainer.Position = UDim2.new(0, 5, 0, 25)
+        imgContainer.BackgroundTransparency = 1
+        imgContainer.ClipsDescendants = true
+        imgContainer.Parent = container
+        
+        local img = Instance.new("ImageLabel")
+        img.Size = UDim2.new(1, 0, 1, 0)
+        img.AnchorPoint = Vector2.new(0.5, 0.5)
+        img.Position = UDim2.new(0.5, 0, 0.5, 0)
+        img.BackgroundTransparency = 1
+        img.ScaleType = Enum.ScaleType.Fit
+        
+       
+        if em.imageId and em.imageId > 0 then
+            img.Image = "rbxthumb://type=Asset&id="..em.imageId.."&w=150&h=150"
+        else
+            img.Image = "rbxassetid://13479668392"
+        end
+        img.Parent = imgContainer
+
+        -- Animation indicator
+        if em.isAnimation then
+            local animIndicator = Instance.new("TextLabel")
+            animIndicator.Size = UDim2.new(1, 0, 0, 15)
+            animIndicator.Position = UDim2.new(0, 0, 0, 50)
+            animIndicator.BackgroundTransparency = 1
+            animIndicator.Text = "ANIMATION"
+            animIndicator.TextColor3 = Color3.new(0.5, 1, 0.5)
+            animIndicator.Font = Enum.Font.SourceSansBold
+            animIndicator.TextSize = 10
+            animIndicator.TextScaled = true
+            animIndicator.Parent = container
+        end
+
+        
+        local lbl = Instance.new("TextLabel")
+        lbl.Size = UDim2.new(1, -4, 0, 35)
+        lbl.Position = UDim2.new(0, 2, u, 105)
+        lbl.BackgroundTransparency = 1
+        lbl.Text = em.n.."\n"..em.price.."R$"
+        lbl.TextColor3 = Color3.new(1, 1, 1)
+        lbl.TextSize = 12
+        lbl.Font = Enum.Font.SourceSansBold
+        lbl.TextScaled = true
+        lbl.TextWrapped = true
+        lbl.Parent = container
+        
+        -- Date indicator
+        local dateLbl = Instance.new("TextLabel")
+        dateLbl.Size = UDim2.new(1, -4, 0, 15)
+        dateLbl.Position = UDim2.new(0, 2, 1, -17)
+        dateLbl.BackgroundTransparency = 1
+        dateLbl.Text = em.cr or "Unknown"
+        dateLbl.TextColor3 = Color3.new(0.7, 0.7, 0.7)
+        dateLbl.Font = Enum.Font.SourceSans
+        dateLbl.TextSize = 10
+        dateLbl.TextScaled = true
+        dateLbl.Parent = container
+        
+        
+        if em.id == 0 then
+            local placeholderIndicator = Instance.new("TextLabel")
+            placeholderIndicator.Size = UDim2.new(1, 0, 0, 15)
+            placeholderIndicator.Position = UDim2.new(0, 0, 0, 110)
+            placeholderIndicator.BackgroundTransparency = 1
+            placeholderIndicator.Text = "PLACEHOLDER"
+            placeholderIndicator.TextColor3 = Color3.new(1, 0.5, 0.5)
+            placeholderIndicator.Font = Enum.Font.SourceSansBold
+            placeholderIndicator.TextSize = 10
+            placeholderIndicator.TextScaled = true
+            placeholderIndicator.Parent = container
+        end
+    end
+
+    scroll.CanvasSize = UDim2.new(0, 0, 0, layout.AbsoluteContentSize.Y + 10)
+end
+
+
+searchBox:GetPropertyChangedSignal("Text"):Connect(function()
+    searchText = searchBox.Text
+    refresh()
+end)
+
+
+refresh()

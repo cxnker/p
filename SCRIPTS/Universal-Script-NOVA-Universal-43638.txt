@@ -1,0 +1,46 @@
+--[[
+	All my scripts are open source, i usually update others. I always give Credit, so make sure to check the credits out if u want to see the og script
+
+NØVA 
+
+Steal a sword >
+> Give Your self any Sword in the game
+
+Steal a Ride >
+> Give Your self any car in the game
+
+Grow a Mine >
+> Get Any Upgrade
+> Get Any Drill
+> Get Any Miner
+> Give Self Money
+> Inf Money
+
+Universal >
+
+> > Player
+> Break Joints
+> Reset Char
+> Noclip
+> Inf Jumo
+> Fly
+> Anti AFK
+> Walkspeed
+> Jump Power
+> Gravity
+
+> > Game
+> Rejoin Game
+> FPS Booster
+> HD Grahpics
+
+> > FOV 
+> Reset FOV
+> Change FOV
+
+> > Visual
+> X-Ray
+> Full Bright
+]]
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/DozeIsOkLol/OpenSrcRBLX/refs/heads/main/NOVA"))()
