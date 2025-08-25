@@ -145,8 +145,8 @@ end
 -- Cuadro de texto para escribir el nombre del jugador
 Tab2:AddTextBox({
     Name = "Headsit Player",
-    Description = "Introduzca parte del nombre del jugador",
-    PlaceholderText = "ej: No → Nova",
+    Description = "Ingrese parte del nombre del jugador",
+    PlaceholderText = "ej: Rou → Roun95",
     Callback = function(Value)
         local foundPlayer = findPlayerByPartialName(Value)
         if foundPlayer then
@@ -158,8 +158,7 @@ Tab2:AddTextBox({
     end
 })
 
--- Botón para activar/desactivar el head-sit
--- Botón para activar/desactivar el head-sit (Version simplificada)
+-- Boton para activar/desactivar el head-sit
 Tab2:AddButton({"", function()
     if not selectedPlayerName then
         return
@@ -3731,7 +3730,7 @@ end
 Tab9:AddTextBox({
     Name = "Añadir jugador a la lista blanca",
     Description = "Ingrese parte del nombre del jugador",
-    PlaceholderText = "Ej: No - Nova",
+    PlaceholderText = "ej: Rou → Roun95",
     Callback = function(Value)
         if Value == "" then
             showNotification("Ninguna accion", "Introduzca un nombre para agregar un jugador.", nil)
