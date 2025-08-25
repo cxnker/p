@@ -23,9 +23,9 @@ local Tab9 = Window:MakeTab({"Troll", "skull"})
 local Tab10 = Window:MakeTab({"Lag Server", "bomb"})
 local Tab11 = Window:MakeTab({"Scripts", "scroll"})
 local Tab12 = Window:MakeTab({"Teleportes", "map-pin"})
---------------------------------------------------------------------------------------------------------------------------------
-                                                   -- === Tab 1: credits === --
----------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+                                    -- === Tab 1: Credits === --
+----------------------------------------------------------------------------------------------------
 local function detectExecutor()
     if identifyexecutor then
         return identifyexecutor()
@@ -55,9 +55,9 @@ Tab1:AddButton({
     setclipboard("https://www.tiktok.com/@lxvap")
     end
 })
------------------------------------------------------------------------------------------------------------------------------------
-                                                   -- === Tab 2: Fun === --
------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+                                    -- === Tab 2: Fun === --
+----------------------------------------------------------------------------------------------------
 local Section = Tab2:AddSection({"Personaje del jugador"})
 
 local Players = game:GetService("Players")
@@ -256,7 +256,7 @@ Tab2:AddSlider({
        InfiniteJumpEnabled = Value
     end
  })
--------------------------------------------------------------------------------
+
 -- Toggle para Anti-Sit
 local antiSitConnection = nil
 local antiSitEnabled = false
@@ -357,7 +357,7 @@ Tab2:AddButton({
         })
     end
 })
-
+----------------------------------------------------------------------------------------------------
 local Section = Tab2:AddSection({"ESP"})
 
 -- Dropdown de cor
@@ -497,10 +497,9 @@ Toggle1:Callback(function(value)
         billboardGuis = {}
     end
 end)
-----------------------------------------------------------------------------------------------------------------------------------
-                                                         -- Tab3:  Avatar Editor--
-----------------------------------------------------------------------------------------------------------------------------------
-
+----------------------------------------------------------------------------------------------------
+                                -- === Tab 3: Avatar Editor === --
+----------------------------------------------------------------------------------------------------
 local Section = Tab3:AddSection({"Copiar avatar"})
 
 local Players = game:GetService("Players")
@@ -659,8 +658,7 @@ Tab3:AddButton({
         end
     end
 })
-
-------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 local Section = Tab3:AddSection({"Ropa 3D"})
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
@@ -733,7 +731,7 @@ Tab3:AddButton({
         AvatarManager:EquiparAvatar(_G.SelectedAvatar)
     end
 })
--------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 local Section = Tab3:AddSection({"Editor de avatar"})
 
 Tab3:AddParagraph({
@@ -761,7 +759,6 @@ Tab3:AddButton({
         print("Todas las partes han sido equipadas!")
     end
 })
----------------------------------------------------------------------------------------------------
 
 Tab3:AddButton({
     Name = "S15-Thin-Hourglass (Headless)",
@@ -784,8 +781,6 @@ Tab3:AddButton({
     end
 })
 
----------------------------------------------------------------------------------------------------
-
 Tab3:AddButton({
     Name = "inf15-Thin (Headless)",
     Callback = function()
@@ -806,8 +801,6 @@ Tab3:AddButton({
         print("Todas las partes han sido equipadas!")
     end
 })
-
----------------------------------------------------------------------------------------------------
 
 Tab3:AddButton({
     Name = "Blush-Fashion-Doll (Headless)",
@@ -830,8 +823,6 @@ Tab3:AddButton({
     end
 })
 
----------------------------------------------------------------------------------------------------
-
 Tab3:AddButton({
     Name = "E-Girl Body (Headless)",
     Callback = function()
@@ -852,8 +843,6 @@ Tab3:AddButton({
         print("Todas las partes han sido equipadas!")
     end
 })
-
----------------------------------------------------------------------------------------------------
 
 Tab3:AddButton({
     Name = "E-Girl Body (Headless/Korblox)",
@@ -876,8 +865,6 @@ Tab3:AddButton({
     end
 })
 
----------------------------------------------------------------------------------------------------
-
 Tab3:AddButton({
     Name = "Classic-Female-v2-Torso (Headless)",
     Callback = function()
@@ -895,8 +882,6 @@ Tab3:AddButton({
     end
 })
 
----------------------------------------------------------------------------------------------------
-
 Tab3:AddButton({
     Name = "Headless/Korblox (BETA)",
     Callback = function()
@@ -913,9 +898,9 @@ Tab3:AddButton({
         print("Todas las partes han sido equipadas!")
     end
 })
----------------------------------------------------------------------------------------------------------------------------------
-                                          -- === Tab4: House === --
----------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+                                    -- === Tab4: House === --
+----------------------------------------------------------------------------------------------------
 -- Botón para remover el baneo en todas las casas
 Tab4:AddButton({
     Name = "Desbanear de todas las casas",
@@ -951,7 +936,7 @@ Tab4:AddButton({
         end
         if successCount > 0 then
             game.StarterGui:SetCore("SendNotification", {
-                Title = "Success",
+                Title = "Exito",
                 Text = "Desbaneado de " .. successCount .. " casas!",
                 Duration = 5
             })
@@ -977,9 +962,9 @@ Tab4:AddParagraph({
     Title = "Proximamente mas cosas",
     Content = ""
 })
----------------------------------------------------------------------------------------------------------------------------------
-                                          -- === Tab 5: Car === --
----------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+                                    -- === Tab5: Car === --
+----------------------------------------------------------------------------------------------------
 local Section = Tab5:AddSection({"Todas las funciones del vehiculo"})
 
 local Players = game:GetService("Players")
@@ -1179,7 +1164,7 @@ Tab5:AddToggle({
         end
     end
 })
-
+----------------------------------------------------------------------------------------------------
 local Section = Tab5:AddSection({"Características del vehiculo"})
 
 -- Crear el menú desplegable
@@ -1431,11 +1416,9 @@ TeleportCarro.LocalPlayer.CharacterAdded:Connect(function(character)
         humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll, true)
     end
 end)
-
----------------------------------------------------------------------------------------------------------------------------------
-                                                   -- === Tab 6: RGB === --
----------------------------------------------------------------------------------------------------------------------------------
-
+----------------------------------------------------------------------------------------------------
+                                    -- === Tab6: RGB === --
+----------------------------------------------------------------------------------------------------
 local Section = Tab6:AddSection({"RGB Speed"})
 -- Velocidade controlada pelo slider (quanto maior, mais rápido)
 local rgbSpeed = 1
@@ -1467,7 +1450,7 @@ local function fireServer(eventName, args)
         end)
     end
 end
-
+----------------------------------------------------------------------------------------------------
 local Section = Tab6:AddSection({"Player RGB"})
 
 -- Nome + Bio RGB  juntos
@@ -1489,6 +1472,7 @@ Tab6:AddToggle({
         end
     end
 })
+----------------------------------------------------------------------------------------------------
 local Section = Tab6:AddSection({"Vehicles and Houses"})
 
 local ToggleCasa = Tab6:AddToggle({
@@ -1529,9 +1513,9 @@ Tab6:AddToggle({
         end
     end
 })
----------------------------------------------------------------------------------------------------------------------------------
-                                                -- === Tab 7: Music All === --
----------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+                                    -- === Tab 7: Music All === --
+----------------------------------------------------------------------------------------------------
 local loopAtivo = false
 local InputID = ""
 
@@ -1814,9 +1798,7 @@ createSoundDropdown("Selecione um meme", {
         {name = "HA HA HA", id = "138236682866721"}
     }
 }, "pankapakan")
-
-
-
+----------------------------------------------------------------------------------------------------
 local Section = Tab7:AddSection({"Reproducir sonidos de terror o efectos"})
 
 -- Dropdown "Efeito/Terror"
@@ -1890,10 +1872,9 @@ createSoundDropdown("Seleccione un sonido de terror o efecto", {
         {name = "", id = ""}
     }
 }, "jumpscar")
----------------------------------------------------------------------------------------------------------------------------------
-                                          -- === Tab 8: Troll Musica === --
----------------------------------------------------------------------------------------------------------------------------------
-
+----------------------------------------------------------------------------------------------------
+                                -- === Tab 8: Troll Musica === --
+----------------------------------------------------------------------------------------------------
 local function tocarMusica(id)
     local ReplicatedStorage = game:GetService("ReplicatedStorage")
     
@@ -2179,9 +2160,9 @@ Tab8:AddButton({
         tocarMusica("")
     end
 })
----------------------------------------------------------------------------------------------------------------------------------
-                                                   -- === Tab 9: troll === --
------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+                                    -- === Tab 9: Troll === --
+----------------------------------------------------------------------------------------------------
 local Players = game:GetService("Players")
 local Workspace = game:GetService("Workspace")
 local RunService = game:GetService("RunService")
@@ -2506,7 +2487,7 @@ end)
 
 -- Inicializa o dropdown
 updateDropdown(DropdownPlayerTab2, SpectateToggleTab10)
-
+----------------------------------------------------------------------------------------------------
 local Section = Tab9:AddSection({"Matar o Atraer jugador"})
 
 local DropdownKillPullMethod = Tab9:AddDropdown({
@@ -2517,9 +2498,8 @@ local DropdownKillPullMethod = Tab9:AddDropdown({
         selectedKillPullMethod = value
     end
 })
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                                                   --Lanzar con Sofa--
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+-- Lanzar con Sofa --
 local function equipSofa()
     local backpack = LocalPlayer:WaitForChild("Backpack")
     local sofa = backpack:FindFirstChild("Couch") or LocalPlayer.Character:FindFirstChild("Couch")
@@ -2554,9 +2534,8 @@ local function pullWithSofa(targetPlayer)
     isFollowingPull = true
     originalPosition = LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Position
 end
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                                                   --Lanzar con Autobus--
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+-- Lanzar con Autobus --
 local function killWithBus(targetPlayer)
     if not targetPlayer or not targetPlayer.Character or not LocalPlayer.Character then return end
     local character = LocalPlayer.Character
@@ -2815,7 +2794,7 @@ Tab9:AddButton({
         end)
     end
 })
-
+----------------------------------------------------------------------------------------------------
 local Section = Tab9:AddSection({"Lanzar Jugador"})
 
 local DropdownFlingMethod = Tab9:AddDropdown({
@@ -2826,9 +2805,8 @@ local DropdownFlingMethod = Tab9:AddDropdown({
         selectedFlingMethod = value
     end
 })
-----------------------------------------------------------------------------------------------------------------------------------------------------------
-                                                   --Lanzamiento con Sofa--
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+-- Lanzar con Sofa --
 local function flingWithSofa(targetPlayer)
     if not targetPlayer or not targetPlayer.Character or not LocalPlayer.Character then
         return
@@ -2968,9 +2946,8 @@ local function flingWithSofa(targetPlayer)
         end
     end)
 end
------------------------------------------------------------------------------------------------------------------------------------------------------
-                                                   --Lanzamiento con Autobus--
------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+-- Lanzar con Autobus --
 local function flingWithBus(targetPlayer)
     if not targetPlayer or not targetPlayer.Character or not LocalPlayer.Character then return end
     local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
@@ -3100,9 +3077,8 @@ local function flingWithBus(targetPlayer)
         end
     end)
 end
----------------------------------------------------------------------------------------------------------------------------------------------------------
-                                                   --Lanzamiento con Balon--
----------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+-- Lanzar con Balon --
 local function equipBola()
     local backpack = LocalPlayer:WaitForChild("Backpack")
     local bola = backpack:FindFirstChild("SoccerBall") or LocalPlayer.Character:FindFirstChild("SoccerBall")
@@ -3211,9 +3187,8 @@ local function flingWithBall(targetPlayer)
         end
     end)
 end
-------------------------------------------------------------------------------------------------------------------------------------------------------------
-                                                  --Lanzamiento con Balon V2--
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+-- Lanzar con Balon V2 --
 local function flingWithBallV2(targetPlayer)
     if not targetPlayer or not targetPlayer.Character then return end
     local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
@@ -3288,9 +3263,8 @@ local function flingWithBallV2(targetPlayer)
         end
     end)
 end
------------------------------------------------------------------------------------------------------------------------------------------------------------
-                                                   --Lanzamiento con Barco--
------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+-- Lanzar con Barco --
 local function flingWithBoat(targetPlayer)
     if not targetPlayer or not targetPlayer.Character or not LocalPlayer.Character then return end
     local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
@@ -3430,9 +3404,8 @@ local function flingWithBoat(targetPlayer)
         end
     end)
 end
-------------------------------------------------------------------------------------------------------------------------------------------------
-                                      --Lanzamiento con camion--
-------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+-- Lanzar con Camion --
 local function flingWithTruck(targetPlayer)
     if not targetPlayer or not targetPlayer.Character or not LocalPlayer.Character then return end
     local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
@@ -3440,7 +3413,6 @@ local function flingWithTruck(targetPlayer)
     local myHRP = character:FindFirstChild("HumanoidRootPart")
     if not humanoid or not myHRP then return end
     savedPosition = myHRP.Position
-
     -- Teletransporta para a posição inicial do ônibus para invocar o caminhão
     pcall(function()
         myHRP.Anchored = true
@@ -3452,30 +3424,25 @@ local function flingWithTruck(targetPlayer)
         if humanoid then humanoid:ChangeState(Enum.HumanoidStateType.GettingUp) end
     end)
     task.wait(0.5)
-
     -- Desativa o cliente de carro para evitar interferências
     disableCarClient()
-
     -- Deleta qualquer veículo existente
     local args = { [1] = "DeleteAllVehicles" }
     pcall(function()
         ReplicatedStorage:WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args))
     end)
-
     -- Invoca o caminhão (Semi) usando o comando fornecido
     args = { [1] = "PickingCar", [2] = "Semi" }
     pcall(function()
         ReplicatedStorage:WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args))
     end)
     task.wait(1)
-
     -- Encontra o caminhão invocado
     local vehiclesFolder = Workspace:FindFirstChild("Vehicles")
     if not vehiclesFolder then return end
     local truckName = LocalPlayer.Name .. "Car"
     local truck = vehiclesFolder:FindFirstChild(truckName)
     if not truck then return end
-
     -- Teletransporta para a posição do assento do caminhão
     pcall(function()
         myHRP.Anchored = true
@@ -3486,14 +3453,12 @@ local function flingWithTruck(targetPlayer)
         myHRP.Anchored = false
         humanoid:ChangeState(Enum.HumanoidStateType.Seated)
     end)
-
     -- Espera o jogador sentar no caminhão
     local sitStart = tick()
     repeat
         task.wait()
         if tick() - sitStart > 10 then return end
     until humanoid.Sit
-
     -- Desactiva la colisión de piezas del camión y establece la propiedad de la red.
     for _, part in ipairs(truck:GetDescendants()) do
         if part:IsA("BasePart") then
@@ -3501,7 +3466,6 @@ local function flingWithTruck(targetPlayer)
             pcall(function() part:SetNetworkOwner(nil) end)
         end
     end
-
     -- Inicia el proceso de lanzamiento
     running = true
     connection = RunService.Stepped:Connect(function()
@@ -3520,18 +3484,15 @@ local function flingWithTruck(targetPlayer)
         local newTargetHumanoid = targetPlayer.Character:FindFirstChild("Humanoid")
         if not newTargetHRP or not newTargetHumanoid then running = false return end
         if not myHRP or not humanoid then running = false return end
-
         -- Encuentra la parte del Trailer para lanzar
         local trailer = truck:FindFirstChild("Body") and truck.Body:FindFirstChild("Trailer")
         if not trailer then return end
-
         -- Hace que el remolque se mueva hacia arriba y hacia abajo muy rápidamente.
         local verticalOffset = math.sin(tick() * 30) * 5 -- Oscila entre -5 y 5 unidades verticalmente, incluso más rápido.
         pcall(function()
             local targetPosition = newTargetHRP.Position + Vector3.new(0, verticalOffset, 0)
             trailer:PivotTo(CFrame.new(targetPosition)) -- Sólo movimiento vertical, sin rotación.
         end)
-
         -- Comprueba la distancia entre el remolque y el jugador objetivo para aplicar el lanzamiento.
         local dist = (trailer.Position - newTargetHRP.Position).Magnitude
         if dist < 5 and tick() - lastFlingTime > 0.4 then --Aplica el lanzamiento si el jugador está a menos de 5 unidades de distancia
@@ -3551,7 +3512,6 @@ local function flingWithTruck(targetPlayer)
                 end
             end)
         end
-
         -- Detiene el lanzamiento si el jugador objetivo está sentado, o después de 10 segundos.
         local playerSeated = false
         for _, seat in ipairs(truck:GetDescendants()) do
@@ -3567,7 +3527,6 @@ local function flingWithTruck(targetPlayer)
             running = false
             if connection then connection:Disconnect() connection = nil end
             if flingConnection then flingConnection:Disconnect() flingConnection = nil end
-
             -- Teletransporta el camion a una posición fuera del mapa.
             pcall(function()
                 truck:PivotTo(CFrame.new(Vector3.new(-59599.73, 2040070.50, -293391.16)))
@@ -3618,9 +3577,8 @@ local function flingWithTruck(targetPlayer)
         end
     end)
 end
-------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+-- Stop All --
 local function stopFling()
     running = false
     if connection then
@@ -3711,7 +3669,7 @@ flingToggle = Tab9:AddToggle({
         end
     end
 })
-
+----------------------------------------------------------------------------------------------------
 local Section = Tab9:AddSection({"Quite TODO y el RGB antes de usar"})
 
 -- Variables globales al inicio de Tab2
@@ -4113,14 +4071,13 @@ Tab9:AddButton({"Stop All", function()
     originalProperties = nil
     showNotification("Aviso", "Se han desactivado todas las funciones.", nil)
 end})
----------------------------------------------------------------------------------------------------------------------------------
-                                                   -- === Tab 10: lag server === --
----------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+                                -- === Tab 10: lag server === --
+----------------------------------------------------------------------------------------------------
 
-----------------------------------------------------------------------------------------------------------------------------------------------
-                                               -- === Tab 11: Scripts === --
-----------------------------------------------------------------------------------------------------------------------------------------------
-
+----------------------------------------------------------------------------------------------------
+                                -- === Tab 11: Scripts === --
+----------------------------------------------------------------------------------------------------
 Tab11:AddButton({
     Name = "Bring Flings Players",
     Description = "Universal",
@@ -4128,7 +4085,7 @@ Tab11:AddButton({
         loadstring(game:HttpGet("https://raw.githubusercontent.com/cxnker/p/refs/heads/main/BringFlingPlayers"))()
     end
 })
-
+----------------------------------------------------------------------------------------------------
 local Section = Tab11:AddSection({"Paneles"})
 
 Tab11:AddButton({
@@ -4146,10 +4103,9 @@ Tab11:AddButton({
         loadstring(game:HttpGet("https://raw.githubusercontent.com/ExploitFin/AquaMatrix/refs/heads/AquaMatrix/AquaMatrix"))()
     end
 })
-
------------------------------------------------------------------------------------------------------------------------------------------
-                                          -- === Tab 12: Teleportes === --
------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+                                -- === Tab 12: Teleportes === --
+----------------------------------------------------------------------------------------------------
 local teleportPlayer = game.Players.LocalPlayer
 local teleportLocation = "Inicio" -- Valor Predeterminado
 
