@@ -1664,12 +1664,12 @@ end
 -- Dropdown "Memes"
 createSoundDropdown("Selecione um meme", {
     ["Memes"] = {
-        {name = "pankapakan", id = "122547522269143"}, 
+        {name = "pankapakan", id = "91760524161503"}, 
        
-        {name = "Gemido ultra rápido", id = "128863565301778"},
-        {name = "vai g0z@?", id = "116293771329297"},
+        {name = "Gemido ultra rápido", id = "112143944982807"},
+        {name = "vai g0z@?", id = "123394392737234"},
         {name = "G0z33iiii", id = "93462644278510"},
-        {name = "Hommmm ", id = "133135656929513"},
+        {name = "Hommmm ", id = "112068892721408"},
         {name = "gemido1", id = "105263704862377"},
         {name = " gemido2", id = "92186909873950"},
         {name = "sus sex", id = "128137573022197"},
