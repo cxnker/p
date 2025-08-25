@@ -2,7 +2,7 @@ local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/cxnke
 
 local Window = redzlib:MakeWindow({
     Title = "Nova Hub",
-    SubTitle = "by Nova",
+    SubTitle = "by Roun95",
     SaveFolder = "NovaData"
   })
 
@@ -46,8 +46,8 @@ end
 
 local executorName = detectExecutor()
 local Paragraph = Tab1:AddParagraph({"Executor", executorName})
-local Section = Tab1:AddSection({"Version Lite"})
-local Paragraph = Tab1:AddParagraph({"Creador", "Roun \n Nova"})
+local Section = Tab1:AddSection({"Version BETA"})
+local Paragraph = Tab1:AddParagraph({"Creador", "Roun95\n(Nova)"})
 
 Tab1:AddButton({
     Name = "Copiar Tiktok",
@@ -98,6 +98,7 @@ local function headsitOnPlayer(targetPlayer)
     print("Headsit activado en " .. targetPlayer.Name)
     return true
 end
+
 local function removeHeadsit()
     local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
     local humanoid = character:FindFirstChildOfClass("Humanoid")
@@ -112,11 +113,10 @@ local function removeHeadsit()
     if humanoid then
         humanoid.Sit = false
     end
-
     print("Headsit desactivado.")
 end
 
--- Função para encontrar jogador por nome parcial
+-- Funcion para buscar jugadores por nombre parcial
 local function findPlayerByPartialName(partial)
     partial = partial:lower()
     for _, player in pairs(Players:GetPlayers()) do
@@ -127,7 +127,7 @@ local function findPlayerByPartialName(partial)
     return nil
 end
 
--- Notificação com imagem do jogador
+-- Notificacion con imagen del jugador
 local function notifyPlayerSelected(player)
     local StarterGui = game:GetService("StarterGui")
     local thumbType = Enum.ThumbnailType.HeadShot
@@ -142,7 +142,7 @@ local function notifyPlayerSelected(player)
     })
 end
 
--- TextBox para digitar nome do player
+-- Cuadro de texto para escribir el nombre del jugador
 Tab2:AddTextBox({
     Name = "Headsit Player",
     Description = "Introduzca parte del nombre del jugador",
@@ -317,7 +317,7 @@ Tab2:AddToggle({
     end
 })
 
--- Services
+-- Servicios
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 
@@ -327,7 +327,7 @@ local connections = {}
 local espEnabled = false
 local selectedColor = "RGB Suave"
 
--- Fly GUI Button
+-- Noclip GUI Button
 Tab2:AddButton({
     Name = "Noclip GUI Universal",
     Callback = function()
@@ -360,7 +360,7 @@ Tab2:AddButton({
 ----------------------------------------------------------------------------------------------------
 local Section = Tab2:AddSection({"ESP"})
 
--- Dropdown de cor
+-- Menú desplegable de color
 Tab2:AddDropdown({
     Name = "ESP Color",
     Default = "RGB",
@@ -373,7 +373,7 @@ Tab2:AddDropdown({
     end
 })
 
--- Função para obter a cor
+-- Funcion para obtener el color
 local function getESPColor()
     if selectedColor == "RGB" then
         local h = (tick() % 5) / 5
@@ -398,7 +398,7 @@ local function getESPColor()
     return Color3.new(1, 1, 1)
 end
 
--- Função para criar o ESP
+-- Funcion para crear el ESP
 local function updateESP(player)
     if player == Players.LocalPlayer then return end
     if not espEnabled then return end
@@ -435,7 +435,7 @@ local function updateESP(player)
     end
 end
 
--- Função para remover o ESP
+-- Funcion para eliminar el ESP
 local function removeESP(player)
     if billboardGuis[player] then
         billboardGuis[player]:Destroy()
@@ -443,7 +443,7 @@ local function removeESP(player)
     end
 end
 
--- Toggle de ativação do ESP
+-- Interruptor de activación para el ESP
 local Toggle1 = Tab2:AddToggle({
     Name = "Activar ESP",
     Description = "Muestra la entidad de los jugadores.",
@@ -1418,13 +1418,12 @@ end)
 ----------------------------------------------------------------------------------------------------
                                     -- === Tab6: RGB === --
 ----------------------------------------------------------------------------------------------------
-local Section = Tab6:AddSection({"RGB Speed"})
+local Section = Tab6:AddSection({"Velocidad RGB"})
 -- Velocidade controlada pelo slider (quanto maior, mais rápido)
 local rgbSpeed = 1
 
 Tab6:AddSlider({
-    Name = "Velocidad RGB",
-    Description = "Ajusta la velocidad RGB",
+    Name = "Ajusta la velocidad del RGB",
     Min = 1,
     Max = 5,
     Increase = 1,
@@ -1450,7 +1449,7 @@ local function fireServer(eventName, args)
     end
 end
 ----------------------------------------------------------------------------------------------------
-local Section = Tab6:AddSection({"Player RGB"})
+local Section = Tab6:AddSection({"Jugador RGB"})
 
 -- Nome + Bio RGB  juntos
 local nameBioRGBActive = false
@@ -1472,11 +1471,10 @@ Tab6:AddToggle({
     end
 })
 ----------------------------------------------------------------------------------------------------
-local Section = Tab6:AddSection({"Vehicles and Houses"})
+local Section = Tab6:AddSection({"Vehiculos y casas"})
 
 local ToggleCasa = Tab6:AddToggle({
     Name = "Casa RGB",
-    Description = "Casa RGB",
     Default = false
 })
 ToggleCasa:Callback(function(Value)
@@ -1491,9 +1489,7 @@ ToggleCasa:Callback(function(Value)
         end
     end)
 end)
-
-
--- Carro RGB 
+-- Vehiculo RGB
 local carRGBActive = false
 Tab6:AddToggle({
     Name = "Vehiculo RGB (Premium)",
@@ -1553,6 +1549,7 @@ Tab7:AddButton({
         end
     end
 })
+
 Tab7:AddToggle({
     Name = "Repetir",
     Description = "Repetir sonido en bucle",
