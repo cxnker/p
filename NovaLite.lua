@@ -1877,9 +1877,6 @@ createSoundDropdown("Seleccione un sonido de terror o efecto", {
         {name = "", id = ""}
     }
 }, "jumpscar")
-
-
-
 ---------------------------------------------------------------------------------------------------------------------------------
                                           -- === Tab 8: Troll Musica === --
 ---------------------------------------------------------------------------------------------------------------------------------
@@ -1921,8 +1918,8 @@ local function isValidMusicId(value)
 end
 
 Tab8:AddTextBox({
-    Name = "ID da música",
-    PlaceholderText = "Digite o ID e pressione Enter",
+    Name = "Pon el ID de la musica para reproducir",
+    PlaceholderText = "ej: 6832470734",
     Callback = function(value)
         if value and value ~= "" then
             tocarMusica(tostring(value))
@@ -2164,8 +2161,7 @@ createMusicDropdown("Phonk", {
 }, "Option 1")
 
 Tab8:AddButton({
-    Name = "Stop",
-    Description = "ALL music",
+    Name = "Parar musica",
     Callback = function()
         tocarMusica("")
     end
@@ -2296,9 +2292,6 @@ local function spectatePlayer(playerName)
         end
 
         updateCamera()
-
-
-
 
         characterConnection = RunService.Heartbeat:Connect(function()
             if not isSpectating then
@@ -2443,8 +2436,8 @@ end})
 UptadePlayers()
 
 Tab9:AddButton({
-    Title = "Teletransportar al jugador",
-    Desc = "Teletransportarse al jugador seleccionado",
+    Title = "Teletransportarse al jugador",
+    Desc = "Teletransportarse a la posicion del jugador seleccionado",
     Callback = function()
         local selectedPlayerName = valor_do_nome_do_joagdor
         if selectedPlayerName and selectedPlayerName ~= "" then
@@ -2459,7 +2452,7 @@ Tab9:AddButton({
 })
 
 local SpectateToggleTab10 = Tab9:AddToggle({
-    Name = "Visualizar Jugador",
+    Name = "Visualizar jugador",
     Description = "Activar/desactivar la visualizacion del jugador seleccionado",
     Default = false,
     Callback = function(state)
@@ -2748,7 +2741,7 @@ end)
 
 Tab9:AddButton({
     Name = "Matar",
-    Description = "Teletransporta dl jugador seleccionado al vacio",
+    Description = "Teletransporta el jugador seleccionado al vacio",
     Callback = function()
         if isFollowingKill or isFollowingPull or running then return end
         if not selectedPlayer or not selectedKillPullMethod then return end
