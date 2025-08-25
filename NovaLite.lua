@@ -329,6 +329,21 @@ local selectedColor = "RGB Suave"
 
 -- Fly GUI Button
 Tab2:AddButton({
+    Name = "Noclip GUI Universal",
+    Callback = function()
+        local success, _ = pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/cxnker/p/refs/heads/main/NoclipGui"))()
+        end)
+
+        game.StarterGui:SetCore("SendNotification", {
+            Title = success and "Exito" or "Error",
+            Text = success and "Noclip GUI cargado!" or "Fallo al cargar Noclip GUI.",
+            Duration = 5
+        })
+    end
+})
+-- Fly GUI Button
+Tab2:AddButton({
     Name = "Fly GUI Universal",
     Callback = function()
         local success, _ = pcall(function()
@@ -344,7 +359,6 @@ Tab2:AddButton({
 })
 
 local Section = Tab2:AddSection({"ESP"})
-
 
 -- Dropdown de cor
 Tab2:AddDropdown({
@@ -4106,14 +4120,6 @@ end})
 ----------------------------------------------------------------------------------------------------------------------------------------------
                                                -- === Tab 11: Scripts === --
 ----------------------------------------------------------------------------------------------------------------------------------------------
-
-Tab11:AddButton({
-    Name = "NoclipGui",
-    Description = "Universal",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/cxnker/p/refs/heads/main/NoclipGui"))()
-    end
-})
 
 Tab11:AddButton({
     Name = "Bring Flings Players",
