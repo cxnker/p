@@ -58,7 +58,7 @@ Tab1:AddButton({
 -----------------------------------------------------------------------------------------------------------------------------------
                                                    -- === Tab 2: Fun === --
 -----------------------------------------------------------------------------------------------------------------------------------
-local Section = Tab2:AddSection({"Player Character"})
+local Section = Tab2:AddSection({"Personaje del jugador"})
 
 local Players = game:GetService("Players")
 local localPlayer = Players.LocalPlayer
@@ -487,7 +487,7 @@ end)
                                                          -- Tab3:  Avatar Editor--
 ----------------------------------------------------------------------------------------------------------------------------------
 
-local Section = Tab3:AddSection({"Copy Avatar"})
+local Section = Tab3:AddSection({"Copiar avatar"})
 
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
@@ -508,7 +508,7 @@ local function GetPlayerNames()
 end
 
 local Dropdown = Tab3:AddDropdown({
-    Name = "Players List",
+    Name = "Seleccionar jugador",
     Description = "",
     Options = GetPlayerNames(),
     Default = "",
@@ -533,7 +533,7 @@ Players.PlayerAdded:Connect(UptadePlayers)
 Players.PlayerRemoving:Connect(UptadePlayers)
 
 Tab3:AddButton({
-    Name = "Copy Avatar",
+    Name = "Copiar avatar",
     Callback = function()
         if not Target then return end
 
@@ -647,7 +647,7 @@ Tab3:AddButton({
 })
 
 ------------------------------------------------------------------------------------------------------------------------------------
-local Section = Tab3:AddSection({"3D Clothes"})
+local Section = Tab3:AddSection({"Ropa 3D"})
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 -- Namespace para evitar conflitos
@@ -700,8 +700,7 @@ end
 -- Tab3: Opção de Avatar
 -- Dropdown para avatares
 local AvatarDropdown = Tab3:AddDropdown({
-    Name = "Ropa 3D",
-    Description = "Seleccione para equipar",
+    Name = "Selecciona una opcion",
     Default = nil,
     Options = AvatarManager:GetAvatarNames(),
     Callback = function(avatarSelecionado)
@@ -721,10 +720,10 @@ Tab3:AddButton({
     end
 })
 -------------------------------------------------------------------------------------------------------------------------
-local Section = Tab3:AddSection({"Avatar Editor"})
+local Section = Tab3:AddSection({"Editor de avatar"})
 
 Tab3:AddParagraph({
-    Title = "Tu avatar se reiniciara, Ajusta las proporciones de tu personaje para un mejor resultado",
+    Title = "Tu avatar se reiniciara, Ajusta las proporciones de tu avatar para un mejor resultado",
     Content = ""
 })
 -- Cria um botão para equipar todas as partes do corpo
@@ -967,7 +966,7 @@ Tab4:AddParagraph({
 ---------------------------------------------------------------------------------------------------------------------------------
                                           -- === Tab 5: Car === --
 ---------------------------------------------------------------------------------------------------------------------------------
-local Section = Tab5:AddSection({"All Vehicle Functions"})
+local Section = Tab5:AddSection({"Todas las funciones del vehiculo"})
 
 local Players = game:GetService("Players")
 local Workspace = game:GetService("Workspace")
@@ -1103,7 +1102,7 @@ end
 
 -- Parágrafo
 Tab5:AddParagraph({
-    Title = "Utiliza void protection",
+    Title = "Utiliza proteccion de vacio",
     Content = ""
 })
 
@@ -1167,7 +1166,7 @@ Tab5:AddToggle({
     end
 })
 
-local Section = Tab5:AddSection({"Vehicle Features"})
+local Section = Tab5:AddSection({"Características del vehiculo"})
 
 -- Crear el menú desplegable
 local Dropdown = Tab5:AddDropdown({
@@ -1239,12 +1238,12 @@ TeleportCarro.Workspace:WaitForChild("Vehicles").ChildRemoved:Connect(function()
     Dropdown:Set(TeleportCarro:AtualizarListaCarros())
 end)
 
-local Section = Tab5:AddSection({"Others Functions"})
+local Section = Tab5:AddSection({"Otras funciones"})
 
 -- Botão para destruir carro selecionado
 Tab5:AddButton({
     Name = "Eliminar vehiculo seleccionado",
-    Description = "Teletransporta el vehiculo al vacio",
+    Description = "Teletransporta el vehiculo seleccionado al vacio",
     Callback = function()
         if not _G.SelectedVehicle or _G.SelectedVehicle == "" then
             TeleportCarro:MostrarNotificacao("Ningun vehiculo seleccionado!")
@@ -2399,7 +2398,7 @@ local valor_do_nome_do_joagdor
 
 local DropdownPlayerTab2 = Tab9:AddDropdown({
     Name = "Seleccionar Jugador",
-    Description = "Elige un jugador para matar, tirar, ver o lanzar",
+    Description = "Elige un jugador para matar, atraer, ver o lanzar",
     Default = "",
     Multi = false,
     Options = getPlayerNames(),
@@ -2502,11 +2501,11 @@ end)
 -- Inicializa o dropdown
 updateDropdown(DropdownPlayerTab2, SpectateToggleTab10)
 
-local Section = Tab9:AddSection({"Matar/Atraer Jugador"})
+local Section = Tab9:AddSection({"Matar o Atraer jugador"})
 
 local DropdownKillPullMethod = Tab9:AddDropdown({
-    Name = "Selecciona una opcion (Matar/Atraer)",
-    Description = "Escoja si matar o atraer",
+    Name = "Selecciona una opcion",
+    Description = "Elige una opcion para matar o atraer a un jugador",
     Options = {"Sofa", "Autobus"},
     Callback = function(value)
         selectedKillPullMethod = value
@@ -2749,7 +2748,7 @@ end)
 
 Tab9:AddButton({
     Name = "Matar",
-    Description = "Teletransporta al jugador seleccionado al vacio",
+    Description = "Teletransporta dl jugador seleccionado al vacio",
     Callback = function()
         if isFollowingKill or isFollowingPull or running then return end
         if not selectedPlayer or not selectedKillPullMethod then return end
@@ -2763,7 +2762,7 @@ Tab9:AddButton({
 
 Tab9:AddButton({
     Name = "Atraer",
-    Description = "Atrae al jugador seleccionado hacia ti",
+    Description = "Teletransporta el jugador seleccionado a tu posicion",
     Callback = function()
         if isFollowingKill or isFollowingPull or running then return end
         if not selectedPlayer or not selectedKillPullMethod or selectedKillPullMethod ~= "Sofa" then return end
