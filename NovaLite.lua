@@ -682,9 +682,14 @@ AvatarManager.Avatares = {
     { Nome = "Black-Oversized-Warmers", ID = 10789914680 },
     { Nome = "Black-Oversized-Off-Shoulder-Hoodie", ID = 18396592827 },
     { Nome = "White-Oversized-Off-Shoulder-Hoodie", ID = 18396754379 },
-    { Nome = "Left-Leg-Spikes", ID = 10814325667 }
+    { Nome = "Left-Leg-Spikes", ID = 10814325667 },
+
+    { Nome = "Mini-Cat-Suit", ID = 121465611890520 },
+    { Nome = "Mini-Chicken", ID = 104504321709161 },
+    { Nome = "Cute-Shark-Plushie-Onesie-Blue", ID = 93560160273165 },
+    { Nome = "Cute-Shark-Plushie-Onesie-Pink", ID = 117112810163740 }
 }
--- Função para obter os nomes dos avatares para o dropdown
+-- Funcion para obtener los nombres de los avatares del menu
 function AvatarManager:GetAvatarNames()
     local nomes = {}
     for _, avatar in ipairs(self.Avatares) do
@@ -693,7 +698,7 @@ function AvatarManager:GetAvatarNames()
     return nomes
 end
 
--- Função para equipar o avatar
+-- Funcion para equipar el avatar
 function AvatarManager:EquiparAvatar(avatarName)
     for _, avatar in ipairs(self.Avatares) do
         if avatar.Nome == avatarName then
@@ -712,8 +717,7 @@ function AvatarManager:EquiparAvatar(avatarName)
     self:MostrarNotificacao("Avatar " .. avatarName .. " no encontrado!")
 end
 
--- Tab3: Opção de Avatar
--- Dropdown para avatares
+-- Tab3: Opción de avatar
 local AvatarDropdown = Tab3:AddDropdown({
     Name = "Selecciona una opcion",
     Default = nil,
@@ -723,7 +727,7 @@ local AvatarDropdown = Tab3:AddDropdown({
     end
 })
 
--- Botão para equipar avatar
+-- Boton para equipar el avatar
 Tab3:AddButton({
     Name = "Equipar",
     Callback = function()
