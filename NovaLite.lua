@@ -685,7 +685,6 @@ AvatarManager.Avatares = {
     { Nome = "Left-Leg-Spikes", ID = 10814325667 },
 
     { Nome = "Mini-Cat-Suit", ID = 121465611890520 },
-    { Nome = "Mini-Chicken", ID = 104504321709161 },
     { Nome = "Cute-Shark-Plushie-Onesie-Blue", ID = 93560160273165 },
     { Nome = "Cute-Shark-Plushie-Onesie-Pink", ID = 117112810163740 }
 }
