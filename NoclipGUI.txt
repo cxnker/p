@@ -1,13 +1,12 @@
--- Noclip GUI
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 
--- Rimuove GUI esistente
+-- Delete GUI existent
 pcall(function()
     game.CoreGui.NoclipGui:Destroy()
 end)
 
--- Crea GUI
+-- GUI Create
 local gui = Instance.new("ScreenGui", game.CoreGui)
 gui.Name = "NoclipGui"
 gui.ResetOnSpawn = false
