@@ -1543,8 +1543,7 @@ local function fireServer(eventName, args)
 end
 
 Tab7:AddButton({
-    Name = "Reproducir Musica",
-    Description = "Reproducir Sonido",
+    Name = "Reproducir musica",
     Callback = function()
         if InputID then
             fireServer("1Gu1nSound1s", {Workspace, InputID, 1})
@@ -1558,8 +1557,8 @@ Tab7:AddButton({
     end
 })
 Tab7:AddToggle({
-    Name = "Loop",
-    Description = "Activar Bucle",
+    Name = "Repetir",
+    Description = "Repetir sonido en bucle",
     Default = false,
     Callback = function(state)
         loopAtivo = state
@@ -1618,7 +1617,7 @@ local function createSoundDropdown(title, musicOptions, defaultOption)
 
     Tab7:AddDropdown({
         Name = title,
-        Description = "Escoja un sonido para reproducir en el servidor",
+        Description = "Elige un sonido para reproducir en el servidor",
         Default = defaultOption,
         Multi = false,
         Options = musicNames,
@@ -1632,8 +1631,8 @@ local function createSoundDropdown(title, musicOptions, defaultOption)
     })
 
     Tab7:AddButton({
-        Name = "Reproducir Sonido Seleccionado",
-        Description = "Reproducir Sonido seleccionado del menu",
+        Name = "Reproducir sonido",
+        Description = "Reproducir sonido seleccionado del menu",
         Callback = function()
             if selectedSoundID then
                 playSound(selectedSoundID, currentVolume, currentPitch)
@@ -1643,8 +1642,8 @@ local function createSoundDropdown(title, musicOptions, defaultOption)
 
     local dropdownLoopActive = false
     Tab7:AddToggle({
-        Name = "Loop",
-        Description = "Activar Bucle",
+        Name = "Repetir",
+        Description = "Repetir sonido en bucle",
         Default = false,
         Callback = function(state)
             dropdownLoopActive = state
